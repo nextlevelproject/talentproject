@@ -1,0 +1,2 @@
+FLASK_APP=talent
+FLASK_ENV=development
