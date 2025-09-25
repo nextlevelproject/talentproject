@@ -4,4 +4,4 @@ bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/')
 def index():
-    return 'Project Start!'
+    return redirect(url_for('main.index'))
