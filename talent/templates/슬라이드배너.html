@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배너</title>
+  <style>
+    body {
+      font-family: "Pretendard", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fff;
+      margin: 0;
+    }
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 90%;
+      max-width: 900px;
+      overflow: hidden;
+    }
+    .slider {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+    }
+    .menu-item {
+      min-width: 80px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 0 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .menu-item .icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .menu-item .icon-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .menu-item span {
+      font-size: 14px;
+      color: #333;
+    }
+    .menu-item:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    .nav-btn {
+      background: #f0f0f0;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <button class="nav-btn" id="prev">&#10094;</button>
+  <div class="slider-container" id="slider-container">
+    <div class="slider" id="slider">
+      <div class="menu-item"><div class="icon1">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/이사.png">
+      </div><span>이사</span></div>
+      <div class="menu-item"><div class="icon2">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/청소.png">
+      </div><span>청소</span></div>
+      <div class="menu-item"><div class="icon3">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/설치.png">
+      </div><span>설치</span></div>
+      <div class="menu-item"><div class="icon4">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/인테리어.png">
+      </div><span>인테리어</span></div>
+      <div class="menu-item"><div class="icon5">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/수리.jpg">
+      </div><span>수리</span></div>
+      <div class="menu-item"><div class="icon6">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/이벤트.jpg">
+      </div><span>이벤트</span></div>
+      <div class="menu-item"><div class="icon7">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/취업.jpg">
+      </div><span>취업</span></div>
+      <div class="menu-item"><div class="icon8">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/과외.jpg">
+      </div><span>과외</span></div>
+      <div class="menu-item"><div class="icon9">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/차량관리.jpg">
+      </div><span>차량관리</span></div>
+      <div class="menu-item"><div class="icon10">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/법률.jpg">
+      </div><span>법률</span></div>
+      <div class="menu-item"><div class="icon11">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/렌탈.jpg">
+      </div><span>렌탈</span></div>
+      <div class="menu-item"><div class="icon12">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/심리상담.jpg">
+      </div><span>심리상담</span></div>
+      <div class="menu-item"><div class="icon13">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/반려동물.jpg">
+      </div><span>반려동물</span></div>
+      <div class="menu-item"><div class="icon14">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/번역.jpg">
+      </div><span>번역</span></div>
+      <div class="menu-item"><div class="icon15">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/의류.jpg">
+      </div><span>의류</span></div>
+      <div class="menu-item"><div class="icon16">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/여행.jpg">
+      </div><span>여행</span></div>
+      <div class="menu-item"><div class="icon17">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/배달.jpg">
+      </div><span>배달</span></div>
+      <div class="menu-item"><div class="icon18">
+        <img src="C:/JYD/Flask/project/talentproject/talent/static/image/숙박시설.jpg">
+      </div><span>숙박시설</span></div>
+    </div>
+  </div>
+  <button class="nav-btn" id="next">&#10095;</button>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const sliderContainer = document.getElementById('slider-container');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    let scrollAmount = 0;
+    const scrollStep = 120;
+    let autoSlide;
+
+    function slide(direction) {
+      scrollAmount += direction * scrollStep;
+      slider.style.transform = `translateX(${scrollAmount}px)`;
+    }
+
+    function startAutoSlide() {
+      autoSlide = setInterval(() => slide(-1), 3000); // 3초마다 왼쪽으로 이동
+    }
+
+    function stopAutoSlide() {
+      clearInterval(autoSlide);
+    }
+
+    next.addEventListener('click', () => slide(-1));
+    prev.addEventListener('click', () => slide(1));
+
+    // 마우스 올리면 자동 슬라이드 멈춤
+    sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+    sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+    startAutoSlide();
+  </script>
+</body>
+</html>
