@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 56px);
+  }
+
+  .signup-container {
+    background-color: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 500px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border: 1px solid #7d4fff;
+  }
+
+  .birthday-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .birthday-group select {
+    flex: 1;
+  }
+
+  .signup-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #7d4fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .signup-btn:hover {
+    background-color: #693ae6;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .cancel-btn {
+    padding: 14px 20px;
+    background-color: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+</style>
+
+<div class="signup-container">
+  <h2>일반 회원 가입</h2>
+
+  <form method="post" action="{{ url_for('auth.client_signup') }}">
+    <div class="form-group">
+      <label for="userid">아이디</label>
+      <input type="text" id="userid" name="userid" placeholder="아이디를 입력해주세요 (6~20자)" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요 (8~20자)" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password_confirm">비밀번호 확인</label>
+      <input type="password" id="password_confirm" name="password_confirm" placeholder="비밀번호를 다시 입력해주세요" required />
+    </div>
+
+    <div class="form-group">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">이메일</label>
+      <input type="email" id="email" name="email" placeholder="이메일 주소를 입력해주세요" required />
+    </div>
+
+    <div class="form-group">
+      <label for="tel_number">전화번호</label>
+      <input type="tel" id="tel_number" name="tel_number" placeholder="전화번호를 입력해주세요 (- 없이)" required />
+    </div>
+
+    <div class="form-group">
+      <label>생년월일</label>
+      <div class="birthday-group">
+        <select name="birth_year" id="birth_year" required>
+          <option value="">년도</option>
+          {% for year in range(1950, 2024) %}
+            <option value="{{ year }}">{{ year }}</option>
+          {% endfor %}
+        </select>
+
+        <select name="birth_month" id="birth_month" required>
+          <option value="">월</option>
+          {% for month in range(1, 13) %}
+            <option value="{{ month }}">{{ month }}</option>
+          {% endfor %}
+        </select>
+
+        <select name="birth_day" id="birth_day" required>
+          <option value="">일</option>
+          {% for day in range(1, 32) %}
+            <option value="{{ day }}">{{ day }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button type="submit" class="signup-btn">회원가입</button>
+      <a href="{{ url_for('main.index') }}" class="cancel-btn">취소</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
