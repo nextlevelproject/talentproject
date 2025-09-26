@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail  # Mail 임포트 추가
@@ -34,7 +35,7 @@ def create_app():
     from .views import main_views, auth_views
 
     app.register_blueprint(main_views.bp)
-    app.register_blueprint(auth_views.auth_bp)
 
     # 생성 및 설정된 Flask 앱 객체를 반환합니다.
+    app.register_blueprint(auth_views.bp)
     return app
