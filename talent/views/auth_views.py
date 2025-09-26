@@ -34,3 +34,6 @@ def signup():
     db.session.add(new_user)
     db.session.commit()
     return redirect(url_for("login"))
+
+bp = Blueprint('auth', __name__, url_prefix='/auth')
+
