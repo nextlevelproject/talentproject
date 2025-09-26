@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<small>Posted: {{ post.create_date.strftime('%Y-%m-%d %H:%M') }}</small>
+<p>Likes: {{ post.likes|length }}</p>
+
+{% if current_user.is_authenticated %}
+    <form method="POST">
+        <textarea name="comment" placeholder="Add a comment"></textarea>
+        <button type="submit">Comment</button>
+        <button type="submit" name="like">Like</button>
+    </form>
+{% else %}
+    <p>Please <a href="{{ url_for('auth.login') }}">log in</a> to comment or like.</p>
+{% endif %}
+
+<h3>Comments:</h3>
+{% for comment in post.comments %}
+    <div class="comment">
+        <p>{{ comment.content }}</p>
+        <small>{{ comment.create_date.strftime('%Y-%m-%d %H:%M') }}</small>
+    </div>
+{% else %}
+    <p>No comments yet.</p>
+{% endfor %}
+{% endblock %}
