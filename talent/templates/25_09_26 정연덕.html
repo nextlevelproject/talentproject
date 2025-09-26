@@ -345,6 +345,84 @@
 
     /* 작은 텍스트 */
     .muted-sm{ color:var(--muted); font-size:13px; display:flex; gap:8px; align-items:center}
+
+        .container1 {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .header h2 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .view-all {
+      color: #6b2cff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .slider1 {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+    .card {
+      flex: 0 0 250px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background: #fff;
+      cursor: pointer;
+      margin: 25px;
+    }
+    .card img {
+      width: 250px;
+      height: 350px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 10px;
+    }
+    .card-content p {
+      font-size: 14px;
+      margin: 0 0 6px 0;
+      font-weight: 500;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #555;
+    }
+    .profile img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .slider-buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    .btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-left: 10px;
+    }
   </style>
 </head>
 <body>
@@ -436,12 +514,12 @@
         <div class="banner-text">
             <h2>100% 후불 선납 No! 만족 Yes! </h2>
             <h3>생활속의 모든 매칭</h3>
-    </div>
+  </div>
 
     <img class="banner-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/브랜드아이콘2.png">
-        </div>
+      </div>
 
-          <main class="wrap" role="main">
+        <main class="wrap" role="main">
     <h1 class="section-title">숨고 인기 서비스</h1>
 
     <section class="services-grid" aria-label="인기 서비스 목록">
@@ -629,7 +707,57 @@
     </section>
   </main>
 
-    
+        <div class="container">
+        <div class="header">
+          <h2>숨은고수 포트폴리오</h2>
+        </div>
+
+        <div class="slider" id="slider">
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/모델.png" alt="모델 이미지">
+            <div class="card-content">
+              <p>내가 작업한 모델 포토샵 메이크업</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>남서연</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/강아지.jpg" alt="강아지 이미지">
+            <div class="card-content">
+              <p>견주만 휴가를 가나요, 반려견도 휴가!</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>써니</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/골프.jpg" alt="골프 이미지">
+            <div class="card-content">
+              <p>골프란? 프로에게 배우는 꿀팁</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>이원비</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/이사청소.jpg" alt="청소 이미지">
+            <div class="card-content">
+              <p>⭐ 이사청소는 이렇게 진행돼요 ⭐</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>삐까번쩍홈케어</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
     
 
   <script>
@@ -649,7 +777,11 @@
     next.addEventListener('click', () => slide(-1));
     prev.addEventListener('click', () => slide(1));
 
-    startAutoSlide();
+        const slider = document.getElementById('slider');
+    function scrollSlider(direction) {
+      const scrollAmount = 270;
+      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
   </script>
 </body>
 </html>
