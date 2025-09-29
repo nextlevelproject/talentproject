@@ -1,41 +1,54 @@
-from flask import Flask
-from flask_migrate import Migrate
+from flask import Flask, render_template, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_mail import Mail  # Mail 임포트 추가
+from flask_mail import Mail
 
-import config
-
-# 전역적으로 사용할 객체 생성 (아직 Flask 앱과 연결되지 않음)
+# 확장 객체 전역 선언 (앱과 나중에 연결)
 db = SQLAlchemy()
 migrate = Migrate()
-mail = Mail()  # Mail 객체 생성 추가
-
+mail = Mail()
 
 def create_app():
-    # Flask 앱 객체 생성
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='templates', static_folder='static')
 
-    # config.py 파일에서 앱 설정을 불러옵니다.
-    app.config.from_object(config)
+    # 앱 설정 (config.py 대신 간단히 직접 설정)
+    app.config['SECRET_KEY'] = 'c85a9e21d0f5477f9f32f227ea72d7e0e3baf65a42f7c53be9a61a3cfa77d234'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///talent.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # ORM (SQLAlchemy) 초기화: db 객체를 Flask 앱 'app'과 연결합니다.
+    # 익스텐션(app과 연결)
     db.init_app(app)
-
-    # Flask-Migrate 초기화: migrate 객체를 Flask 앱과 db 객체에 연결합니다.
     migrate.init_app(app, db)
+    mail.init_app(app)
 
-    # Flask-Mail 초기화: mail 객체를 Flask 앱 'app'과 연결하고 메일 설정 적용
-    mail.init_app(app)  # 이 라인이 필요해!
+    # 블루프린트 정의 (예: auth)
+    auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-    # SQLAlchemy 모델들을 임포트합니다.
-    from . import models
+    @auth_bp.route('/client_signup')
+    def client_signup():
+        return render_template('auth/client_signup.html')
 
-    # 블루프린트 임포트 및 등록
-    from .views import main_views, auth_views
+    @auth_bp.route('/login')
+    def login():
+        return render_template('auth/login.html')
 
-    app.register_blueprint(main_views.bp)
+    # 더 필요한 라우트들 auth_bp에 추가 가능
 
-    # 생성 및 설정된 Flask 앱 객체를 반환합니다.
-    app.register_blueprint(auth_views.bp)
+    # 블루프린트 등록
+    app.register_blueprint(auth_bp)
+
+    # 메인 페이지 블루프린트도 비슷하게 등록 가능
+    main_bp = Blueprint('main', __name__)
+
+    @main_bp.route('/')
+    def index():
+        return render_template('index.html')
+
+    app.register_blueprint(main_bp)
+
     return app
+
+# 직접 실행 시
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True)
