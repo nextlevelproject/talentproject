@@ -1,11 +1,14 @@
-from flask import request, flash, redirect, url_for, User, Flask
+from flask import Flask, Blueprint, request, flash, redirect, url_for
 from datetime import datetime
 from talent.models import User
 from werkzeug.security import generate_password_hash
-from talent import db
-app = Flask(__name__)
 
-@app.route("/signup", methods=["POST"])
+from talent import db
+
+
+bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+@bp.route("/signup", methods=["POST"])
 def signup():
     year = request.form.get("birth_year")
     month = request.form.get("birth_month")
@@ -33,7 +36,5 @@ def signup():
 
     db.session.add(new_user)
     db.session.commit()
-    return redirect(url_for("login"))
-
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+    return redirect(url_for("/auth/login.html"))
 
