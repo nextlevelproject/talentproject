@@ -1,7 +1,5 @@
-from flask import Blueprint
-
-bp = Blueprint('main', __name__, url_prefix='/')
+from flask import Blueprint, url_for, redirect
 
 @bp.route('/')
 def index():
-    return 'Project Start!'
+    return redirect(url_for('main.html'))
