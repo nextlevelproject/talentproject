@@ -3,7 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 
+import config
+
+
 # 확장 객체 전역 선언 (앱과 나중에 연결)
+
 db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()
@@ -19,10 +23,17 @@ def create_app():
     # 익스텐션(app과 연결)
     db.init_app(app)
     migrate.init_app(app, db)
-    mail.init_app(app)
+    
+    from . import models  # ensure models are loaded
 
-    # 블루프린트 정의 (예: auth)
-    auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+    # 블루프린트 등록
+    from .views import main_views, community_views
+    app.register_blueprint(main_views.bp)
+    app.register_blueprint(community_views.bp)
+    app.register_blueprint(auth_bp)
+    return app
+=======
+    mail.init_app(app)
 
     @auth_bp.route('/client_signup')
     def client_signup():
@@ -32,10 +43,6 @@ def create_app():
     def login():
         return render_template('auth/login.html')
 
-    # 더 필요한 라우트들 auth_bp에 추가 가능
-
-    # 블루프린트 등록
-    app.register_blueprint(auth_bp)
 
     # 메인 페이지 블루프린트도 비슷하게 등록 가능
     main_bp = Blueprint('main', __name__)
