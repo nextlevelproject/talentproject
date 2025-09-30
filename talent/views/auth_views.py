@@ -1,3 +1,4 @@
+# talent/views/auth_views.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, jsonify
 from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,8 +7,18 @@ from flask_mail import Message
 import jwt
 import os
 
-from talent import db, mail
 from talent.models import User
+from talent import db, mail
+
+# ------------------ 공통: 로그인 필요 데코레이터 ------------------
+def login_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if 'user_id' not in session:
+            flash('로그인이 필요한 기능입니다.', 'danger')
+            return redirect(url_for('auth.login'))
+        return f(*args, **kwargs)
+    return decorated
 
 # Blueprint setup
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -21,10 +32,10 @@ def login():
         user = User.query.filter_by(userid=userid).first()
         if user and check_password_hash(user.password_hash, password):
             session['user_id'] = user.id
-            flash(f'{user.userid}님, 로그인되었습니다!', 'success')
+
+            flash(f'{user.userid}님, 로그인되었습니다.', 'success')
             return redirect(url_for('main.index'))
-        else:
-            flash('아이디 또는 비밀번호가 틀렸습니다.', 'danger')
+        flash('아이디 또는 비밀번호가 틀렸습니다.', 'danger')
     return render_template('auth/login.html')
 
 # ----------------- Client Signup -----------------
@@ -47,24 +58,24 @@ def client_signup():
         if User.query.filter_by(tel_number=tel_number).first():
             flash('이미 사용 중인 전화번호입니다.', 'danger')
             return redirect(url_for('auth.client_signup'))
-
-        # 비밀번호 해싱
+          
+         # 비밀번호 해싱
         hashed_password = generate_password_hash(password)
 
+
         # 생년월일 처리
+        year, month, day = request.form.get("birth_year"), request.form.get("birth_month"), request.form.get("birth_day")
         try:
-            birthday = datetime(
-                int(request.form.get("birth_year")),
-                int(request.form.get("birth_month")),
-                int(request.form.get("birth_day"))
-            )
-        except (TypeError, ValueError):
+            birthday = datetime(int(year), int(month), int(day))
+        except Exception:
             flash("생년월일이 유효하지 않습니다.", "danger")
             return redirect(url_for("auth.client_signup"))
 
+        # 사용자 생성
+        user = User(
         new_user = User(
             userid=userid,
-            password_hash=hashed_password,
+            password_hash=generate_password_hash(password),
             email=email,
             birthday=birthday,
             tel_number=tel_number,
@@ -72,9 +83,9 @@ def client_signup():
             is_expert=False
         )
 
-        db.session.add(new_user)
+        db.session.add(user)
         db.session.commit()
-        flash("일반 회원가입이 완료되었습니다! 로그인해 주세요.", "success")
+        flash("회원가입이 완료되었습니다. 로그인해 주세요.", "success")
         return redirect(url_for('auth.login'))
 
     return render_template('auth/client_signup.html')
@@ -91,7 +102,8 @@ def expert_signup():
         service = request.form.get('service')
         location = request.form.get('location')
 
-        # 중복 체크
+
+        # 중복체크
         if User.query.filter_by(userid=userid).first():
             flash('이미 존재하는 아이디입니다.', 'danger')
             return redirect(url_for('auth.expert_signup'))
@@ -102,21 +114,19 @@ def expert_signup():
             flash('이미 사용 중인 전화번호입니다.', 'danger')
             return redirect(url_for('auth.expert_signup'))
 
-        hashed_password = generate_password_hash(password)
 
+        # 생년월일 처리
+        year, month, day = request.form.get("birth_year"), request.form.get("birth_month"), request.form.get("birth_day")
         try:
-            birthday = datetime(
-                int(request.form.get("birth_year")),
-                int(request.form.get("birth_month")),
-                int(request.form.get("birth_day"))
-            )
-        except (TypeError, ValueError):
+            birthday = datetime(int(year), int(month), int(day))
+        except Exception:
             flash("생년월일이 유효하지 않습니다.", "danger")
             return redirect(url_for("auth.expert_signup"))
 
-        new_user = User(
+        # 사용자 생성
+        user = User(
             userid=userid,
-            password_hash=hashed_password,
+            password_hash=generate_password_hash(password),
             email=email,
             birthday=birthday,
             tel_number=tel_number,
@@ -125,13 +135,14 @@ def expert_signup():
             service=service,
             location=location
         )
-
-        db.session.add(new_user)
+        db.session.add(user)
         db.session.commit()
-        flash("전문가 회원가입이 완료되었습니다! 로그인해 주세요.", "success")
+
+        flash("전문가 회원가입이 완료되었습니다. 로그인해 주세요.", "success")
         return redirect(url_for('auth.login'))
 
     return render_template('auth/expert_signup.html')
+
 
 # ----------------- Find ID -----------------
 @bp.route('/find_id', methods=['GET', 'POST'])
@@ -144,6 +155,7 @@ def find_id():
             return jsonify({'success': True, 'userid': user.userid})
         return jsonify({'success': False, 'message': '일치하는 정보가 없습니다.'})
     return render_template('auth/find_id.html')
+
 
 # ----------------- Find Password -----------------
 @bp.route('/find_password', methods=['GET', 'POST'])
@@ -159,23 +171,39 @@ def find_password():
             )
             reset_url = url_for('auth.reset_password', token=token, _external=True)
             msg = Message('비밀번호 재설정', recipients=[email])
-            msg.body = f'''안녕하세요, {user.name}님!\n\n비밀번호 재설정을 요청하셨습니다. 아래 링크를 클릭하여 새 비밀번호를 설정해주세요:\n\n{reset_url}\n\n이 링크는 1시간 동안 유효합니다.'''
+
+            msg.body = f"아래 링크를 클릭하여 새 비밀번호를 설정하세요:\n{reset_url}"
+
             try:
                 mail.send(msg)
                 flash('비밀번호 재설정 링크가 이메일로 발송되었습니다.', 'success')
             except Exception as e:
-                flash(f'이메일 발송 중 오류가 발생했습니다: {str(e)}', 'danger')
+                flash(f'이메일 발송 중 오류 발생: {str(e)}', 'danger')
             return redirect(url_for('auth.login'))
-        else:
-            flash('해당 이메일로 등록된 사용자가 없습니다.', 'danger')
+        flash('해당 이메일로 등록된 사용자가 없습니다.', 'danger')
     return render_template('auth/find_password.html')
 
-# ----------------- Reset Password -----------------
-@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+# ------------------ 비밀번호 재설정 ------------------
+@auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    # 실제 토큰 검증과 비밀번호 재설정 로직 구현 필요
-    flash("비밀번호 재설정 페이지 (임시)", "info")
-    return render_template('auth/reset_password.html', token=token)
+    try:
+        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
+        user = User.query.get(payload['user_id'])
+    except Exception:
+        flash("유효하지 않거나 만료된 링크입니다.", "danger")
+        return redirect(url_for("auth.find_password"))
+
+    if request.method == 'POST':
+        new_password = request.form.get("password")
+        if not new_password:
+            flash("비밀번호를 입력해주세요.", "danger")
+            return redirect(url_for("auth.reset_password", token=token))
+        user.password_hash = generate_password_hash(new_password)
+        db.session.commit()
+        flash("비밀번호가 변경되었습니다. 로그인해 주세요.", "success")
+        return redirect(url_for("auth.login"))
+
+    return render_template("auth/reset_password.html", token=token)
 
 # ----------------- Mypage -----------------
 @bp.route('/mypage')

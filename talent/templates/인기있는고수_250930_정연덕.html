@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>지금 인기 있는 고수</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background-color: #fff;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .section-title a {
+      font-size: 14px;
+      color: #6b4eff;
+      text-decoration: none;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .category-tabs button {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 15px;
+      background-color: #f4f2ff;
+      color: #6b4eff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .category-tabs button:not(:first-child) {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .card-list {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      align-items: center;
+      justify-content: center;
+      
+    }
+
+    .card {
+      background: #f9f9fb;
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 180px;
+      flex: 0 0 auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      
+    }
+
+    .card img {
+      width: 180px;
+      height: 100px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin: 5px 0;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: #EFF1F5;
+      margin: 4px 0;
+    }
+
+    .rating {
+      color: #ffb400;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .sugo-pay {
+      display: inline-block;
+      font-size: 12px;
+      color: #6b4eff;
+      background-color: #f4f2ff;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+
+    .banner {
+      width: 100%;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f4f2ff;
+      border-radius: 120px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- 제목 -->
+  <div class="section-title">
+    <h2>　　　　　　　지금 인기 있는 고수</h2>
+    <a href="#">전체보기 ></a>
+  </div>
+
+  <!-- 카테고리 탭 -->
+  <div class="category-tabs">
+    <button>수영 레슨</button>
+    <button>원룸/소형 이사</button>
+    <button>용달/화물 운송</button>
+    <button>도배 시공</button>
+  </div>
+
+  <!-- 카드 리스트 -->
+  <div class="card-list">
+    <div class="card">
+      <img src="C:/JYD/Flask/project/talentproject/talent/static/image/돋보기.png">
+      <h3>1,558명의<br>고수 만나보기 ></h3>
+    </div>
+    <div class="card">
+      <img src="C:/JYD/Flask/project/talentproject/talent/static/image/수영1.jpg" alt="코치">
+      <div class="rating">⭐ 5.0</div>
+      <h3>최코치 수영아카데미</h3>
+      <span class="sugo-pay">숨고페이</span>
+      <p>경력 10년 · 평균 2시간 내 응답</p>
+    </div>
+    <div class="card">
+      <img src="C:/JYD/Flask/project/talentproject/talent/static/image/축구.jpg" alt="코치">
+      <div class="rating">⭐ 5.0</div>
+      <h3>김용임</h3>
+      <span class="sugo-pay">숨고페이</span>
+      <p>경력 15년 · 평균 1시간 내 응답</p>
+    </div>
+    <div class="card">
+      <img src="C:/JYD/Flask/project/talentproject/talent/static/image/배드민턴.jpg" alt="코치">
+      <div class="rating">⭐ 4.9</div>
+      <h3>박우희코치</h3>
+      <span class="sugo-pay">숨고페이</span>
+      <p>경력 20년 · 평균 1시간 내 응답</p>
+    </div>
+    <div class="card">
+      <img src="C:/JYD/Flask/project/talentproject/talent/static/image/야구.jpg" alt="코치">
+      <div class="rating">⭐ 5.0</div>
+      <h3>김민석</h3>
+      <span class="sugo-pay">숨고페이</span>
+      <p>경력 38년 · 평균 1시간 내 응답</p>
+    </div>
+  </div>
+
+  <!-- 배너 -->
+  <div class="banner">
+    <div class="card">
+    숨고 앱으로 더 편하게 고수를 찾아보세요
+    </div>
+  </div>
+</body>
+</html>

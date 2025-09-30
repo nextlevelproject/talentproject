@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 
+from . import models
 import config
 
 db = SQLAlchemy()
@@ -17,7 +18,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
-
+  
     # 블루프린트 등록
     from .views import main_views, community_views, auth_views
     app.register_blueprint(main_views.bp)
@@ -25,7 +26,3 @@ def create_app():
     app.register_blueprint(auth_views.bp)
 
     return app
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)
