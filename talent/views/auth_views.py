@@ -1,24 +1,25 @@
 # talent/views/auth_views.py
-
 # 필요한 Flask 모듈들을 임포트
-from flask import Blueprint, request, flash, redirect, url_for, render_template, jsonify, session
+from flask import Flask,Blueprint, request, flash, redirect, url_for, render_template, jsonify, session, current_app
 # 비밀번호 해싱을 위한 모듈 임포트
 from werkzeug.security import generate_password_hash, check_password_hash
 # 생년월일 처리를 위한 모듈 임포트
 from datetime import datetime
 # 정의한 User 모델 임포트
 from talent.models import User
-# 데이터베이스 객체 임포트 (db 객체가 어디서 생성되는지에 따라 경로가 달라질 수 있음)
-# 일반적으로 'from talent import db' 라고 한다면, talent/__init__.py 에 db 객체가 생성되었을 가능성이 큼
-from talent import db
-from flask import current_app
+from werkzeug.security import generate_password_hash
 
+from talent import db, mail
 # 기존 임포트 문 아래에 추가
-from flask import current_app  # SECRET_KEY 접근용
 import jwt  # pip install pyjwt 필요
 from datetime import timedelta  # datetime은 이미 임포트되어 있음
-from talent import mail  # __init__.py에서 설정한 mail 객체
 from flask_mail import Message  # 메일 발송용
+
+
+
+# 데이터베이스 객체 임포트 (db 객체가 어디서 생성되는지에 따라 경로가 달라질 수 있음)
+# 일반적으로 'from talent import db' 라고 한다면, talent/__init__.py 에 db 객체가 생성되었을 가능성이 큼
+
 
 # Blueprint 객체 생성
 # 'auth'는 이 블루프린트의 이름이고, url_prefix='/auth'는 이 블루프린트의 모든 라우트에 '/auth'가 앞에 붙는다는 의미
@@ -34,11 +35,12 @@ def login_required(f):
     return decorated_function
 
 
+
 # 참고: 이 파일에는 'app = Flask(__name__)' 같은 코드가 들어가면 안 됨.
 # Flask 앱 객체는 프로젝트의 최상위 app.py (또는 __init__.py) 같은 곳에서 단 한 번만 생성해야 함.
 
 # --- 로그인 라우트 ---
-@auth_bp.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         # 폼에서 입력받은 아이디(또는 이메일)와 비밀번호를 가져옴
@@ -57,10 +59,15 @@ def login():
         else:
             flash('아이디 또는 비밀번호가 틀렸습니다.', 'danger')  # 로그인 실패 메시지
     return render_template('auth/login.html')  # GET 요청 시 로그인 폼 렌더링
-
+  
+@bp.route("/signup", methods=["POST"])
+def signup():
+    year = request.form.get("birth_year")
+    month = request.form.get("birth_month")
+    day = request.form.get("birth_day")
 
 # --- 일반 사용자 회원가입 라우트 ---
-@auth_bp.route('/client_signup', methods=['GET', 'POST'])
+@bp.route('/client_signup', methods=['GET', 'POST'])
 def client_signup():
     if request.method == 'POST':
         userid = request.form.get('userid')
@@ -112,12 +119,11 @@ def client_signup():
         db.session.commit()
         flash("일반 회원가입이 완료되었습니다! 로그인해 주세요.", "success")
         return redirect(url_for('auth.login'))  # 회원가입 성공 후 로그인 페이지로 이동
-
     return render_template('auth/client_signup.html')  # GET 요청 시 일반 사용자 회원가입 폼 렌더링
 
 
 # --- 전문가 회원가입 라우트 ---
-@auth_bp.route('/expert_signup', methods=['GET', 'POST'])
+@bp.route('/expert_signup', methods=['GET', 'POST'])
 def expert_signup():
     if request.method == 'POST':
         userid = request.form.get('userid')
@@ -138,7 +144,6 @@ def expert_signup():
         if User.query.filter_by(tel_number=tel_number).first():
             flash('이미 사용 중인 전화번호입니다.', 'danger')
             return redirect(url_for('auth.expert_signup'))
-
         hashed_password = generate_password_hash(password)
 
         # 생년월일 처리
@@ -170,12 +175,11 @@ def expert_signup():
         db.session.commit()
         flash("전문가 회원가입이 완료되었습니다! 로그인해 주세요.", "success")
         return redirect(url_for('auth.login'))  # 회원가입 성공 후 로그인 페이지로 이동
-
     return render_template('auth/expert_signup.html')  # GET 요청 시 전문가 회원가입 폼 렌더링
 
 
 # --- 아이디 찾기 라우트 ---
-@auth_bp.route('/find_id', methods=['GET', 'POST'])
+@bp.route('/find_id', methods=['GET', 'POST'])
 def find_id():
     if request.method == 'POST':
         name = request.form.get('name')
@@ -192,8 +196,9 @@ def find_id():
     return render_template('auth/find_id.html')  # GET 요청 시 아이디 찾기 폼 렌더링
 
 
+
 # --- 비밀번호 찾기 라우트 ---
-@auth_bp.route('/find_password', methods=['GET', 'POST'])
+@bp.route('/find_password', methods=['GET', 'POST'])
 def find_password():
     if request.method == 'POST':
         email = request.form.get('email')
@@ -232,53 +237,40 @@ def find_password():
                 flash('비밀번호 재설정 링크가 이메일로 발송되었습니다.', 'success')
             except Exception as e:
                 flash(f'이메일 발송 중 오류가 발생했습니다: {str(e)}', 'danger')
-
             return redirect(url_for('auth.login'))
         else:
             flash('해당 이메일로 등록된 사용자가 없습니다.', 'danger')
-
     return render_template('auth/find_password.html')
 
-
 # --- 비밀번호 재설정 라우트 ---
-@auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     try:
-        # 토큰 검증
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
-        user_id = payload['user_id']
-        user = User.query.get(user_id)
+        birthday = datetime(int(year), int(month), int(day))
+    except (TypeError, ValueError):
+        flash("생년월일이 유효하지 않습니다.", "danger")
+        return redirect(url_for("signup"))
 
-        if not user:
-            flash('유효하지 않은 사용자입니다.', 'danger')
-            return redirect(url_for('auth.login'))
+    password = request.form.get("password")
+    if not password:
+        flash("비밀번호를 입력해주세요.", "danger")
+        return redirect(url_for("signup"))
+    hashed_password = generate_password_hash(password)
 
-        if request.method == 'POST':
-            password = request.form.get('password')
-            confirm_password = request.form.get('confirm_password')
+    new_user = User(
+        userid=request.form["id"],
+        password=hashed_password,
+        email=request.form["email"] + "@naver.com",  # 도메인 처리 필요
+        birthday=birthday,
+        tel_number=request.form["tel_number"]
+    )
 
-            if password != confirm_password:
-                flash('비밀번호가 일치하지 않습니다.', 'danger')
-                return render_template('auth/reset_password.html', token=token)
-
-            # 비밀번호 업데이트
-            user.password_hash = generate_password_hash(password)
-            db.session.commit()
-
-            flash('비밀번호가 성공적으로 변경되었습니다. 새 비밀번호로 로그인해주세요.', 'success')
-            return redirect(url_for('auth.login'))
-
-        return render_template('auth/reset_password.html', token=token)
-
-    except jwt.ExpiredSignatureError:
-        flash('만료된 링크입니다. 비밀번호 찾기를 다시 시도해주세요.', 'danger')
-        return redirect(url_for('auth.find_password'))
-    except jwt.InvalidTokenError:
-        flash('유효하지 않은 링크입니다. 비밀번호 찾기를 다시 시도해주세요.', 'danger')
-        return redirect(url_for('auth.find_password'))
-
+    db.session.add(new_user)
+    db.session.commit()
+    return redirect(url_for("/auth/login.html"))
+  
     # --- 마이페이지 라우트 ---
-    @auth_bp.route('/mypage')
+    @bp.route('/mypage')
     @login_required  # 로그인한 사용자만 접근 가능
     def mypage():
         # 세션에서 현재 로그인한 사용자의 ID를 가져와서 해당 사용자 정보를 조회
@@ -289,7 +281,7 @@ def reset_password(token):
         return render_template('auth/mypage.html', user=user)
 
     # --- 프로필 수정 라우트 ---
-    @auth_bp.route('/edit_profile', methods=['GET', 'POST'])
+    @bp.route('/edit_profile', methods=['GET', 'POST'])
     @login_required  # 로그인한 사용자만 접근 가능
     def edit_profile():
         # 세션에서 현재 로그인한 사용자의 ID를 가져와서 해당 사용자 정보를 조회
@@ -316,7 +308,7 @@ def reset_password(token):
         return render_template('auth/edit_profile.html', user=user)
 
     # --- 비밀번호 변경 라우트 ---
-    @auth_bp.route('/change_password', methods=['POST'])
+    @bp.route('/change_password', methods=['POST'])
     @login_required  # 로그인한 사용자만 접근 가능
     def change_password():
         # 세션에서 현재 로그인한 사용자의 ID를 가져와서 해당 사용자 정보를 조회

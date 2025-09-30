@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 
 import config
-
+from . import models  # ensure models are loaded
 
 # 확장 객체 전역 선언 (앱과 나중에 연결)
 
@@ -23,36 +23,15 @@ def create_app():
     # 익스텐션(app과 연결)
     db.init_app(app)
     migrate.init_app(app, db)
-    
-    from . import models  # ensure models are loaded
 
-    # 블루프린트 등록
-    from .views import main_views, community_views
+    # 블루 프린트 등록
+    from .views import main_views, auth_views, community_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(community_views.bp)
     app.register_blueprint(auth_bp)
     return app
-=======
+
     mail.init_app(app)
-
-    @auth_bp.route('/client_signup')
-    def client_signup():
-        return render_template('auth/client_signup.html')
-
-    @auth_bp.route('/login')
-    def login():
-        return render_template('auth/login.html')
-
-
-    # 메인 페이지 블루프린트도 비슷하게 등록 가능
-    main_bp = Blueprint('main', __name__)
-
-    @main_bp.route('/')
-    def index():
-        return render_template('index.html')
-
-    app.register_blueprint(main_bp)
-
     return app
 
 # 직접 실행 시

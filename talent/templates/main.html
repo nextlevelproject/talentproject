@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% endblock %}
+{% block content %}
+<!--    <div class="left-group">-->
+<!--      <div class="logo">매칭허브</div>-->
+<!--      <nav>-->
+<!--        <a href="#">견적요청</a>-->
+<!--        <a href="#">고수찾기</a>-->
+<!--        <a href="#">마켓</a>-->
+<!--        <a href="#">커뮤니티</a>-->
+<!--      </nav>-->
+<!--    </div>-->
+<!--    <div class="right-menu">-->
+<!--      <a href="#">로그인 / 회원가입</a>-->
+<!--      <a href="#" class="btn-primary">고수가입</a>-->
+<!--    </div>-->
+
+  <main>
+    <h1>더 나은 생활을 위한 변화</h1>
+    <div class="search-box">
+      🔍
+      <input type="text" placeholder="어떤 서비스가 필요하세요?">
+    </div>
+  </main>
+    <button class="nav-btn" id="prev">&#10094;</button>
+  <div class="slider-container" id="slider-container">
+    <div class="slider" id="slider">
+      <div class="menu-item"><div class="icon1">
+        <img src="{{ url_for('static', filename='image/이사.png') }}">
+      </div><span>이사</span></div>
+      <div class="menu-item"><div class="icon2">
+        <img src="{{ url_for('static', filename='image/청소.png') }}">
+      </div><span>청소</span></div>
+      <div class="menu-item"><div class="icon3">
+        <img src="{{ url_for('static', filename='image/설치.png') }}">
+      </div><span>설치</span></div>
+      <div class="menu-item"><div class="icon4">
+        <img src="{{ url_for('static', filename='image/인테리어.png') }}">
+      </div><span>인테리어</span></div>
+      <div class="menu-item"><div class="icon5">
+        <img src="{{ url_for('static', filename='image/수리.jpg') }}">
+      </div><span>수리</span></div>
+      <div class="menu-item"><div class="icon6">
+        <img src="{{ url_for('static', filename='image/이벤트.jpg') }}">
+      </div><span>이벤트</span></div>
+      <div class="menu-item"><div class="icon7">
+        <img src="{{ url_for('static', filename='image/취업.jpg') }}">
+      </div><span>취업</span></div>
+      <div class="menu-item"><div class="icon8">
+        <img src="{{ url_for('static', filename='image/과외.jpg') }}">
+      </div><span>과외</span></div>
+      <div class="menu-item"><div class="icon9">
+        <img src="{{ url_for('static', filename='image/차량관리.jpg') }}">
+      </div><span>차량관리</span></div>
+      <div class="menu-item"><div class="icon10">
+        <img src="{{ url_for('static', filename='image/법률.jpg') }}">
+      </div><span>법률</span></div>
+      <div class="menu-item"><div class="icon11">
+        <img src="{{ url_for('static', filename='image/렌탈.jpg') }}">
+      </div><span>렌탈</span></div>
+      <div class="menu-item"><div class="icon12">
+        <img src="{{ url_for('static', filename='image/심리상담.jpg') }}">
+      </div><span>심리상담</span></div>
+      <div class="menu-item"><div class="icon13">
+        <img src="{{ url_for('static', filename='image/반려동물.jpg') }}">
+      </div><span>반려동물</span></div>
+      <div class="menu-item"><div class="icon14">
+        <img src="{{ url_for('static', filename='image/번역.jpg) }}">
+      </div><span>번역</span></div>
+      <div class="menu-item"><div class="icon15">
+        <img src="{{ url_for('static', filename='image/의류.jpg') }}">
+      </div><span>의류</span></div>
+      <div class="menu-item"><div class="icon16">
+        <img src="{{ url_for('static', filename='image/여행.jpg') }}">
+      </div><span>여행</span></div>
+      <div class="menu-item"><div class="icon17">
+        <img src="{{ url_for('static', filename='image/배달.jpg') }}">
+      </div><span>배달</span></div>
+      <div class="menu-item"><div class="icon18">
+        <img src="{{ url_for('static', filename='image/숙박시설.jpg') }}">
+      </div><span>숙박시설</span></div>
+    </div>
+  </div>
+  <button class="nav-btn" id="next">&#10095;</button>
+  
+    <div class="banner-container">
+        <div class="banner-text">
+            <h2>100% 후불 선납 No! 만족 Yes! </h2>
+            <h3>생활속의 모든 매칭</h3>
+  </div>
+
+    <img class="banner-image" src="{{ url_for('static', filename='image/브랜드아이콘2.png') }}">
+      </div>
+
+        <main class="wrap" role="main">
+    <h1 class="section-title">숨고 인기 서비스</h1>
+
+    <section class="services-grid" aria-label="인기 서비스 목록">
+      <!-- 카드 1 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/피아노레슨.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">피아노 레슨</div>
+            <div class="svc-meta">
+              <!-- envelope icon (inline svg) -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>255,555명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 카드 2 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/골프레슨.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">골프 레슨</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>386,504명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 카드 3 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/퍼스널트레이닝.jpg">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">퍼스널트레이닝(PT)</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>690,199명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- 카드 4 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/보컬.jpg">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">보컬 레슨</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>486,061명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/청소.jpg">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">청소</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>777,777명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/렌탈1.jpg">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">렌탈</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>543,879명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/이벤트대행.jpg">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">이벤트 대행</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>557,899명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="C:/JYD/Flask/project/talentproject/talent/static/image/중고차 구매 대행.jpg">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">중고차 구매대행</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>256,248명 요청</span>
+            </div>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </section>
+  </main>
+
+        <div class="container">
+        <div class="header">
+          <h2>숨은고수 포트폴리오</h2>
+        </div>
+
+        <div class="slider" id="slider">
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/모델.png" alt="모델 이미지">
+            <div class="card-content">
+              <p>내가 작업한 모델 포토샵 메이크업</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>남서연</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/강아지.jpg" alt="강아지 이미지">
+            <div class="card-content">
+              <p>견주만 휴가를 가나요, 반려견도 휴가!</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>써니</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/골프.jpg" alt="골프 이미지">
+            <div class="card-content">
+              <p>골프란? 프로에게 배우는 꿀팁</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>이원비</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="C:/JYD/Flask/project/talentproject/talent/static/image/이사청소.jpg" alt="청소 이미지">
+            <div class="card-content">
+              <p>⭐ 이사청소는 이렇게 진행돼요 ⭐</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>삐까번쩍홈케어</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    
+
+  <script>
+    const slider = document.getElementById('slider');
+    const sliderContainer = document.getElementById('slider-container');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    let scrollAmount = 0;
+    const scrollStep = 120;
+    let autoSlide;
+
+    function slide(direction) {
+      scrollAmount += direction * scrollStep;
+      slider.style.transform = `translateX(${scrollAmount}px)`;
+    }
+
+    next.addEventListener('click', () => slide(-1));
+    prev.addEventListener('click', () => slide(1));
+
+        const slider = document.getElementById('slider');
+    function scrollSlider(direction) {
+      const scrollAmount = 270;
+      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
