@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2 class="my-4">마이페이지</h2>
+
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>내 정보</h5>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">아이디</div>
+        <div class="col-md-9">{{ user.userid }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">이름</div>
+        <div class="col-md-9">{{ user.name }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">이메일</div>
+        <div class="col-md-9">{{ user.email }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">전화번호</div>
+        <div class="col-md-9">{{ user.tel_number }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">생년월일</div>
+        <div class="col-md-9">{{ user.birthday.strftime('%Y년 %m월 %d일') }}</div>
+      </div>
+      {% if user.is_expert %}
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">제공 서비스</div>
+        <div class="col-md-9">{{ user.service }}</div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-3 fw-bold">활동 지역</div>
+        <div class="col-md-9">{{ user.location }}</div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="card-footer">
+      <a href="{{ url_for('auth.edit_profile') }}" class="btn btn-primary">정보 수정</a>
+      <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+        비밀번호 변경
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 비밀번호 변경 모달 -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">비밀번호 변경</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post" action="{{ url_for('auth.change_password') }}">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="current_password" class="form-label">현재 비밀번호</label>
+            <input type="password" class="form-control" id="current_password" name="current_password" required>
+          </div>
+          <div class="mb-3">
+            <label for="new_password" class="form-label">새 비밀번호</label>
+            <input type="password" class="form-control" id="new_password" name="new_password" required>
+          </div>
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">비밀번호 확인</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-primary">변경하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

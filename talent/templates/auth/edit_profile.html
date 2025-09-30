@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2 class="my-4">내 정보 수정</h2>
+  
+  <form method="post" action="{{ url_for('auth.edit_profile') }}">
+    {% include 'form_errors.html' %}
+    
+    <div class="mb-3">
+      <label for="name" class="form-label">이름</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="email" class="form-label">이메일</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="tel_number" class="form-label">전화번호</label>
+      <input type="text" class="form-control" id="tel_number" name="tel_number" value="{{ user.tel_number }}" required>
+    </div>
+    
+    {% if user.is_expert %}
+    <div class="mb-3">
+      <label for="service" class="form-label">제공 서비스</label>
+      <input type="text" class="form-control" id="service" name="service" value="{{ user.service }}">
+    </div>
+    
+    <div class="mb-3">
+      <label for="location" class="form-label">활동 지역</label>
+      <input type="text" class="form-control" id="location" name="location" value="{{ user.location }}">
+    </div>
+    {% endif %}
+    
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">정보 수정</button>
+      <a href="{{ url_for('auth.mypage') }}" class="btn btn-outline-secondary">취소</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
