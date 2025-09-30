@@ -1,0 +1,89 @@
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 56px);
+  }
+
+  .signup-container {
+    background-color: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 500px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border: 1px solid #7d4fff;
+  }
+
+  .birthday-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .birthday-group select {
+    flex: 1;
+  }
+
+  .signup-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #7d4fff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .signup-btn:hover {
+    background-color: #693ae6;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .cancel-btn {
+    padding: 14px 20px;
+    background-color: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
