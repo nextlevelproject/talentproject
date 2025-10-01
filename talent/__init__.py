@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
+from flask_wtf import CSRFProtect
 
 from . import models
 import config
@@ -10,6 +11,7 @@ from talent.views import store_views
 db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()
+csrf = CSRFProtect()
 
 def create_app():
     app = Flask(__name__)
@@ -19,6 +21,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
+    csrf.init_app(app)
 
     # 블루프린트 등록
     from .views import main_views, community_views, auth_views, store_views

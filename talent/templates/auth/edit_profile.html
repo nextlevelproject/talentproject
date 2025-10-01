@@ -4,6 +4,7 @@
   <h2 class="my-4">내 정보 수정</h2>
   
   <form method="post" action="{{ url_for('auth.edit_profile') }}">
+    {{ csrf_token() }}
     {% include 'form_errors.html' %}
     
     <div class="mb-3">
