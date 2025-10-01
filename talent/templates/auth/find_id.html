@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style>
+<!-- <style>
     .container {
         max-width: 400px;
         margin: 0 auto;
@@ -50,11 +50,13 @@
         text-align: center;
         color: #333;
     }
-</style>
+</style> 
+find_id.css가 없길래 일단 주석처리만 해놨어요 ! 필요 없으면 삭제하셔요 -->
 
 <div class="container">
     <h2>아이디 찾기</h2>
-    <form id="findIdForm">
+    <form id="findIdForm" method="post" action="{{ url_for('auth.find_id') }}">
+        {{ csrf_token() }}
         <label for="name">이름</label>
         <input type="text" id="name" name="name" required>
 

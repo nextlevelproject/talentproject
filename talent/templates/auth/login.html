@@ -4,6 +4,7 @@
     <h5 class="my-3 border-bottom pb-2">로그인</h5>
     <!-- 폼의 method와 action을 Flask 라우트와 연결 -->
     <form method="post" action="{{ url_for('auth.login') }}">
+        {{ csrf_token() }}
         {% include 'form_errors.html' %} {# 플래시 메시지를 보여줄 때 사용할 파일 #}
 
         <div class="mb-3">
