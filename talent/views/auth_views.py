@@ -1,4 +1,6 @@
 # talent/views/auth_views.py
+from functools import wraps
+
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, jsonify
 from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -73,7 +75,6 @@ def client_signup():
 
         # 사용자 생성
         user = User(
-        new_user = User(
             userid=userid,
             password_hash=generate_password_hash(password),
             email=email,
@@ -184,7 +185,7 @@ def find_password():
     return render_template('auth/find_password.html')
 
 # ------------------ 비밀번호 재설정 ------------------
-@auth_bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     try:
         payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
