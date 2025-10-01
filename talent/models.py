@@ -41,3 +41,14 @@ class CommentLike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment_id = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+# STORE
+class Store(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.Text(), nullable=False)
+    create_date = db.Column(db.DateTime, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id',ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User', backref=db.backref('store'))
+    edit_date = db.Column(db.DateTime, nullable=False)
+    image_path = db.Column(db.String(120), nullable=False)
