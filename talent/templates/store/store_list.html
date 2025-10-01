@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row my-3">
+    <div class="col-6">
+        <h2>Store</h2>
+    </div>
+    <div class="col-6">
+        <div class="input-group">
+<!--            <input type="text" id="search_kw" class="form-control" value="{{ kw or '' }}">-->
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" id="btn_search">검색</button>
+                <a href="{{ url_for('store.create') }}" class="btn btn-outline-secondary">상품 등록하기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="grid" style="--bs-columns: 12;">
+    <div class="g-col-4">4 of 12
+
+    </div>
+    <div class="g-col-8">8 of 12
+        <div class="container my-3">
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-dark">
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">글쓴이</th>
+                    <th scope="col">작성일시</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if store %}
+                {% for store in question_list.items %}
+                <tr>
+<!--                    <td>{{ store_list.total - (store_list.page - 1) * store_list.per_page - loop.index0 }}</td>-->
+                    <td>
+                        {% store.image_path %}
+                        <img src="{{ url_for('static', filename=question.image_path) }}" alt="썸네일" style="width:50px;">
+                        <a href="{{ url_for('store.detail', store_id = store.id) }}">{{ store.title }}</a>
+                    </td>
+<!--                    <td>{{ question.user.username }}</td>-->
+                    <td>{{ store.create_date|datetime }}</td>
+                </tr>
+                {% endfor %} {% else %}
+                <tr>
+                    <td colspan="3">질문이 없습니다.</td>
+                </tr>
+                {% endif %}
+                </tbody>
+            </table>
+            <!--        <div class="card" style="width: 18rem;">-->
+            <!--            <img src="{{ url_for('static', filename=store.image_path }}" class="card-img-top" alt="첨부 이미지">-->
+            <!--            <div class="card-body">-->
+            <!--                <h5 class="card-title">제목</h5>-->
+            <!--                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the-->
+            <!--                    card’s-->
+            <!--                    content.</p>-->
+            <!--                <a href="#" class="btn btn-primary">Go somewhere</a>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <!--        <div class="card" style="width: 18rem;">-->
+            <!--            <img src="..." class="card-img-top" alt="...">-->
+            <!--            <div class="card-body">-->
+            <!--                <h5 class="card-title">Card title</h5>-->
+            <!--                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the-->
+            <!--                    card’s content.</p>-->
+            <!--                <a href="#" class="btn btn-primary">Go somewhere</a>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <!--        <div class="card" style="width: 18rem;">-->
+            <!--            <img src="..." class="card-img-top" alt="...">-->
+            <!--            <div class="card-body">-->
+            <!--                <h5 class="card-title">Card title</h5>-->
+            <!--                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the-->
+            <!--                    card’s content.</p>-->
+            <!--                <a href="#" class="btn btn-primary">Go somewhere</a>-->
+            <!--            </div>-->
+            <!--        </div>-->
+        </div>
+    </div>
+    {% endblock %}
