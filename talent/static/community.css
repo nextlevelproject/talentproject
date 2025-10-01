@@ -1,0 +1,141 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #ffffff;
+    color: #212529;
+}
+
+.community-container {
+    width: 75%;
+    margin-left: 10%;
+    margin-right: 15%;
+}
+
+/* Page title */
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Write button */
+.btn-write {
+    background-color: #6f42c1;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-write:hover {
+    background-color: #5936a2;
+    color: #fff;
+}
+
+/* Segmented tabs */
+.segmented-tabs {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+.tab-item {
+    padding: 8px 0;
+    font-weight: 500;
+    color: #6c757d;
+    text-decoration: none;
+    position: relative;
+}
+.tab-item.active {
+    color: #000;
+    font-weight: 700;
+}
+.tab-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+}
+
+/* Announcement */
+.announcement-box {
+    background-color: #e5e5e5;
+    border-radius: 6px;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+}
+.notice-label {
+    font-weight: bold;
+    color: black;
+}
+/* Hot picks cards */
+.hot-card {
+    background-color: #fdf2f2;
+    border-radius: 8px;
+    border: 1px solid #f5c2c7;
+    transition: 0.2s;
+}
+.hot-card:hover {
+    background-color: #ffe8e8;
+}
+
+/* Post cards */
+.card {
+    border-radius: 12px;
+    height: 50px;
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-4px);
+}
+.card-img-top {
+    height: 260px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card-text {
+    font-size: 0.85rem;
+    color: #495057;
+}
+
+/* Pro badge */
+.pro-badge {
+    background-color: #28a745;
+    color: white;
+    font-size: 0.65rem;
+    margin-left: 5px;
+}
+
+/* Category menu */
+.category-menu {
+    padding-right: 12px;
+}
+.category-item {
+    padding: 10px 14px;
+    border-radius: 8px;
+    color: #212529;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+.category-item:hover {
+    background-color: #f1f3f5;
+}
+.category-item.active {
+    background-color: #f3f0ff;
+    font-weight: 600;
+    color: #6f42c1;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .category-menu {
+        display: none;
+    }
+}

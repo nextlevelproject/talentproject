@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Post</title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block content %}
 <h1>Create New Post</h1>
 
 <form method="POST" enctype="multipart/form-data">
@@ -25,7 +20,5 @@
     <button type="submit">Create Post</button>
 </form>
 
-<p><a href="{{ url_for('home') }}">Back to Community</a></p>
-
-</body>
-</html>
+<p><a href="{{ url_for('community_views.home') }}">Back to Community</a></p>
+{% endblock %}
