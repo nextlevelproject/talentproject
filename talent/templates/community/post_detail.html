@@ -1,52 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }}</title>
-</head>
-<body>
-    <a href="{{ url_for('home') }}">← Go Back</a>
+{% extends "base.html" %}
 
-    <h1>{{ post.title }}</h1>
-    <p>By: {{ post.author.username if post.author else 'Unknown' }}</p>
-    <p>{{ post.content }}</p>
+{% block content %}
+<a href="{{ url_for('community_views.home') }}">← Go Back</a>
 
-    {% if post.image_filename %}
-        <img src="{{ url_for('static', filename='uploads/' ~ post.image_filename) }}" alt="Post Image">
-    {% endif %}
+<h1>{{ post.title }}</h1>
+<p>By: {{ post.author.username if post.author else 'Unknown' }}</p>
+<p>{{ post.content }}</p>
 
-    <!-- Like Post -->
-    {% if current_user.is_authenticated %}
-        <form action="{{ url_for('like_post', post_id=post.id) }}" method="POST">
-            <button type="submit">❤️ Like Post ({{ post.likes|length }})</button>
-        </form>
-    {% else %}
-        <p>Likes: {{ post.likes|length }} (login to like)</p>
-    {% endif %}
+{% if post.image_filename %}
+    <img src="{{ url_for('static', filename='uploads/' ~ post.image_filename) }}" alt="Post Image">
+{% endif %}
 
-    <!-- Comments -->
-    <h3>Comments ({{ post.comments|length }})</h3>
-    {% for comment in post.comments %}
-        <div>
-            <p><strong>{{ comment.author.username if comment.author else 'Unknown' }}</strong>: {{ comment.content }}</p>
-            {% if current_user.is_authenticated %}
-                <form action="{{ url_for('like_comment', comment_id=comment.id) }}" method="POST">
-                    <button type="submit">❤️ {{ comment.likes|length }}</button>
-                </form>
-            {% else %}
-                <span>❤️ {{ comment.likes|length }}</span>
-            {% endif %}
-        </div>
-    {% endfor %}
+<!-- Like Post -->
+{% if current_user.is_authenticated %}
+    <form action="{{ url_for('community_views.like_post', post_id=post.id) }}" method="POST">
+        <button type="submit">❤️ Like Post ({{ post.likes|length }})</button>
+    </form>
+{% else %}
+    <p>Likes: {{ post.likes|length }} (login to like)</p>
+{% endif %}
 
-    <!-- Add Comment -->
-    {% if current_user.is_authenticated %}
-        <form action="{{ url_for('post_detail', post_id=post.id) }}" method="POST">
-            <input type="text" name="comment" placeholder="Write a comment..." required>
-            <button type="submit">Add Comment</button>
-        </form>
-    {% else %}
-        <p><a href="{{ url_for('login') }}">Login</a> to add a comment.</p>
-    {% endif %}
-</body>
-</html>
+<!-- Comments -->
+<h3>Comments ({{ post.comments|length }})</h3>
+{% for comment in post.comments %}
+    <div>
+        <p><strong>{{ comment.author.username if comment.author else 'Unknown' }}</strong>: {{ comment.content }}</p>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('community_views.like_comment', comment_id=comment.id) }}" method="POST">
+                <button type="submit">❤️ {{ comment.likes|length }}</button>
+            </form>
+        {% else %}
+            <span>❤️ {{ comment.likes|length }}</span>
+        {% endif %}
+    </div>
+{% endfor %}
+
+<!-- Add Comment -->
+{% if current_user.is_authenticated %}
+    <form action="{{ url_for('community_views.post_detail', post_id=post.id) }}" method="POST">
+        <input type="text" name="comment" placeholder="Write a comment..." required>
+        <button type="submit">Add Comment</button>
+    </form>
+{% else %}
+    <p><a href="{{ url_for('auth_views.login') }}">Login</a> to add a comment.</p>
+{% endif %}
+{% endblock %}
