@@ -2,40 +2,42 @@
 {% block content %}
 <div class="container">
   <h2 class="my-4">내 정보 수정</h2>
-  
+
   <form method="post" action="{{ url_for('auth.edit_profile') }}">
-    {{ csrf_token() }}
-    {% include 'form_errors.html' %}
-    
+    {{ form.hidden_tag() }}
+
     <div class="mb-3">
-      <label for="name" class="form-label">이름</label>
-      <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}" required>
+      {{ form.name.label(class="form-label") }}
+      {{ form.name(class="form-control", value=user.name) }}
+      {% for e in form.name.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
-    
+
     <div class="mb-3">
-      <label for="email" class="form-label">이메일</label>
-      <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+      {{ form.email.label(class="form-label") }}
+      {{ form.email(class="form-control", value=user.email) }}
+      {% for e in form.email.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
-    
+
     <div class="mb-3">
-      <label for="tel_number" class="form-label">전화번호</label>
-      <input type="text" class="form-control" id="tel_number" name="tel_number" value="{{ user.tel_number }}" required>
+      {{ form.tel_number.label(class="form-label") }}
+      {{ form.tel_number(class="form-control", value=user.tel_number) }}
+      {% for e in form.tel_number.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
-    
+
     {% if user.is_expert %}
     <div class="mb-3">
-      <label for="service" class="form-label">제공 서비스</label>
-      <input type="text" class="form-control" id="service" name="service" value="{{ user.service }}">
+      {{ form.service.label(class="form-label") }}
+      {{ form.service(class="form-control", value=user.service) }}
     </div>
-    
+
     <div class="mb-3">
-      <label for="location" class="form-label">활동 지역</label>
-      <input type="text" class="form-control" id="location" name="location" value="{{ user.location }}">
+      {{ form.location.label(class="form-label") }}
+      {{ form.location(class="form-control", value=user.location) }}
     </div>
     {% endif %}
-    
+
     <div class="mt-4">
-      <button type="submit" class="btn btn-primary">정보 수정</button>
+      {{ form.submit(class="btn btn-primary") }}
       <a href="{{ url_for('auth.mypage') }}" class="btn btn-outline-secondary">취소</a>
     </div>
   </form>

@@ -3,61 +3,23 @@
 
 <div class="container">
     <h2>아이디 찾기</h2>
-    <form id="findIdForm" method="post" action="{{ url_for('auth.find_id') }}">
-        {{ csrf_token() }}
-        <label for="name">이름</label>
-        <input type="text" id="name" name="name" required>
+    <form method="post" id="findIdForm">
+        {{ form.hidden_tag() }}
 
-        <label for="email">이메일</label>
-        <input type="email" id="email" name="email" required>
+        <div class="mb-3">
+            {{ form.name.label }}
+            {{ form.name(class="form-control") }}
+            {% for e in form.name.errors %}<p class="err">{{ e }}</p>{% endfor %}
+        </div>
 
-        <button type="submit">아이디 찾기</button>
+        <div class="mb-3">
+            {{ form.email.label }}
+            {{ form.email(class="form-control") }}
+            {% for e in form.email.errors %}<p class="err">{{ e }}</p>{% endfor %}
+        </div>
+
+        {{ form.submit(class="btn btn-primary") }}
     </form>
 
     <div class="result" id="resultBox"></div>
 </div>
-
-<script>
-    // 여기가 올바른 자바스크립트 코드야!
-    const form = document.getElementById('findIdForm');
-    const resultBox = document.getElementById('resultBox');
-
-    form.addEventListener('submit', function (event) {
-        event.preventDefault(); // 폼 기본 제출 동작 막기
-
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        const csrf = form.querySelector('input[name="csrf_token"]').value;
-
-        // 백엔드(Flask)로 데이터 전송 요청 (fetch API 사용)
-        fetch('{{ url_for("auth.find_id") }}', {
-            method: 'POST', // POST 방식으로 요청
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded', // 폼 데이터 형식
-                'X-CSRFToken': csrf,
-            },
-            credentials: 'same-origin',
-            // 이름과 이메일 데이터를 URL-encoded 형식으로 body에 담기
-            body: new URLSearchParams({
-            csrf_token: csrf,   // ✅ 반드시 포함
-            name: name,
-            email: email
-        }).toString()
-        })
-        .then(response => response.json()) // 서버 응답을 JSON 형식으로 파싱
-        .then(data => {
-            // 서버에서 받은 'data' 객체 확인
-            if (data.success) { // 성공적으로 아이디를 찾았으면
-                resultBox.textContent = `당신의 아이디는: ${data.userid}입니다.`;
-            } else { // 아이디를 찾지 못했으면
-                resultBox.textContent = data.message;
-            }
-        })
-        .catch(error => { // 요청 중 오류 발생 시
-            resultBox.textContent = "오류가 발생했습니다. 다시 시도해주세요.";
-            console.error('Error:', error); // 콘솔에 오류 메시지 출력
-        });
-    });
-</script>
-
-{% endblock %}

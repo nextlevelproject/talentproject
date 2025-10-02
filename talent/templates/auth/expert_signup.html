@@ -3,155 +3,51 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='expert_signup.css') }}">
 {% endblock %}
 {% block content %}
-
 <div class="container">
   <h2>매칭허브 고수 가입하기</h2>
 
-  <form id="expertForm" method="POST" action="{{ url_for('auth.expert_signup') }}">
-    {{ csrf_token() }}
-    <label for="userid">아이디</label>
-    <input type="text" id="userid" name="userid" required
-           placeholder="영문/숫자/_ 6~20자"
-           pattern="^[a-zA-Z0-9_]{6,20}$"
-           autocomplete="username">
+  <form id="expertForm" method="post" action="{{ url_for('auth.expert_signup') }}">
+    {{ form.hidden_tag() }}
 
-    <label for="name">이름</label>
-    <input type="text" id="name" name="name" required>
+    {{ form.userid.label }} {{ form.userid(class="form-control") }}
+    {% for e in form.userid.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
-    <label for="email">이메일</label>
-    <input type="email" id="email" name="email" required autocomplete="email">
+    {{ form.name.label }} {{ form.name(class="form-control") }}
+    {% for e in form.name.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
-    <label for="password">비밀번호</label>
-    <input type="password" id="password" name="password" required
-           placeholder="영문·숫자·특수문자 포함 8~20자"
-           autocomplete="new-password"
-           pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?&quot;:{}|&lt;&gt;])[A-Za-z\d!@#$%^&*(),.?&quot;:{}|&lt;&gt;]{8,20}$">
+    {{ form.email.label }} {{ form.email(class="form-control") }}
+    {% for e in form.email.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
-    <label for="tel_number">전화번호</label>
-    <input type="tel" id="tel_number" name="tel_number" required
-           placeholder="- 없이 숫자만 입력" autocomplete="tel">
+    {{ form.password.label }} {{ form.password(class="form-control") }}
+    {% for e in form.password.errors %}<p class="err">{{ e }}</p>{% endfor %}
+
+    {{ form.tel_number.label }} {{ form.tel_number(class="form-control") }}
+    {% for e in form.tel_number.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
     <label>생년월일</label>
     <div style="display:flex;gap:10px;">
-      <select name="birth_year" id="birth_year" required>
-        <option value="">년도</option>
-        {% for year in range(1950, 2024) %}
-          <option value="{{ year }}">{{ year }}</option>
-        {% endfor %}
-      </select>
-
-      <select name="birth_month" id="birth_month" required>
-        <option value="">월</option>
-        {% for month in range(1, 13) %}
-          <option value="{{ month }}">{{ month }}</option>
-        {% endfor %}
-      </select>
-
-      <select name="birth_day" id="birth_day" required>
-        <option value="">일</option>
-        {% for day in range(1, 32) %}
-          <option value="{{ day }}">{{ day }}</option>
-        {% endfor %}
-      </select>
+      {{ form.birth_year(class="form-select") }}
+      {{ form.birth_month(class="form-select") }}
+      {{ form.birth_day(class="form-select") }}
     </div>
+    {% for e in form.birth_year.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
-    <label for="service">제공 서비스</label>
-    <select id="service" name="service" required>
-      <option value="">서비스를 선택하세요</option>
-      <option value="청소">청소</option>
-      <option value="과외">과외</option>
-      <option value="인테리어">인테리어</option>
-      <option value="디자인">디자인</option>
-      <option value="이사">이사</option>
-    </select>
+    {{ form.service.label }} {{ form.service(class="form-select") }}
+    {% for e in form.service.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
-    <label for="location">지역</label>
-    <select id="location" name="location" required>
-      <option value="">지역을 선택하세요</option>
-      <option value="서울">서울</option>
-      <option value="경기">경기</option>
-      <option value="부산">부산</option>
-      <option value="대구">대구</option>
-      <option value="기타">기타</option>
-    </select>
+    {{ form.location.label }} {{ form.location(class="form-select") }}
+    {% for e in form.location.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
     <div style="text-align:center;margin-top:20px;">
       <label style="display:inline-flex;align-items:center;gap:8px;font-size:14px;">
-        <input type="checkbox" id="agree" required>
-        이용 약관 및 개인정보 수집에 동의합니다.
+        {{ form.agree() }} 이용 약관 및 개인정보 수집에 동의합니다.
       </label>
+      {% for e in form.agree.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
-    <button type="submit">매칭허브 전문가 가입하기</button>
+    <div style="margin-top:20px;">
+      {{ form.submit(class="btn btn-primary w-100") }}
+    </div>
   </form>
 </div>
-
-<script>
-(function() {
-  const form = document.getElementById('expertForm');
-  const telInput = document.getElementById('tel_number');
-  telInput.addEventListener('input', e => { e.target.value = e.target.value.replace(/-/g, ''); });
-
-  form.addEventListener('submit', function(e) {
-    const useridEl = document.getElementById('userid');
-    const nameEl = document.getElementById('name');
-    const emailEl = document.getElementById('email');
-    const pwEl = document.getElementById('password');
-    const telEl = document.getElementById('tel_number');
-    const yEl = document.getElementById('birth_year');
-    const mEl = document.getElementById('birth_month');
-    const dEl = document.getElementById('birth_day');
-    const serviceEl = document.getElementById('service');
-    const locationEl = document.getElementById('location');
-    const agreeEl = document.getElementById('agree');
-
-    const userid = useridEl.value.trim();
-    const name = nameEl.value.trim();
-    const email = emailEl.value.trim();
-    const password = pwEl.value.trim();
-    const tel = telEl.value.trim();
-    const year = yEl.value, month = mEl.value, day = dEl.value;
-
-    const USERID_RE   = /^[a-zA-Z0-9_]{6,20}$/;
-    const EMAIL_RE    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const PHONE_RE    = /^\d{9,11}$/;
-    const PASSWORD_RE = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,20}$/;
-
-    // 아이디
-    if (!userid) { e.preventDefault(); alert('아이디는 필수입니다'); useridEl.focus(); return; }
-    if (!USERID_RE.test(userid)) { e.preventDefault(); alert('아이디는 영문/숫자/밑줄 6~20자'); useridEl.focus(); return; }
-
-    // 비밀번호
-    if (!password) { e.preventDefault(); alert('비밀번호는 필수입니다'); pwEl.focus(); return; }
-    if (!PASSWORD_RE.test(password)) { e.preventDefault(); alert('비밀번호는 영문, 숫자, 특수문자를 포함한 8~20자'); pwEl.focus(); return; }
-
-    // 이름
-    if (!name) { e.preventDefault(); alert('이름은 필수입니다'); nameEl.focus(); return; }
-
-    // 이메일
-    if (!email) { e.preventDefault(); alert('이메일은 필수입니다'); emailEl.focus(); return; }
-    if (!EMAIL_RE.test(email)) { e.preventDefault(); alert('이메일 형식이 올바르지 않습니다'); emailEl.focus(); return; }
-
-    // 전화번호
-    if (!tel) { e.preventDefault(); alert('전화번호는 필수입니다'); telEl.focus(); return; }
-    if (!PHONE_RE.test(tel)) { e.preventDefault(); alert('전화번호는 숫자 9~11자리'); telEl.focus(); return; }
-
-    // 생년월일
-    if (!year || !month || !day) { e.preventDefault(); alert('생년월일을 모두 선택하세요'); (year ? (month ? dEl : mEl) : yEl).focus(); return; }
-    const y = parseInt(year, 10), m = parseInt(month, 10), d = parseInt(day, 10);
-    const dt = new Date(y, m - 1, d);
-    if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) {
-      e.preventDefault(); alert('유효하지 않은 생년월일입니다'); yEl.focus(); return;
-    }
-
-    // 서비스/지역
-    if (!serviceEl.value) { e.preventDefault(); alert('제공 서비스를 선택하세요'); serviceEl.focus(); return; }
-    if (!locationEl.value) { e.preventDefault(); alert('지역을 선택하세요'); locationEl.focus(); return; }
-
-    // 약관 동의
-    if (!agreeEl.checked) { e.preventDefault(); alert('약관에 동의해야 가입할 수 있습니다'); agreeEl.focus(); return; }
-  });
-})();
-</script>
-
 {% endblock %}
