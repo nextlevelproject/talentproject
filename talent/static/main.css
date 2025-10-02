@@ -149,8 +149,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: background 0.2s;
-
     }
     .nav-btn:hover {
       background: #ddd;
@@ -415,4 +413,206 @@
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       margin-left: 10px;
+    }
+
+
+    .section-title1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 70px;
+      margin-bottom: 30px;
+    }
+
+    .section-title1 h2 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .section-title1 a {
+      font-size: 14px;
+      color: #6b4eff;
+      text-decoration: none;
+    }
+
+    .category-tabs1 {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .category-tabs1 button {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 15px;
+      background-color: #f4f2ff;
+      color: #6b4eff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .category-tabs1 button:not(:first-child) {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .card-list1 {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      align-items: center;
+      justify-content: center;
+      
+    }
+
+    .card1 {
+      background: #f9f9fb;
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 180px;
+      flex: 0 0 auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      
+    }
+
+    .card1 img {
+      width: 180px;
+      height: 100px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .card1 h3 {
+      font-size: 15px;
+      margin: 5px 0;
+    }
+
+    .card1 p {
+      font-size: 13px;
+      color: #EFF1F5;
+      margin: 4px 0;
+    }
+
+    .rating {
+      color: #ffb400;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .sugo-pay {
+      display: inline-block;
+      font-size: 12px;
+      color: #6b4eff;
+      background-color: #f4f2ff;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+
+    .banner1 {
+      width: 100%;
+      margin-top: 30px;
+      margin-bottom: 70px;
+      padding: 20px;
+      background-color: #f4f2ff;
+      border-radius: 120px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      justify-content: center;
+    }
+
+        h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #2d3748;
+    }
+
+    .card2-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 10px;
+      justify-content: center;
+    }
+
+    .card2 {
+      flex: 0 0 auto;
+      width: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .card2 img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .card2 p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    /* 스크롤바 숨기기 */
+    .card2-container::-webkit-scrollbar {
+      display: none;
+    }
+
+        .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .section-title a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #6c3af0;
+    }
+
+    .story-container {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      justify-content: center;
+    }
+
+    .story-card {
+      flex: 0 0 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: #fff;
+      margin-bottom: 90px;
+    }
+
+    .story-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .story-card p {
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
     }
