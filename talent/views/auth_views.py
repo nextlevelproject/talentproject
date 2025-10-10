@@ -20,7 +20,12 @@ from talent.forms import (
     ChangePasswordForm,
 )
 
-# ------------------ 공통: 로그인 필요 데코레이터 ------------------
+# 비밀번호 규칙: 영문+숫자+특수문자 8~20자
+PASSWORD_RE = re.compile(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,20}$')
+
+bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+# ----------------- Auth guard -----------------
 def login_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -30,20 +35,44 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated
 
-# Blueprint
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+# ----------------- Basic signup -----------------
+@bp.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        if User.query.filter_by(userid=form.userid.data).first():
+            flash('이미 존재하는 사용자입니다.', 'danger')
+            return render_template('auth/signup.html', form=form)
+
+        # 폼에 따라 username 또는 name 필드가 있을 수 있음
+        username_field = getattr(form, "username", None) or getattr(form, "name", None)
+        username_value = username_field.data if username_field else form.userid.data
+
+        user = User(
+            username=username_value if hasattr(User, 'username') else None,
+            name=username_value if hasattr(User, 'name') else None,
+            userid=form.userid.data,
+            password_hash=generate_password_hash(form.password1.data),
+            email=form.email.data.strip().lower(),
+        )
+        db.session.add(user)
+        db.session.commit()
+        flash('회원가입이 완료되었습니다.', 'success')
+        return redirect(url_for('main.index'))
+    return render_template('auth/signup.html', form=form)
 
 # ----------------- Login -----------------
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         userid = form.userid.data.strip()
-        password = form.password.data
+        password = form.password.data or ''
         user = User.query.filter_by(userid=userid).first()
         if user and check_password_hash(user.password_hash, password):
             session.clear()
             session['user_id'] = user.id
+            session['is_expert'] = bool(getattr(user, 'is_expert', False))
             flash(f'{user.userid}님, 로그인되었습니다.', 'success')
             return redirect(url_for('main.index'))
         flash('아이디 또는 비밀번호가 틀렸습니다.', 'danger')
@@ -57,16 +86,23 @@ def logout():
     flash('로그아웃되었습니다.', 'success')
     return redirect(url_for('auth.login'))
 
-# ----------------- Client Signup -----------------
+# ----------------- Client signup -----------------
 @bp.route('/client_signup', methods=['GET', 'POST'])
 def client_signup():
     form = SignupForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         userid = form.userid.data.strip()
         password = form.password.data
         email = form.email.data.strip().lower()
-        tel_number = form.phone.data.strip().replace('-', '')
-        name = form.name.data.strip()
+
+        # 폼에 따라 phone 또는 tel_number 사용
+        tel_field = getattr(form, 'phone', None) or getattr(form, 'tel_number', None)
+        tel_number = tel_field.data.strip().replace('-', '') if tel_field else ''
+
+        name = (getattr(form, 'name', None).data.strip()
+                if getattr(form, 'name', None) else
+                (getattr(form, 'username', None).data.strip() if getattr(form, 'username', None) else userid))
+
         y, m, d = form.birth_year.data, form.birth_month.data, form.birth_day.data
         birthday = datetime(y, m, d)
 
@@ -74,15 +110,22 @@ def client_signup():
             flash('이미 존재하는 아이디입니다.', 'danger'); return redirect(url_for('auth.client_signup'))
         if User.query.filter_by(email=email).first():
             flash('이미 사용 중인 이메일입니다.', 'danger'); return redirect(url_for('auth.client_signup'))
-        if User.query.filter_by(tel_number=tel_number).first():
+        if tel_number and User.query.filter_by(tel_number=tel_number).first():
             flash('이미 사용 중인 전화번호입니다.', 'danger'); return redirect(url_for('auth.client_signup'))
 
-        user = User(userid=userid,
-                    password_hash=generate_password_hash(password),
-                    email=email, birthday=birthday, tel_number=tel_number,
-                    name=name, is_expert=False)
+        user = User(
+            userid=userid,
+            password_hash=generate_password_hash(password),
+            email=email,
+            birthday=birthday,
+            tel_number=tel_number,
+            name=name if hasattr(User, 'name') else None,
+            username=name if hasattr(User, 'username') else None,
+            is_expert=False
+        )
         try:
-            db.session.add(user); db.session.commit()
+            db.session.add(user)
+            db.session.commit()
         except IntegrityError:
             db.session.rollback()
             flash('동일한 아이디/이메일/전화번호가 이미 존재합니다.', 'danger')
@@ -92,11 +135,11 @@ def client_signup():
         return redirect(url_for('auth.login'))
     return render_template('auth/client_signup.html', form=form)
 
-# ----------------- Expert Signup -----------------
+# ----------------- Expert signup -----------------
 @bp.route('/expert_signup', methods=['GET', 'POST'])
 def expert_signup():
     form = ExpertSignupForm()
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         userid = form.userid.data.strip()
         password = form.password.data
         email = form.email.data.strip().lower()
@@ -107,28 +150,24 @@ def expert_signup():
         service = form.service.data
         location = form.location.data
 
-        # 중복 체크
         if User.query.filter_by(userid=userid).first():
-            flash('이미 존재하는 아이디입니다.', 'danger')
-            return redirect(url_for('auth.expert_signup'))
+            flash('이미 존재하는 아이디입니다.', 'danger'); return redirect(url_for('auth.expert_signup'))
         if User.query.filter_by(email=email).first():
-            flash('이미 사용 중인 이메일입니다.', 'danger')
-            return redirect(url_for('auth.expert_signup'))
+            flash('이미 사용 중인 이메일입니다.', 'danger'); return redirect(url_for('auth.expert_signup'))
         if User.query.filter_by(tel_number=tel_number).first():
-            flash('이미 사용 중인 전화번호입니다.', 'danger')
-            return redirect(url_for('auth.expert_signup'))
+            flash('이미 사용 중인 전화번호입니다.', 'danger'); return redirect(url_for('auth.expert_signup'))
 
-        # 저장
         user = User(
             userid=userid,
             password_hash=generate_password_hash(password),
             email=email,
             birthday=birthday,
             tel_number=tel_number,
-            name=name,
+            name=name if hasattr(User, 'name') else None,
+            username=name if hasattr(User, 'username') else None,
             is_expert=True,
-            service=service,
-            location=location,
+            service=service if hasattr(User, 'service') else None,
+            location=location if hasattr(User, 'location') else None,
         )
         try:
             db.session.add(user)
@@ -140,7 +179,128 @@ def expert_signup():
 
         flash('전문가 회원가입이 완료되었습니다. 로그인해 주세요.', 'success')
         return redirect(url_for('auth.login'))
-
-    # GET 또는 검증 실패 시
     return render_template('auth/expert_signup.html', form=form)
 
+# ----------------- My page -----------------
+@bp.route('/mypage')
+@login_required
+def mypage():
+    user = User.query.get_or_404(session.get('user_id'))
+    form = ChangePasswordForm()
+    return render_template('auth/mypage.html', user=user, form=form)
+
+# ----------------- Edit profile -----------------
+@bp.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    user = User.query.get_or_404(session.get('user_id'))
+    form = EditProfileForm(obj=user)
+    if request.method == 'POST' and form.validate_on_submit():
+        # 공통 필드
+        if hasattr(form, 'name'):
+            user.name = form.name.data.strip()
+        if hasattr(form, 'email'):
+            user.email = form.email.data.strip().lower()
+        if hasattr(form, 'tel_number'):
+            user.tel_number = form.tel_number.data.strip().replace('-', '')
+        # 전문가 전용
+        if getattr(user, 'is_expert', False):
+            if hasattr(form, 'service'):
+                user.service = form.service.data.strip()
+            if hasattr(form, 'location'):
+                user.location = form.location.data.strip()
+        db.session.commit()
+        flash('프로필이 성공적으로 수정되었습니다.', 'success')
+        return redirect(url_for('auth.mypage'))
+    return render_template('auth/edit_profile.html', form=form, user=user)
+
+# ----------------- Find ID -----------------
+@bp.route('/find_id', methods=['GET', 'POST'])
+def find_id():
+    form = FindIdForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        name = form.name.data.strip()
+        email = form.email.data.strip().lower()
+        user = User.query.filter_by(name=name, email=email).first()
+        if user:
+            return jsonify({'success': True, 'userid': user.userid})
+        return jsonify({'success': False, 'message': '일치하는 정보가 없습니다.'})
+    return render_template('auth/find_id.html', form=form)
+
+# ----------------- Find / Reset password -----------------
+@bp.route('/find_password', methods=['GET', 'POST'])
+def find_password():
+    form = FindPasswordForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        email = form.email.data.strip().lower()
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            flash('해당 이메일로 등록된 사용자가 없습니다.', 'danger')
+            return render_template('auth/find_password.html', form=form)
+
+        token = jwt.encode(
+            {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
+            current_app.config['SECRET_KEY'],
+            algorithm='HS256'
+        )
+        if isinstance(token, bytes):
+            token = token.decode('utf-8')
+
+        reset_url = url_for('auth.reset_password', token=token, _external=True)
+        msg = Message('비밀번호 재설정', recipients=[email])
+        msg.body = f"아래 링크를 클릭하여 새 비밀번호를 설정하세요:\n{reset_url}"
+        try:
+            mail.send(msg)
+            flash('비밀번호 재설정 링크가 이메일로 발송되었습니다.', 'success')
+        except Exception as e:
+            flash(f'이메일 발송 중 오류 발생: {str(e)}', 'danger')
+        return redirect(url_for('auth.login'))
+    return render_template('auth/find_password.html', form=form)
+
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    try:
+        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
+        user = User.query.get(payload['user_id'])
+    except Exception:
+        flash('유효하지 않거나 만료된 링크입니다.', 'danger')
+        return redirect(url_for('auth.find_password'))
+
+    if request.method == 'POST':
+        new_password = request.form.get('password') or ''
+        if not PASSWORD_RE.fullmatch(new_password):
+            flash('비밀번호는 영문, 숫자, 특수문자를 포함한 8~20자여야 합니다.', 'danger')
+            return redirect(url_for('auth.reset_password', token=token))
+
+        user.password_hash = generate_password_hash(new_password)
+        db.session.commit()
+        flash('비밀번호가 변경되었습니다. 로그인해 주세요.', 'success')
+        return redirect(url_for('auth.login'))
+
+    return render_template('auth/reset_password.html', token=token)
+
+# ----------------- Change password (logged-in) -----------------
+@bp.route('/change_password', methods=['POST'])
+@login_required
+def change_password():
+    user = User.query.get_or_404(session.get('user_id'))
+    form = ChangePasswordForm()
+    if not form.validate_on_submit():
+        for _, errs in form.errors.items():
+            for e in errs:
+                flash(e, 'danger')
+        return redirect(url_for('auth.mypage'))
+
+    if not check_password_hash(user.password_hash, form.current_password.data or ''):
+        flash('현재 비밀번호가 일치하지 않습니다.', 'danger')
+        return redirect(url_for('auth.mypage'))
+
+    new_password = form.new_password.data
+    if not PASSWORD_RE.fullmatch(new_password):
+        flash('비밀번호는 영문, 숫자, 특수문자를 포함한 8~20자여야 합니다.', 'danger')
+        return redirect(url_for('auth.mypage'))
+
+    user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+    flash('비밀번호가 성공적으로 변경되었습니다.', 'success')
+    return redirect(url_for('auth.mypage'))

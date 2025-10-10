@@ -13,7 +13,7 @@
 <ul class="nav nav-tabs mb-3">
     <li class="nav-item">
         <a class="nav-link {% if active_tab == 'community' %}active{% endif %}"
-           href="{{ url_for('home') }}">숨고 라이프</a>
+           href="{{ url_for('community.home') }}">숨고 라이프</a>
     </li>
     <li class="nav-item">
         <a class="nav-link {% if active_tab == 'pro_center' %}active{% endif %}"
@@ -24,18 +24,18 @@
 <!-- Login / Create Post Links -->
 {% if current_user.is_authenticated %}
     <p>
-        <a href="{{ url_for('create_post') }}">Create New Post</a> |
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('community.create_post') }}">Create New Post</a> |
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
     </p>
 {% else %}
-    <p><a href="{{ url_for('login') }}">Login</a></p>
+    <p><a href="{{ url_for('auth.login') }}">Login</a></p>
 {% endif %}
 
 <!-- Posts List -->
 {% if posts %}
     {% for post in posts %}
         <div class="card mb-3 p-3">
-            <a href="{{ url_for('post_detail', post_id=post.id) }}">
+            <a href="{{ url_for('community.post_detail', post_id=post.id) }}">
                 <h5 class="card-title">{{ post.title }}</h5>
             </a>
 
@@ -52,10 +52,72 @@
                 {% if post.is_pro %}| <span class="badge bg-success">Pro</span>{% endif %}
             </small>
         </div>
-    {% endfor %}
-{% else %}
-    <p>No posts yet!</p>
-{% endif %}
 
-</body>
-</html>
+        <div class="row">
+            <!-- Category menu -->
+            <div class="col-3 category-menu d-none d-lg-flex flex-column gap-2">
+                <a href="{{ url_for('home') }}" class="category-item {% if not selected_category %}active{% endif %}">전체</a>
+                <a href="{{ url_for('home', category_name='고수에게묻다') }}" class="category-item {% if selected_category=='고수에게묻다' %}active{% endif %}">고수에게묻다</a>
+                <a href="{{ url_for('home', category_name='고수노하우') }}" class="category-item {% if selected_category=='고수노하우' %}active{% endif %}">고수노하우</a>
+                <a href="{{ url_for('home', category_name='함께해요') }}" class="category-item {% if selected_category=='함께해요' %}active{% endif %}">함께해요</a>
+                <a href="{{ url_for('home', category_name='고수소식') }}" class="category-item {% if selected_category=='고수소식' %}active{% endif %}">고수소식</a>
+                <a href="{{ url_for('home', category_name='숨고이야기') }}" class="category-item {% if selected_category=='숨고이야기' %}active{% endif %}">숨고이야기</a>
+            </div>
+
+            <!-- Posts section -->
+            <div class="col-8">
+                <!-- Announcement -->
+                <div class="announcement-box mb-4">
+                    <span class="notice-label">공지</span> 사진과 감사 메시지를 더해, 리뷰 쓰기 더 쉬워졌어요!
+                </div>
+
+                <!-- Hot posts -->
+                <h5 class="fw-bold mb-3">지금 가장 뜨거운 숨고픽 🔥</h5>
+                <div class="row row-cols-1 row-cols-md-3 g-3 mb-4">
+                    {% for hot in hot_posts %}
+                    <div class="col">
+                        <div class="hot-card p-3">
+                            <p class="mb-1 fw-semibold text-truncate">{{ hot.title }}</p>
+                            <div class="text-muted small">
+                                👁 {{ hot.views if hot.views else 0 }} &nbsp; 💬 {{ hot.comments|length }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Regular posts -->
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                    {% for post in posts %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            {% if post.image_filename %}
+                            <img src="{{ url_for('static', filename='uploads/' + post.image_filename) }}" class="card-img-top" alt="{{ post.title }}">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="fw-bold card-title text-truncate">
+                                    <a href="{{ url_for('post_detail', post_id=post.id) }}" class="text-decoration-none text-dark">
+                                        {{ post.title }}
+                                    </a>
+                                    {% if post.is_pro %}
+                                    <span class="badge pro-badge">고수</span>
+                                    {% endif %}
+                                </h6>
+                                <p class="card-text">{{ post.content[:100] }}{% if post.content|length>100 %}...{% endif %}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-auto pt-2 border-top small text-muted">
+                                    <span>💖 {{ post.likes|length }}</span>
+                                    <span>{{ human_readable_time(post.create_date) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Right spacer -->
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
