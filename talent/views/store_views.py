@@ -23,7 +23,7 @@ def _list():
         store_list = store_list.join(User).filter(
             Store.title.ilike(search) |
             Store.content.ilike(search) |
-            User.username.ilike(search)
+            User.name.ilike(search)
         ).distinct()
 
     store_list = store_list.paginate(page=page, per_page=10)
@@ -56,7 +56,7 @@ def create():
 
         if image_file:
             today = datetime.now().strftime('%Y%m%d')
-            upload_folder = os.path.join(current_app.root_path, 'static/uploads', today)
+            upload_folder = os.path.join(current_app.root_path, 'static/store_uploads', today)
             os.makedirs(upload_folder, exist_ok=True)
 
             # 파일명 중복 방지 (시간 붙이는 방식)
@@ -67,7 +67,7 @@ def create():
             file_path = os.path.join(upload_folder, new_filename)
             image_file.save(file_path)
 
-            image_path = f'uploads/{today}/{new_filename}'
+            image_path = f'store_uploads/{today}/{new_filename}'
 
         store = Store(
             title=form.title.data,
@@ -106,7 +106,7 @@ def edit(store_id):
         if form.image.data:   # 새 이미지를 업로드한 경우에만 실행
             image_file = form.image.data
             today = datetime.now().strftime('%Y%m%d')
-            upload_folder = os.path.join(current_app.root_path, 'static/uploads', today)
+            upload_folder = os.path.join(current_app.root_path, 'static/store_uploads', today)
             os.makedirs(upload_folder, exist_ok=True)
 
             # 파일명 중복 방지: 시간 붙이기 방식
@@ -118,7 +118,7 @@ def edit(store_id):
             image_file.save(file_path)
 
             # DB에 새로운 경로 반영
-            store.image_path = f'uploads/{today}/{new_filename}'
+            store.image_path = f'store_uploads/{today}/{new_filename}'
 
         # 이미지 안 올리면 → store.image_path는 그대로 유지
         db.session.commit()

@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, request, redirect, url_for, current_app
-from .models import db, User, Post, Comment, Like, CommentLike
 from flask_login import current_user, login_required
 from datetime import datetime, timedelta
 import pytz
@@ -35,13 +34,13 @@ def human_readable_time(post_time):
 @bp.route('/category/<string:category_name>')
 def home(category_name=None):
     if category_name:
-        posts = Post.query.filter_by(category=category_name).order_by(Post.create_date.desc()).all()
+        posts = CommunityPost.query.filter_by(category=category_name).order_by(CommunityPost.create_date.desc()).all()
     else:
-        posts = Post.query.order_by(Post.create_date.desc()).all()
+        posts = CommunityPost.query.order_by(CommunityPost.create_date.desc()).all()
 
-    hot_picks = Post.query.filter(Post.is_pro == True).limit(5).all()
+    hot_picks = CommunityPost.query.filter(CommunityPost.is_pro == True).limit(5).all()
     return render_template(
-        'community.html',
+        '/community/community.html',
         posts=posts,
         hot_posts=hot_picks,
         active_tab='community',
@@ -65,7 +64,7 @@ def create_post():
             filename = f"{datetime.utcnow().timestamp()}_{image.filename}"
             image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
 
-        post = Post(
+        post = CommunityPost(
             title=title,
             content=content,
             category=category,
@@ -77,7 +76,7 @@ def create_post():
         db.session.commit()
         return redirect(url_for('community.home'))
 
-    return render_template('create_post.html')
+    return render_template('community/create_post.html')
 
 
 @bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
@@ -90,7 +89,7 @@ def post_detail(post_id):
             db.session.add(comment)
             db.session.commit()
             return redirect(url_for('community.post_detail', post_id=post.id))
-    return render_template('post_detail.html', post=post, human_readable_time=human_readable_time)
+    return render_template('community/post_detail.html', post=post, human_readable_time=human_readable_time)
 
 
 @bp.route('/like_post/<int:post_id>', methods=['POST'])
