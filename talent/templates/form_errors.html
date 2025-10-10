@@ -1,3 +1,5 @@
+<!--  필드 오류  -->
+
 <!--CSRF 토큰 오류 처리-->
 {{ form.csrf_token }}
 
@@ -16,10 +18,9 @@
 {% endif %}
 <!--  오류 표시 end  -->
 
-<!--  flash 오류 start  -->
+<!--  flash 오류  -->
 {% for message in get_flashed_messages() %}
 <div class="alert alert-danger" role="alert">
     {{ message }}
 </div>
 {% endfor %}
-<!--  flash 오류 end  -->

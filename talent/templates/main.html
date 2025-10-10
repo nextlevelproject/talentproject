@@ -1,22 +1,5 @@
 {% extends 'base.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-{% endblock %}
 {% block content %}
-<!--    <div class="left-group">-->
-<!--      <div class="logo">매칭허브</div>-->
-<!--      <nav>-->
-<!--        <a href="#">견적요청</a>-->
-<!--        <a href="#">고수찾기</a>-->
-<!--        <a href="#">마켓</a>-->
-<!--        <a href="#">커뮤니티</a>-->
-<!--      </nav>-->
-<!--    </div>-->
-<!--    <div class="right-menu">-->
-<!--      <a href="#">로그인 / 회원가입</a>-->
-<!--      <a href="#" class="btn-primary">고수가입</a>-->
-<!--    </div>-->
-
 <main>
     <h1>더 나은 생활을 위한 변화</h1>
     <div class="search-box">
@@ -420,32 +403,32 @@
 <!-- 카드 리스트 -->
 <div class="card-list1">
     <div class="card1">
-        <img src="{{url_for('static', filename='img/돋보기.png') }}">
+        <img src="{{url_for('static', filename='image/돋보기.png') }}">
         <h3>1,558명의<br>고수 만나보기 ></h3>
     </div>
     <div class="card1">
-        <img src="{{url_for('static', filename='img/수영1.jpg') }}">
+        <img src="{{url_for('static', filename='image/수영1.jpg') }}">
         <div class="rating">⭐ 5.0</div>
         <h3>최코치 수영아카데미</h3>
         <span class="sugo-pay">숨고페이</span>
         <p>경력 10년 · 평균 2시간 내 응답</p>
     </div>
     <div class="card1">
-        <img src="{{url_for('static', filename='img/축구.jpg') }}">
+        <img src="{{url_for('static', filename='image/축구.jpg') }}">
         <div class="rating">⭐ 5.0</div>
         <h3>김용임</h3>
         <span class="sugo-pay">숨고페이</span>
         <p>경력 15년 · 평균 1시간 내 응답</p>
     </div>
     <div class="card1">
-        <img src="{{url_for('static', filename='img/배트민턴.jpg') }}">
+        <img src="{{url_for('static', filename='image/배트민턴.jpg') }}">
         <div class="rating">⭐ 4.9</div>
         <h3>박우희코치</h3>
         <span class="sugo-pay">숨고페이</span>
         <p>경력 20년 · 평균 1시간 내 응답</p>
     </div>
     <div class="card1">
-        <img src="{{url_for('static', filename='img/야구.jpg') }}">
+        <img src="{{url_for('static', filename='image/야구.jpg') }}">
         <div class="rating">⭐ 5.0</div>
         <h3>김민석</h3>
         <span class="sugo-pay">숨고페이</span>
@@ -465,23 +448,23 @@
 
 <div class="card2-container">
     <div class="card2">
-        <img src="{{url_for('static', filename='img/도배장판.webp') }}" alt="도배장판 시공">
+        <img src="{{url_for('static', filename='image/도배장판.webp') }}" alt="도배장판 시공">
         <p>도배장판 시공</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/인테리어필름.webp') }}">
+        <img src="{{url_for('static', filename='image/인테리어필름.webp') }}">
         <p>인테리어필름 시공</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/전기배선.webp') }}">
+        <img src="{{url_for('static', filename='image/전기배선.webp') }}">
         <p>전기배선 설치 및 수리</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/리모델링.webp') }}">
+        <img src="{{url_for('static', filename='image/리모델링.webp') }}">
         <p>욕실/화장실 리모델링</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/간접조명.jpg') }}">
+        <img src="{{url_for('static', filename='image/간접조명.jpg') }}">
         <p>간접조명 설치</p>
     </div>
 </div>
@@ -490,23 +473,23 @@
 
 <div class="card2-container">
     <div class="card2">
-        <img src="{{url_for('static', filename='img/거주청소.webp') }}">
+        <img src="{{url_for('static', filename='image/거주청소.webp') }}">
         <p>거주 청소업체</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/세탁기청소.webp') }}">
+        <img src="{{url_for('static', filename='image/세탁기청소.webp') }}">
         <p>세탁기 청소</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/폐기물처리.webp') }}">
+        <img src="{{url_for('static', filename='image/폐기물처리.webp') }}">
         <p>폐기물 처리</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/에어컨청소.webp') }}">
+        <img src="{{url_for('static', filename='image/에어컨청소.webp') }}">
         <p>에어컨 청소</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/유리청소.jpg') }}">
+        <img src="{{url_for('static', filename='image/유리청소.jpg') }}">
         <p>유리 청소</p>
     </div>
 </div>
@@ -515,23 +498,23 @@
 
 <div class="card2-container">
     <div class="card2">
-        <img src="{{url_for('static', filename='img/이사트럭.webp') }}">
+        <img src="{{url_for('static', filename='image/이사트럭.webp') }}">
         <p>용달/화물 운송</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/이사청소.webp') }}">
+        <img src="{{url_for('static', filename='image/이사청소.webp') }}">
         <p>이사/입주 청소업체</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/가정이사.webp') }}">
+        <img src="{{url_for('static', filename='image/가정이사.webp') }}">
         <p>가정이사(투룸 이상)</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/정리수납.webp') }}">
+        <img src="{{url_for('static', filename='image/정리수납.webp') }}">
         <p>정리수납 컨설팅</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/줄눈시공.webp') }}">
+        <img src="{{url_for('static', filename='image/줄눈시공.webp') }}">
         <p>줄눈 시공</p>
     </div>
 </div>
@@ -540,23 +523,23 @@
 
 <div class="card2-container">
     <div class="card2">
-        <img src="{{url_for('static', filename='img/수도설치.webp') }}">
+        <img src="{{url_for('static', filename='image/수도설치.webp') }}">
         <p>수도 관련 설치 및 수리</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/에어컨설치.webp') }}">
+        <img src="{{url_for('static', filename='image/에어컨설치.webp') }}">
         <p>에어컨 설치 및 수리</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/싱크대교체.webp') }}">
+        <img src="{{url_for('static', filename='image/싱크대교체.webp') }}">
         <p>싱크대 교체</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/보일러설치.webp') }}">
+        <img src="{{url_for('static', filename='image/보일러설치.webp') }}">
         <p>보일러 설치 및 수리(지역난방 포함)</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/벽걸이TV설치.webp') }}">
+        <img src="{{url_for('static', filename='image/벽걸이TV설치.webp') }}">
         <p>벽걸이TV 설치 및 철거</p>
     </div>
 </div>
@@ -565,23 +548,23 @@
 
 <div class="card2-container">
     <div class="card2">
-        <img src="{{url_for('static', filename='img/영어과외.webp') }}">
+        <img src="{{url_for('static', filename='image/영어과외.webp') }}">
         <p>영어 과외</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/보컬레슨.webp') }}">
+        <img src="{{url_for('static', filename='image/보컬레슨.webp') }}">
         <p>보컬 레슨</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/수학과외.webp') }}">
+        <img src="{{url_for('static', filename='image/수학과외.webp') }}">
         <p>수학 과외</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/퍼스널트레이닝(PT).webp') }}">
+        <img src="{{url_for('static', filename='image/퍼스널트레이닝(PT).webp') }}">
         <p>퍼스널트레이닝(PT)</p>
     </div>
     <div class="card2">
-        <img src="{{url_for('static', filename='img/기타레슨.webp') }}">
+        <img src="{{url_for('static', filename='image/기타레슨.webp') }}">
         <p>기타 레슨</p>
     </div>
 </div>
@@ -594,17 +577,17 @@
 
     <div class="story-container">
         <div class="story-card">
-            <img src="{{url_for('static', filename='img/숨고1.webp') }}">
+            <img src="{{url_for('static', filename='image/숨고1.webp') }}">
             <p>[10/1~10/12] 요청서를 보내면 100만 원 여행 상품권의 기회가!</p>
         </div>
 
         <div class="story-card">
-            <img src="{{url_for('static', filename='img/숨고2.webp') }}">
+            <img src="{{url_for('static', filename='image/숨고2.webp') }}">
             <p>환갑도 늦지 않았어요, 나다운 삶으로 나아가는 원동력</p>
         </div>
 
         <div class="story-card">
-            <img src="{{url_for('static', filename='img/숨고3.webp') }}">
+            <img src="{{url_for('static', filename='image/숨고3.webp') }}">
             <p>고생은 덜고 여유는 챙기는 추석 연휴</p>
         </div>
     </div>
@@ -627,94 +610,86 @@
     next.addEventListener('click', () => slide(-1));
     prev.addEventListener('click', () => slide(1));
 
-        const slider = document.getElementById('slider');
-    function scrollSlider(direction) {
-      const scrollAmount = 270;
-      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-    }
-</script>
+            const slider = document.getElementById('slider');
+        function scrollSlider(direction) {
+          const scrollAmount = 270;
+          slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+    </script>
 
-<footer style="background:#fff; padding:40px 20px; font-family:Arial, sans-serif; color:#555; border-top:1px solid #eee;">
-    <div style="max-width:1200px; margin:0 auto;">
-        <!-- 고객센터 -->
-        <div style="text-align:center; margin-bottom:20px;">
-            <h2 style="color:#6c3cf0; margin:0; font-size:20px;">1599-5319</h2>
-            <p style="margin:5px 0;">평일 09:00 - 18:00<br>(점심시간 12:00 - 13:00 제외 · 주말/공휴일 제외)</p>
-            <div style="margin-top:15px;">
-                <a href="#"
-                   style="display:inline-block; margin:5px; padding:12px 25px; background:#6c3cf0; color:#fff; border-radius:25px; text-decoration:none; font-size:14px;">▶
-                    APP STORE</a>
-                <a href="#"
-                   style="display:inline-block; margin:5px; padding:12px 25px; background:#6c3cf0; color:#fff; border-radius:25px; text-decoration:none; font-size:14px;">▶
-                    PLAY STORE</a>
+    <footer style="background:#fff; padding:40px 20px; font-family:Arial, sans-serif; color:#555; border-top:1px solid #eee;">
+        <div style="max-width:1200px; margin:0 auto;">
+            <!-- 고객센터 -->
+            <div style="text-align:center; margin-bottom:20px;">
+                <h2 style="color:#6c3cf0; margin:0; font-size:20px;">1599-5319</h2>
+                <p style="margin:5px 0;">평일 09:00 - 18:00<br>(점심시간 12:00 - 13:00 제외 · 주말/공휴일 제외)</p>
+                <div style="margin-top:15px;">
+                    <a href="#" style="display:inline-block; margin:5px; padding:12px 25px; background:#6c3cf0; color:#fff; border-radius:25px; text-decoration:none; font-size:14px;">▶ APP STORE</a>
+                    <a href="#" style="display:inline-block; margin:5px; padding:12px 25px; background:#6c3cf0; color:#fff; border-radius:25px; text-decoration:none; font-size:14px;">▶ PLAY STORE</a>
+                </div>
+            </div>
+
+            <!-- 링크 메뉴 -->
+            <div style="display:flex; justify-content:center; gap:150px; margin:40px 0; flex-wrap:wrap; text-align:left;">
+                <div>
+                    <h4 style="margin-bottom:10px;">숨고소개</h4>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li><a href="#" style="text-decoration:none; color:#555;">회사소개</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">채용안내</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">팀블로그</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:10px;">고객안내</h4>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li><a href="#" style="text-decoration:none; color:#555;">이용안내</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">안전정책</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">예상금액</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">고수찾기</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">숨고보증</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">고수에게묻다</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:10px;">고수안내</h4>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li><a href="#" style="text-decoration:none; color:#555;">이용안내</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">고수가이드</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">고수가입</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:10px;">고객센터</h4>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li><a href="#" style="text-decoration:none; color:#555;">공지사항</a></li>
+                        <li><a href="#" style="text-decoration:none; color:#555;">자주묻는질문</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 회사 정보 -->
+            <div style="font-size:12px; color:#888; line-height:1.6; text-align:center; margin-top:60px;">
+                <p>
+                    이용약관 | 광고약관 | 개인정보 처리방침 | 사업자 정보확인
+                </p>
+                <p>
+                    (주)브레이브모바일은 통신판매중개자로서 통신판매의 당사자가 아니며 개별 판매자가 제공하는 서비스에 대한 이행, 계약사항 등과 관련한 의무와 책임은 거래당사자에게 있습니다.
+                </p>
+                <p>
+                    상호명:(주)브레이브모바일 · 대표이사:김태우 · 개인정보책임관리자:이은선 · 주소:서울특별시 강남구 테헤란로 133, 11-12층 (역삼동, 한국타이어빌딩)<br>
+                    사업자등록번호:120-88-22325 · 통신판매업신고:제 2021-서울강남-00551 호 · 직업정보제공사업 신고번호:J1200020190021<br>
+                    호스팅서비스 제공자:Amazon Web Services, Inc. · 고객센터:1599-5319 · 이메일:support@soomgo.com
+                </p>
+                <p>Copyright ⓒBrave Mobile Inc. All Rights Reserved.</p>
+            </div>
+
+            <!-- 소셜 아이콘 -->
+            <div style="text-align:center; margin-top:20px;">
+                <a href="#"><img src="{{url_for('static', filename='image/블로그.jpg') }}" alt="blog" style="width:55px; margin:0 5px;"></a>
+                <a href="#"><img src="{{url_for('static', filename='image/유튜브.jpg') }}" alt="youtube" style="width:55px; margin:0 5px;"></a>
+                <a href="#"><img src="{{url_for('static', filename='image/인스타.jpg') }}" alt="instagram" style="width:55px; margin:0 5px;"></a>
+                <a href="#"><img src="{{url_for('static', filename='image/카카오톡.jpg') }}" alt="chat" style="width:55px; margin:0 5px;"></a>
             </div>
         </div>
-
-        <!-- 링크 메뉴 -->
-        <div style="display:flex; justify-content:center; gap:150px; margin:40px 0; flex-wrap:wrap; text-align:left;">
-            <div>
-                <h4 style="margin-bottom:10px;">숨고소개</h4>
-                <ul style="list-style:none; padding:0; margin:0;">
-                    <li><a href="#" style="text-decoration:none; color:#555;">회사소개</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">채용안내</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">팀블로그</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 style="margin-bottom:10px;">고객안내</h4>
-                <ul style="list-style:none; padding:0; margin:0;">
-                    <li><a href="#" style="text-decoration:none; color:#555;">이용안내</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">안전정책</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">예상금액</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">고수찾기</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">숨고보증</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">고수에게묻다</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 style="margin-bottom:10px;">고수안내</h4>
-                <ul style="list-style:none; padding:0; margin:0;">
-                    <li><a href="#" style="text-decoration:none; color:#555;">이용안내</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">고수가이드</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">고수가입</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 style="margin-bottom:10px;">고객센터</h4>
-                <ul style="list-style:none; padding:0; margin:0;">
-                    <li><a href="#" style="text-decoration:none; color:#555;">공지사항</a></li>
-                    <li><a href="#" style="text-decoration:none; color:#555;">자주묻는질문</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 회사 정보 -->
-        <div style="font-size:12px; color:#888; line-height:1.6; text-align:center; margin-top:60px;">
-            <p>
-                이용약관 | 광고약관 | 개인정보 처리방침 | 사업자 정보확인
-            </p>
-            <p>
-                (주)브레이브모바일은 통신판매중개자로서 통신판매의 당사자가 아니며 개별 판매자가 제공하는 서비스에 대한 이행, 계약사항 등과 관련한 의무와 책임은 거래당사자에게 있습니다.
-            </p>
-            <p>
-                상호명:(주)브레이브모바일 · 대표이사:김태우 · 개인정보책임관리자:이은선 · 주소:서울특별시 강남구 테헤란로 133, 11-12층 (역삼동, 한국타이어빌딩)<br>
-                사업자등록번호:120-88-22325 · 통신판매업신고:제 2021-서울강남-00551 호 · 직업정보제공사업 신고번호:J1200020190021<br>
-                호스팅서비스 제공자:Amazon Web Services, Inc. · 고객센터:1599-5319 · 이메일:support@soomgo.com
-            </p>
-            <p>Copyright ⓒBrave Mobile Inc. All Rights Reserved.</p>
-        </div>
-
-        <!-- 소셜 아이콘 -->
-        <div style="text-align:center; margin-top:20px;">
-            <a href="#"><img src="{{url_for('static', filename='img/블로그.jpg') }}" alt="blog"
-                             style="width:55px; margin:0 5px;"></a>
-            <a href="#"><img src="{{url_for('static', filename='img/유튜브.jpg') }}" alt="youtube"
-                             style="width:55px; margin:0 5px;"></a>
-            <a href="#"><img src="{{url_for('static', filename='img/인스타.jpg') }}" alt="instagram"
-                             style="width:55px; margin:0 5px;"></a>
-            <a href="#"><img src="{{url_for('static', filename='img/카카오톡.jpg') }}" alt="chat"
-                             style="width:55px; margin:0 5px;"></a>
-        </div>
-    </div>
-</footer>
+    </footer>
 {% endblock %}
