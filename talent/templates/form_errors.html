@@ -1,0 +1,26 @@
+<!--  필드 오류  -->
+
+<!--CSRF 토큰 오류 처리-->
+{{ form.csrf_token }}
+
+<!--  오류 표시 start  -->
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+   {% for field, errors in form.errors.items() %}  <!--  form.errors.items() => 딕셔너리 / key와 value를 쌍으로 가져옴  -->
+    <strong>{{ form[field].label }}</strong>
+    <ul>
+        {% for error in errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</div>
+{% endif %}
+<!--  오류 표시 end  -->
+
+<!--  flash 오류  -->
+{% for message in get_flashed_messages() %}
+<div class="alert alert-danger" role="alert">
+    {{ message }}
+</div>
+{% endfor %}

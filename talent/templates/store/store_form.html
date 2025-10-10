@@ -1,22 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-    <h5 class="my-3 border-bottom pb-2">상품등록</h5>
+<div class="container" style="max-width: 1000px;">
+    <h4 class="my-3 border-bottom pb-2 text-center">상품 등록/수정</h4>
+
     <form method="post" class="my-3" enctype="multipart/form-data">
-       {% include 'form_errors.html' %}
+        {% include 'form_errors.html' %}
+
         <div class="mb-3">
-            <label for="title">제목</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ form.title.data or '' }}">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" name="title" id="title"
+                   class="form-control"
+                   value="{{ form.title.data or '' }}"
+                   placeholder="상품명을 입력하세요">
         </div>
+
         <div class="mb-3">
-            <label for="content">내용</label>
-            <textarea name="content" id="content" rows="5" class="form-control">{{ form.content.data or '' }}</textarea>
+            <label for="content" class="form-label">내용</label>
+            <textarea name="content" id="content" rows="5"
+                      class="form-control"
+                      placeholder="상품 설명을 입력하세요">{{ form.content.data or '' }}</textarea>
         </div>
+
         <div class="mb-3">
-            <label for="image">이미지 첨부</label>
+            <label for="price" class="form-label">가격</label>
+            <input type="number" name="price" id="price"
+                   class="form-control"
+                   value="{{ form.price.data or '' }}"
+                   placeholder="가격을 입력하세요">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">이미지 첨부</label>
             <input type="file" name="image" id="image" class="form-control">
         </div>
-        <button type="submit" class="btn btn-light">저장하기</button>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('store._list') }}" class="btn btn-secondary">목록</a>
+            <button type="submit" class="btn btn-primary">저장하기</button>
+        </div>
     </form>
 </div>
 {% endblock %}

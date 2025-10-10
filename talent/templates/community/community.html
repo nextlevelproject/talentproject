@@ -13,7 +13,7 @@
 <ul class="nav nav-tabs mb-3">
     <li class="nav-item">
         <a class="nav-link {% if active_tab == 'community' %}active{% endif %}"
-           href="{{ url_for('home') }}">숨고 라이프</a>
+           href="{{ url_for('community.home') }}">숨고 라이프</a>
     </li>
     <li class="nav-item">
         <a class="nav-link {% if active_tab == 'pro_center' %}active{% endif %}"
@@ -24,18 +24,18 @@
 <!-- Login / Create Post Links -->
 {% if current_user.is_authenticated %}
     <p>
-        <a href="{{ url_for('create_post') }}">Create New Post</a> |
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('community.create_post') }}">Create New Post</a> |
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
     </p>
 {% else %}
-    <p><a href="{{ url_for('login') }}">Login</a></p>
+    <p><a href="{{ url_for('auth.login') }}">Login</a></p>
 {% endif %}
 
 <!-- Posts List -->
 {% if posts %}
     {% for post in posts %}
         <div class="card mb-3 p-3">
-            <a href="{{ url_for('post_detail', post_id=post.id) }}">
+            <a href="{{ url_for('community.post_detail', post_id=post.id) }}">
                 <h5 class="card-title">{{ post.title }}</h5>
             </a>
 

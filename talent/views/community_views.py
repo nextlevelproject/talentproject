@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 
 from talent import db
-from talent.models import Post, Comment, Like, CommentLike, User
+from talent.models import CommunityPost, Comment, Like, CommentLike, User
 
 bp = Blueprint('community', __name__, url_prefix='/community')
 
@@ -13,8 +13,8 @@ UPLOAD_FOLDER = os.path.join('static', 'uploads')
 # Home / Community
 @bp.route('/')
 def home():
-    posts = Post.query.order_by(Post.create_date.desc()).all()
-    return render_template('community.html', posts=posts, active_tab='community')
+    posts = CommunityPost.query.order_by(CommunityPost.create_date.desc()).all()
+    return render_template('community/community.html', posts=posts, active_tab='community')
 
 # Create Post
 @bp.route('/create_post', methods=['GET', 'POST'])
@@ -30,7 +30,7 @@ def create_post():
             filename = f"{datetime.utcnow().timestamp()}_{image.filename}"
             image.save(os.path.join(UPLOAD_FOLDER, filename))
 
-        post = Post(title=title, content=content, author_id=current_user.id)
+        post = CommunityPost(title=title, content=content, author_id=current_user.id)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('community.home'))
@@ -39,7 +39,7 @@ def create_post():
 # Post Detail
 @bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def post_detail(post_id):
-    post = Post.query.get_or_404(post_id)
+    post = CommunityPost.query.get_or_404(post_id)
     if request.method == 'POST' and current_user.is_authenticated:
         comment_content = request.form.get('comment')
         if comment_content:
@@ -53,7 +53,7 @@ def post_detail(post_id):
 @bp.route('/like_post/<int:post_id>', methods=['POST'])
 @login_required
 def like_post(post_id):
-    post = Post.query.get_or_404(post_id)
+    post = CommunityPost.query.get_or_404(post_id)
     existing_like = next((like for like in post.likes if like.user_id == current_user.id), None)
     if not existing_like:
         db.session.add(Like(user_id=current_user.id, post_id=post.id))
