@@ -1,5 +1,3 @@
-# talent/__init__.py
-from flask import Flask
 from flask import Flask, g, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -37,7 +35,6 @@ def create_app():
     from .views import main_views, auth_views, store_views, community_views
     # 2) init 이후에만 내부 모듈 임포트 (순환 방지)
     from . import models
-    from .views import main_views, community_views, auth_views, store_views
 
     # 3) 블루프린트 등록
     app.register_blueprint(main_views.bp)
