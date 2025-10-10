@@ -35,31 +35,6 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated
 
-# ----------------- Basic signup -----------------
-@bp.route('/signup', methods=['GET', 'POST'])
-def signup():
-    form = SignupForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        if User.query.filter_by(userid=form.userid.data).first():
-            flash('이미 존재하는 사용자입니다.', 'danger')
-            return render_template('auth/signup.html', form=form)
-
-        # 폼에 따라 username 또는 name 필드가 있을 수 있음
-        username_field = getattr(form, "username", None) or getattr(form, "name", None)
-        username_value = username_field.data if username_field else form.userid.data
-
-        user = User(
-            username=username_value if hasattr(User, 'username') else None,
-            name=username_value if hasattr(User, 'name') else None,
-            userid=form.userid.data,
-            password_hash=generate_password_hash(form.password1.data),
-            email=form.email.data.strip().lower(),
-        )
-        db.session.add(user)
-        db.session.commit()
-        flash('회원가입이 완료되었습니다.', 'success')
-        return redirect(url_for('main.index'))
-    return render_template('auth/signup.html', form=form)
 
 # ----------------- Login -----------------
 @bp.route('/login', methods=['GET', 'POST'])
