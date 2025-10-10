@@ -5,6 +5,9 @@ from datetime import datetime, timedelta
 import pytz
 import os
 
+from talent import db
+from talent.models import CommunityPost, Comment, Like, CommentLike, User
+
 bp = Blueprint('community', __name__, url_prefix='/community')
 
 KST = pytz.timezone('Asia/Seoul')
@@ -79,7 +82,7 @@ def create_post():
 
 @bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def post_detail(post_id):
-    post = Post.query.get_or_404(post_id)
+    post = CommunityPost.query.get_or_404(post_id)
     if request.method == 'POST' and current_user.is_authenticated:
         comment_content = request.form.get('comment')
         if comment_content:
@@ -93,7 +96,7 @@ def post_detail(post_id):
 @bp.route('/like_post/<int:post_id>', methods=['POST'])
 @login_required
 def like_post(post_id):
-    post = Post.query.get_or_404(post_id)
+    post = CommunityPost.query.get_or_404(post_id)
     existing_like = next((like for like in post.likes if like.user_id == current_user.id), None)
     if not existing_like:
         db.session.add(Like(user_id=current_user.id, post_id=post.id))

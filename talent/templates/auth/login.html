@@ -2,31 +2,34 @@
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">로그인</h5>
-    <!-- 폼의 method와 action을 Flask 라우트와 연결 -->
+
     <form method="post" action="{{ url_for('auth.login') }}">
-        {{ csrf_token() }}
-        {% include 'form_errors.html' %} {# 플래시 메시지를 보여줄 때 사용할 파일 #}
+        {{ form.hidden_tag() }}
+        {% include 'form_errors.html' %}
 
         <div class="mb-3">
-            <label for="userid">아이디</label> {# 'username' 대신 'userid'로 변경. 백엔드에서 userid로 받으니까! #}
-            <input type="text" name="userid" id="userid" class="form-control"
-                {# 'form.username.data'는 WTForms를 사용할 때 주로 쓰이는데, #}
-                {# 현재 auth_views.py에서는 form 객체를 템플릿으로 넘기지 않고 있어. #}
-                {# 오류 발생 시 입력값을 유지하려면 request.form.get을 사용하거나 이 부분을 삭제하는 게 좋아. #}
-                value="{{ request.form.get('userid', '') }}" required> {# 필수로 입력하도록 required 추가 #}
+            {{ form.userid.label }}
+            {{ form.userid }}
+            {% for error in form.userid.errors %}
+            <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
         </div>
-        <div class="mb-3">
-            <label for="password">비밀번호</label>
-            <input type="password" name="password" id="password" class="form-control"
-                value="{{ request.form.get('password', '') }}" required> {# 필수로 입력하도록 required 추가 #}
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
 
-        {# 아이디/회원가입 찾기 링크 추가 (선택 사항) #}
+        <div class="mb-3">
+            {{ form.password.label }}
+            {{ form.password }}
+            {% for error in form.password.errors %}
+            <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        {{ form.submit }}
+
         <div class="mt-3 text-center">
             <a href="{{ url_for('auth.client_signup') }}" class="btn btn-link">회원가입</a> |
+            <a href="{{ url_for('auth.expert_signup') }}" class="btn btn-link">전문가 회원가입</a> |
             <a href="{{ url_for('auth.find_id') }}" class="btn btn-link">아이디 찾기</a> |
-            <a href="#" class="btn btn-link">비밀번호 찾기</a>
+            <a href="{{ url_for('auth.find_password') }}" class="btn btn-link">비밀번호 찾기</a>
         </div>
     </form>
 </div>

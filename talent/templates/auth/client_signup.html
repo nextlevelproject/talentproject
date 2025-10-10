@@ -2,139 +2,91 @@
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='client_signup.css') }}">
 {% endblock %}
+
 {% block content %}
-
-
 <div class="signup-container">
   <h2>일반 회원 가입</h2>
-  
-  <form id="signupForm" method="post">
-    {{ csrf_token() }}
+
+  <form id="signupForm" method="post" novalidate>
+    {{ form.hidden_tag() }}
+
     <div class="form-group">
-      <label for="userid">아이디</label>
-      <input type="text" id="userid" name="userid"
-             placeholder="아이디를 입력해주세요 (영문/숫자/_ 6~20자)" required />
+      {{ form.userid.label }}
+      {{ form.userid(class="form-control") }}
+      {% for e in form.userid.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
     <div class="form-group">
-      <label for="password">비밀번호</label>
-      <input type="password" id="password" name="password"
-             placeholder="영문·숫자·특수문자 포함 8~20자" required />
+      {{ form.password.label }}
+      {{ form.password(class="form-control") }}
+      {% for e in form.password.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
     <div class="form-group">
-      <label for="password_confirm">비밀번호 확인</label>
-      <input type="password" id="password_confirm" name="password_confirm"
-             placeholder="비밀번호를 다시 입력해주세요" required />
+      {{ form.password_confirm.label }}
+      {{ form.password_confirm(class="form-control") }}
+      {% for e in form.password_confirm.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
     
     <div class="form-group">
-      <label for="name">이름</label>
-      <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required />
+      {{ form.name.label }}
+      {{ form.name(class="form-control") }}
+      {% for e in form.name.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
     <div class="form-group">
-      <label for="email">이메일</label>
-      <input type="email" id="email" name="email" placeholder="이메일 주소를 입력해주세요" required />
+      {{ form.email.label }}
+      {{ form.email(class="form-control") }}
+      {% for e in form.email.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
     <div class="form-group">
-      <label for="tel_number">전화번호</label>
-      <input type="tel" id="tel_number" name="tel_number" placeholder="전화번호를 입력해주세요 (- 없이)" required />
+      {{ form.phone.label }}
+      {{ form.phone(class="form-control") }}
+      {% for e in form.phone.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
     <div class="form-group">
       <label>생년월일</label>
       <div class="birthday-group">
-        <select name="birth_year" id="birth_year" required>
-          <option value="">년도</option>
-          {% for year in range(1950, 2024) %}
-            <option value="{{ year }}">{{ year }}</option>
-          {% endfor %}
-        </select>
-
-        <select name="birth_month" id="birth_month" required>
-          <option value="">월</option>
-          {% for month in range(1, 13) %}
-            <option value="{{ month }}">{{ month }}</option>
-          {% endfor %}
-        </select>
-
-        <select name="birth_day" id="birth_day" required>
-          <option value="">일</option>
-          {% for day in range(1, 32) %}
-            <option value="{{ day }}">{{ day }}</option>
-          {% endfor %}
-        </select>
+        {{ form.birth_year(class="form-control") }}
+        {{ form.birth_month(class="form-control") }}
+        {{ form.birth_day(class="form-control") }}
       </div>
+      {% for e in form.birth_year.errors %}<p class="err">{{ e }}</p>{% endfor %}
     </div>
 
     <div class="btn-group">
-      <button type="submit" class="signup-btn">회원가입</button>
+      {{ form.submit(class="signup-btn") }}
       <a href="{{ url_for('main.index') }}" class="cancel-btn">취소</a>
     </div>
   </form>
 </div>
 
+{# 선택: 기존 클라이언트 검증을 쓰고 싶으면 아래를 유지 #}
 <script>
   document.getElementById("signupForm").addEventListener("submit", function(e) {
-    const useridEl = document.getElementById("userid");
-    const pwEl = document.getElementById("password");
-    const pcEl = document.getElementById("password_confirm");
-    const nameEl = document.getElementById("name");
-    const emailEl = document.getElementById("email");
-    const telEl = document.getElementById("tel_number");
-    const yEl = document.getElementById("birth_year");
-    const mEl = document.getElementById("birth_month");
-    const dEl = document.getElementById("birth_day");
+    const userid = document.getElementById("userid").value.trim();
+    const pw = document.getElementById("password").value.trim();
+    const pc = document.getElementById("password_confirm").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const tel = document.getElementById("tel_number").value.trim().replace(/-/g,"");
+    const y = parseInt(document.getElementById("birth_year").value,10);
+    const m = parseInt(document.getElementById("birth_month").value,10);
+    const d = parseInt(document.getElementById("birth_day").value,10);
 
-    const userid = useridEl.value.trim();
-    const password = pwEl.value.trim();
-    const confirm  = pcEl.value.trim();
-    const name = nameEl.value.trim();
-    const email = emailEl.value.trim();
-    const tel = telEl.value.trim().replace(/-/g, "");
-    const year = yEl.value, month = mEl.value, day = dEl.value;
+    const USERID_RE=/^[A-Za-z0-9_]{6,20}$/;
+    const PASSWORD_RE=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,20}$/;
+    const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const PHONE_RE=/^\d{9,11}$/;
 
-    // 서버와 동일 규칙
-    const USERID_RE   = /^[a-zA-Z0-9_]{6,20}$/;
-    const EMAIL_RE    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const PHONE_RE    = /^\d{9,11}$/;
-    const PASSWORD_RE = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,20}$/;
-
-    // 아이디
-    if (!userid) { e.preventDefault(); alert("ID 입력은 필수입니다."); useridEl.focus(); return; }
-    if (!USERID_RE.test(userid)) { e.preventDefault(); alert("아이디는 영문/숫자/밑줄 6~20자여야 합니다."); useridEl.focus(); return; }
-
-    // 비밀번호
-    if (!password) { e.preventDefault(); alert("비밀번호는 필수입니다."); pwEl.focus(); return; }
-    if (!PASSWORD_RE.test(password)) {
-      e.preventDefault(); alert("비밀번호는 영문, 숫자, 특수문자를 포함한 8~20자여야 합니다."); pwEl.focus(); return;
-    }
-    if (password !== confirm) { e.preventDefault(); alert("비밀번호가 일치하지 않습니다."); pcEl.focus(); return; }
-
-    // 이름
-    if (!name) { e.preventDefault(); alert("이름은 필수입니다."); nameEl.focus(); return; }
-
-    // 이메일
-    if (!email) { e.preventDefault(); alert("이메일은 필수입니다."); emailEl.focus(); return; }
-    if (!EMAIL_RE.test(email)) { e.preventDefault(); alert("이메일 형식이 올바르지 않습니다."); emailEl.focus(); return; }
-
-    // 전화번호
-    if (!tel) { e.preventDefault(); alert("전화번호는 필수입니다."); telEl.focus(); return; }
-    if (!PHONE_RE.test(tel)) { e.preventDefault(); alert("전화번호는 숫자 9~11자리입니다."); telEl.focus(); return; }
-
-    // 생년월일
-    if (!year || !month || !day) {
-      e.preventDefault(); alert("생년월일을 모두 선택하세요.");
-      (year ? (month ? dEl : mEl) : yEl).focus(); return;
-    }
-    const y = parseInt(year, 10), m = parseInt(month, 10), d = parseInt(day, 10);
-    const dt = new Date(y, m - 1, d);
-    if (dt.getFullYear() !== y || dt.getMonth() !== m - 1 || dt.getDate() !== d) {
-      e.preventDefault(); alert("유효하지 않은 생년월일입니다."); yEl.focus(); return;
-    }
+    if(!USERID_RE.test(userid)){e.preventDefault();alert("아이디는 영문/숫자/밑줄 6~20자");return;}
+    if(!PASSWORD_RE.test(pw)){e.preventDefault();alert("비밀번호는 영문, 숫자, 특수문자 포함 8~20자");return;}
+    if(pw!==pc){e.preventDefault();alert("비밀번호가 일치하지 않습니다.");return;}
+    if(!EMAIL_RE.test(email)){e.preventDefault();alert("이메일 형식 오류");return;}
+    if(!PHONE_RE.test(tel)){e.preventDefault();alert("전화번호는 숫자 9~11자리");return;}
+    const dt=new Date(y,m-1,d);
+    if(dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d){e.preventDefault();alert("유효하지 않은 생년월일");return;}
   });
 </script>
-
 {% endblock %}
