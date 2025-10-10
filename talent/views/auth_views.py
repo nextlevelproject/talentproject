@@ -140,6 +140,16 @@ def client_signup():
 def expert_signup():
     form = ExpertSignupForm()
     if request.method == 'POST' and form.validate_on_submit():
+        # 1) 비밀번호 형식
+        if not PASSWORD_RE.fullmatch(form.password.data or ''):
+            flash('비밀번호는 영문, 숫자, 특수문자 포함 8~20자여야 합니다.', 'danger')
+            return render_template('auth/expert_signup.html', form=form)
+
+        # 2) 비밀번호 확인 일치
+        if hasattr(form, 'password_confirm') and (form.password.data != form.password_confirm.data):
+            flash('비밀번호가 일치하지 않습니다.', 'danger')
+            return render_template('auth/expert_signup.html', form=form)
+
         userid = form.userid.data.strip()
         password = form.password.data
         email = form.email.data.strip().lower()
