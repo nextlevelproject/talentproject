@@ -26,6 +26,8 @@ def create_app():
     migrate.init_app(app, db)
     mail.init_app(app)
 
+    from . import models
+
     # 블루프린트 등록
     from .views import main_views, auth_views, store_views, community_views
     app.register_blueprint(main_views.bp)
