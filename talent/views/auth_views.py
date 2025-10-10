@@ -82,13 +82,11 @@ def client_signup():
         y, m, d = form.birth_year.data, form.birth_month.data, form.birth_day.data
         birthday = datetime(y, m, d)
 
-        # 중복 체크
+        # 3) 중복 체크
         if User.query.filter_by(userid=userid).first():
-            flash('이미 존재하는 아이디입니다.', 'danger')
-            return redirect(url_for('auth.client_signup'))
+            flash('이미 존재하는 아이디입니다.', 'danger'); return redirect(url_for('auth.client_signup'))
         if User.query.filter_by(email=email).first():
-            flash('이미 사용 중인 이메일입니다.', 'danger')
-            return redirect(url_for('auth.client_signup'))
+            flash('이미 사용 중인 이메일입니다.', 'danger'); return redirect(url_for('auth.client_signup'))
         if User.query.filter_by(tel_number=tel_number).first():
             flash('이미 사용 중인 전화번호입니다.', 'danger')
             return redirect(url_for('auth.client_signup'))

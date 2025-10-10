@@ -2,7 +2,9 @@ from flask import Flask, g, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
+from . import models
 import config
+from talent.views import store_views
 
 db = SQLAlchemy()
 migrate = Migrate()

@@ -1,52 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }}</title>
-</head>
-<body>
-    <a href="{{ url_for('community.home') }}">← Go Back</a>
+{% extends "base.html" %}
 
-    <h1>{{ post.title }}</h1>
-    <p>By: {{ post.author.username if post.author else 'Unknown' }}</p>
-    <p>{{ post.content }}</p>
+{% block head %}
+<!-- Page-specific CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='post_detail.css') }}">
+{% endblock %}
 
-    {% if post.image_filename %}
-        <img src="{{ url_for('static', filename='uploads/' ~ post.image_filename) }}" alt="Post Image">
-    {% endif %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <!-- Centered post -->
+        <div class="col-6">
 
-    <!-- Like Post -->
-    {% if current_user.is_authenticated %}
-        <form action="{{ url_for('community.like_post', post_id=post.id) }}" method="POST">
-            <button type="submit">❤️ Like Post ({{ post.likes|length }})</button>
-        </form>
-    {% else %}
-        <p>Likes: {{ post.likes|length }} (login to like)</p>
-    {% endif %}
+            <!-- Breadcrumb row -->
+            <div class="breadcrumb-row">
+                커뮤니티 &gt; {{ post.category if post.category else '미분류' }}
+            </div>
 
-    <!-- Comments -->
-    <h3>Comments ({{ post.comments|length }})</h3>
-    {% for comment in post.comments %}
-        <div>
-            <p><strong>{{ comment.author.username if comment.author else 'Unknown' }}</strong>: {{ comment.content }}</p>
-            {% if current_user.is_authenticated %}
-                <form action="{{ url_for('community.like_comment', comment_id=comment.id) }}" method="POST">
-                    <button type="submit">❤️ {{ comment.likes|length }}</button>
+            <!-- Post title & city -->
+            <div class="post-title">{{ post.title }}</div>
+            <div class="text-muted post-city">{{ post.city if post.city else '' }}</div>
+
+            <!-- Post box -->
+            <div class="post-box">
+                <!-- User info -->
+                <div class="user-info mb-3">
+                    <img src="{{ url_for('static', filename='avatars/' + (post.user.avatar if post.user and post.user.avatar else 'default.png')) }}" class="avatar" alt="avatar">
+                    <div>
+                        <div class="username">{{ post.user.username if post.user else 'Unknown' }}</div>
+                        <div class="user-meta">{{ human_readable_time(post.create_date) }}</div>
+                    </div>
+                </div>
+
+                <!-- Post image -->
+                {% if post.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/' + post.image_filename) }}" class="img-fluid post-image" alt="Post Image">
+                {% endif %}
+
+                <!-- Post content -->
+                <div class="post-content">{{ post.content }}</div>
+
+                <!-- Actions row -->
+                <div class="action-btns">
+                    {% if current_user.is_authenticated %}
+                        <form action="{{ url_for('like_post', post_id=post.id) }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn-action">❤️ 좋아요 {{ post.likes|length }}</button>
+                        </form>
+                    {% else %}
+                        <span class="btn-action">❤️ 좋아요 {{ post.likes|length }}</span>
+                    {% endif %}
+                    <span class="btn-action">💬 댓글 {{ post.comments|length }}</span>
+                </div>
+
+                <!-- Comment input -->
+                {% if current_user.is_authenticated %}
+                <form method="POST" action="{{ url_for('post_detail', post_id=post.id) }}">
+                    <div class="comment-input-wrapper">
+                        <textarea name="comment" placeholder="댓글을 입력하세요..." required></textarea>
+                        <button type="submit" class="btn-register">등록</button>
+                    </div>
                 </form>
-            {% else %}
-                <span>❤️ {{ comment.likes|length }}</span>
-            {% endif %}
-        </div>
-    {% endfor %}
+                {% else %}
+                    <p><a href="{{ url_for('login') }}">Login</a> to comment.</p>
+                {% endif %}
+            </div>
 
-    <!-- Add Comment -->
-    {% if current_user.is_authenticated %}
-        <form action="{{ url_for('community.post_detail', post_id=post.id) }}" method="POST">
-            <input type="text" name="comment" placeholder="Write a comment..." required>
-            <button type="submit">Add Comment</button>
-        </form>
-    {% else %}
-        <p><a href="{{ url_for('auth.login') }}">Login</a> to add a comment.</p>
-    {% endif %}
-</body>
-</html>
+            <!-- Comments section -->
+            {% for comment in post.comments %}
+            <div class="comment-box">
+                <img src="{{ url_for('static', filename='avatars/' + (comment.user.avatar if comment.user and comment.user.avatar else 'default.png')) }}" class="avatar" alt="avatar">
+                <div class="comment-content">
+                    <div class="comment-username">{{ comment.user.username if comment.user else 'Unknown' }}</div>
+                    <div class="comment-text">{{ comment.content }}</div>
+                    <div class="comment-meta">{{ human_readable_time(comment.create_date) }}</div>
+                    <div class="comment-actions">
+                        {% if current_user.is_authenticated %}
+                            <form action="{{ url_for('like_comment', comment_id=comment.id) }}" method="POST" class="d-inline">
+                                <button type="submit" class="btn-action">❤️ 도움됨 {{ comment.likes|length }}</button>
+                            </form>
+                            <button class="btn-action">💬 댓글달기</button>
+                        {% else %}
+                            <span class="btn-action">❤️ 도움됨 {{ comment.likes|length }}</span>
+                            <span class="btn-action">💬 댓글달기</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
