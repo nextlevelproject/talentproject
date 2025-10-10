@@ -1,12 +1,10 @@
+# talent/__init__.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_wtf import CSRFProtect
-
-from . import models
 import config
-from talent.views import store_views
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -17,14 +15,17 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
 
-    # 익스텐션 초기화
+    # 1) 확장 초기화
     db.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
     csrf.init_app(app)
 
-    # 블루프린트 등록
+    # 2) init 이후에만 내부 모듈 임포트 (순환 방지)
+    from . import models
     from .views import main_views, community_views, auth_views, store_views
+
+    # 3) 블루프린트 등록
     app.register_blueprint(main_views.bp)
     app.register_blueprint(community_views.bp)
     app.register_blueprint(auth_views.bp)

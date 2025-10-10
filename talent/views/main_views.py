@@ -1,8 +1,7 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, redirect, url_for, session, render_template
 
-bp = Blueprint('main', __name__, url_prefix='/')
+bp = Blueprint('main', __name__)
 
 @bp.route('/')
 def index():
-    # templates/index.html 파일이 존재해야 함
-    return render_template('index.html')
+    return render_template(url_for('index.html'))
