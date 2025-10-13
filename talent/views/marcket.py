@@ -1,10 +1,10 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
+bf = Flask(__name__)
 
-@app.route('/')
+@bf.route('/')
 def home():
-    return render_template('마켓.html')
+    return render_template('market.html')
 
-if __name__ == '__마켓__':
+if __name__ == '__market__':
     app.run(debug=True)

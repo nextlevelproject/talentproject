@@ -1,599 +1,343 @@
 {% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% endblock %}
 {% block content %}
-<main>
+<!--    <div class="left-group">-->
+<!--      <div class="logo">매칭허브</div>-->
+<!--      <nav>-->
+<!--        <a href="#">견적요청</a>-->
+<!--        <a href="#">고수찾기</a>-->
+<!--        <a href="#">마켓</a>-->
+<!--        <a href="#">커뮤니티</a>-->
+<!--      </nav>-->
+<!--    </div>-->
+<!--    <div class="right-menu">-->
+<!--      <a href="#">로그인 / 회원가입</a>-->
+<!--      <a href="#" class="btn-primary">고수가입</a>-->
+<!--    </div>-->
+
+  <main>
     <h1>더 나은 생활을 위한 변화</h1>
     <div class="search-box">
-        🔍
-        <input type="text" placeholder="어떤 서비스가 필요하세요?">
+      🔍
+      <input type="text" placeholder="어떤 서비스가 필요하세요?">
     </div>
-</main>
-<button class="nav-btn" id="prev">&#10094;</button>
-<div class="slider-container" id="slider-container">
+  </main>
+    <button class="nav-btn" id="prev">&#10094;</button>
+  <div class="slider-container" id="slider-container">
     <div class="slider" id="slider">
-        <div class="menu-item">
-            <div class="icon1">
-                <img src="{{ url_for('static', filename='image/이사.png') }}">
-            </div>
-            <span>이사</span></div>
-        <div class="menu-item">
-            <div class="icon2">
-                <img src="{{ url_for('static', filename='image/청소.png') }}">
-            </div>
-            <span>청소</span></div>
-        <div class="menu-item">
-            <div class="icon3">
-                <img src="{{ url_for('static', filename='image/설치.png') }}">
-            </div>
-            <span>설치</span></div>
-        <div class="menu-item">
-            <div class="icon4">
-                <img src="{{ url_for('static', filename='image/인테리어.png') }}">
-            </div>
-            <span>인테리어</span></div>
-        <div class="menu-item">
-            <div class="icon5">
-                <img src="{{ url_for('static', filename='image/수리.jpg') }}">
-            </div>
-            <span>수리</span></div>
-        <div class="menu-item">
-            <div class="icon6">
-                <img src="{{ url_for('static', filename='image/이벤트.jpg') }}">
-            </div>
-            <span>이벤트</span></div>
-        <div class="menu-item">
-            <div class="icon7">
-                <img src="{{ url_for('static', filename='image/취업.jpg') }}">
-            </div>
-            <span>취업</span></div>
-        <div class="menu-item">
-            <div class="icon8">
-                <img src="{{ url_for('static', filename='image/과외.jpg') }}">
-            </div>
-            <span>과외</span></div>
-        <div class="menu-item">
-            <div class="icon9">
-                <img src="{{ url_for('static', filename='image/차량관리.jpg') }}">
-            </div>
-            <span>차량관리</span></div>
-        <div class="menu-item">
-            <div class="icon10">
-                <img src="{{ url_for('static', filename='image/법률.jpg') }}">
-            </div>
-            <span>법률</span></div>
-        <div class="menu-item">
-            <div class="icon11">
-                <img src="{{ url_for('static', filename='image/렌탈.jpg') }}">
-            </div>
-            <span>렌탈</span></div>
-        <div class="menu-item">
-            <div class="icon12">
-                <img src="{{ url_for('static', filename='image/심리상담.jpg') }}">
-            </div>
-            <span>심리상담</span></div>
-        <div class="menu-item">
-            <div class="icon13">
-                <img src="{{ url_for('static', filename='image/반려동물.jpg') }}">
-            </div>
-            <span>반려동물</span></div>
-        <div class="menu-item">
-            <div class="icon14">
-                <img src="{{ url_for('static', filename='image/번역.jpg') }}">
-            </div>
-            <span>번역</span></div>
-        <div class="menu-item">
-            <div class="icon15">
-                <img src="{{ url_for('static', filename='image/의류.jpg') }}">
-            </div>
-            <span>의류</span></div>
-        <div class="menu-item">
-            <div class="icon16">
-                <img src="{{ url_for('static', filename='image/여행.jpg') }}">
-            </div>
-            <span>여행</span></div>
-        <div class="menu-item">
-            <div class="icon17">
-                <img src="{{ url_for('static', filename='image/배달.jpg') }}">
-            </div>
-            <span>배달</span></div>
-        <div class="menu-item">
-            <div class="icon18">
-                <img src="{{ url_for('static', filename='image/숙박시설.jpg') }}">
-            </div>
-            <span>숙박시설</span></div>
+      <div class="menu-item"><div class="icon1">
+        <img src="{{ url_for('static', filename='image/go.png') }}">
+      </div><span>이사</span></div>
+      <div class="menu-item"><div class="icon2">
+        <img src="{{ url_for('static', filename='image/clean.png') }}">
+      </div><span>청소</span></div>
+      <div class="menu-item"><div class="icon3">
+        <img src="{{ url_for('static', filename='image/fix.png') }}">
+      </div><span>설치</span></div>
+      <div class="menu-item"><div class="icon4">
+        <img src="{{ url_for('static', filename='image/interier.png') }}">
+      </div><span>인테리어</span></div>
+      <div class="menu-item"><div class="icon5">
+        <img src="{{ url_for('static', filename='image/fix.jpg') }}">
+      </div><span>수리</span></div>
+      <div class="menu-item"><div class="icon6">
+        <img src="{{ url_for('static', filename='image/event1.jpg') }}">
+      </div><span>이벤트</span></div>
+      <div class="menu-item"><div class="icon7">
+        <img src="{{ url_for('static', filename='image/job.jpg') }}">
+      </div><span>취업</span></div>
+      <div class="menu-item"><div class="icon8">
+        <img src="{{ url_for('static', filename='image/study.jpg') }}">
+      </div><span>과외</span></div>
+      <div class="menu-item"><div class="icon9">
+        <img src="{{ url_for('static', filename='image/car1.jpg') }}">
+      </div><span>차량관리</span></div>
+      <div class="menu-item"><div class="icon10">
+        <img src="{{ url_for('static', filename='image/bub.jpg') }}">
+      </div><span>법률</span></div>
+      <div class="menu-item"><div class="icon11">
+        <img src="{{ url_for('static', filename='image/rental.jpg') }}">
+      </div><span>렌탈</span></div>
+      <div class="menu-item"><div class="icon12">
+        <img src="{{ url_for('static', filename='image/simly.jpg') }}">
+      </div><span>심리상담</span></div>
+      <div class="menu-item"><div class="icon13">
+        <img src="{{ url_for('static', filename='image/pet.jpg') }}">
+      </div><span>반려동물</span></div>
+      <div class="menu-item"><div class="icon14">
+        <img src="{{ url_for('static', filename='image/Eng.jpg) }}">
+      </div><span>번역</span></div>
+      <div class="menu-item"><div class="icon15">
+        <img src="{{ url_for('static', filename='image/fashion.jpg') }}">
+      </div><span>의류</span></div>
+      <div class="menu-item"><div class="icon16">
+        <img src="{{ url_for('static', filename='image/travel.jpg') }}">
+      </div><span>여행</span></div>
+      <div class="menu-item"><div class="icon17">
+        <img src="{{ url_for('static', filename='image/delivery.jpg') }}">
+      </div><span>배달</span></div>
+      <div class="menu-item"><div class="icon18">
+        <img src="{{ url_for('static', filename='image/hotel.jpg') }}">
+      </div><span>숙박시설</span></div>
     </div>
-</div>
-<button class="nav-btn" id="next">&#10095;</button>
+  </div>
+  <button class="nav-btn" id="next">&#10095;</button>
+  
+    <div class="banner-container">
+        <div class="banner-text">
+            <h2>100% 후불 선납 No! 만족 Yes! </h2>
+            <h3>생활속의 모든 매칭</h3>
+  </div>
 
-<div class="banner-container">
-    <div class="banner-text">
-        <h2>100% 후불 선납 No! 만족 Yes! </h2>
-        <h3>생활속의 모든 매칭</h3>
-    </div>
+    <img class="banner-image" src="{{ url_for('static', filename='image/brand1.png') }}">
+      </div>
 
-    <img class="banner-image" src="{{ url_for('static', filename='image/브랜드아이콘2.png') }}">
-</div>
-
-<main class="wrap" role="main">
-    <h1 class="section-title">매칭허브 인기 서비스</h1>
+        <main class="wrap" role="main">
+    <h1 class="section-title">숨고 인기 서비스</h1>
 
     <section class="services-grid" aria-label="인기 서비스 목록">
-        <!-- 카드 1 -->
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/피아노레슨.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">피아노 레슨</div>
-                    <div class="svc-meta">
-                        <!-- envelope icon (inline svg) -->
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>255,555명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
-            <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
-            </span>
-                </div>
+      <!-- 카드 1 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/piano.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">피아노 레슨</div>
+            <div class="svc-meta">
+              <!-- envelope icon (inline svg) -->
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>255,555명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <!-- 카드 2 -->
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/골프레슨.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">골프 레슨</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>386,504명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 카드 2 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/golf1.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">골프 레슨</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>386,504명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <!-- 카드 3 -->
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/퍼스널트레이닝.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">퍼스널트레이닝(PT)</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>690,199명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 카드 3 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/PT.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">퍼스널트레이닝(PT)</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>690,199명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <!-- 카드 4 -->
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/보컬.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">보컬 레슨</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>486,061명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 카드 4 -->
+      <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/vocal.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">보컬 레슨</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>486,061명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/청소.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">청소</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>777,777명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/clean1.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">청소</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>777,777명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/렌탈1.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">렌탈</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>543,879명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/rental1.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">렌탈</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>543,879명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/이벤트대행.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">이벤트 대행</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>557,899명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/event.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">이벤트 대행</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>557,899명 요청</span>
             </div>
-        </a>
+          </div>
 
-        <a href="#" class="service-card" role="button">
-            <img class="svc-image" src="{{ url_for('static', filename='image/중고차 구매 대행.jpg') }}">
-            <div class="svc-body">
-                <div class="svc-info">
-                    <div class="svc-title">중고차 구매대행</div>
-                    <div class="svc-meta">
-                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                            <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor"
-                                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <span>256,248명 요청</span>
-                    </div>
-                </div>
-
-                <div class="svc-action" aria-hidden="true">
+          <div class="svc-action" aria-hidden="true">
             <span class="chev">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor"
-                                                                            stroke-width="1.8" stroke-linecap="round"
-                                                                            stroke-linejoin="round"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-                </div>
+          </div>
+        </div>
+      </a>
+
+            <a href="#" class="service-card" role="button">
+        <img class="svc-image" src="{{ url_for('static', filename='image/car.jpg') }}">
+        <div class="svc-body">
+          <div class="svc-info">
+            <div class="svc-title">중고차 구매대행</div>
+            <div class="svc-meta">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13a2.5 2.5 0 0 0 2.5-2.5v-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7.3a2.5 2.5 0 0 0-2.5 0L12 11 5.5 7.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>256,248명 요청</span>
             </div>
-        </a>
+          </div>
+
+          <div class="svc-action" aria-hidden="true">
+            <span class="chev">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
 
     </section>
-</main>
+  </main>
 
-<div class="container">
-    <div class="header">
-        <h2>숨은고수 포트폴리오</h2>
-    </div>
-
-    <div class="slider" id="slider">
-        <div class="card">
-            <img src="{{ url_for('static', filename='image/모델.png') }}">
-            <div class="card-content">
-                <p>내가 작업한 모델 포토샵 메이크업</p>
-                <div class="profile">
-                    <img src="https://placehold.co/24" alt="프로필">
-                    <span>남서연</span>
-                </div>
-            </div>
+        <div class="container">
+        <div class="header">
+          <h2>숨은고수 포트폴리오</h2>
         </div>
 
-        <div class="card">
-            <img src="{{ url_for('static', filename='image/강아지.jpg') }}">
+        <div class="slider" id="slider">
+          <div class="card">
+            <img src="{{ url_for('static', filename='image/Chu.png') }}">
             <div class="card-content">
-                <p>견주만 휴가를 가나요, 반려견도 휴가!</p>
-                <div class="profile">
-                    <img src="https://placehold.co/24" alt="프로필">
-                    <span>써니</span>
-                </div>
+              <p>내가 작업한 모델 포토샵 메이크업</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>남서연</span>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <div class="card">
+          <div class="card">
+            <img src="{{ url_for('static', filename='image/Tan.jpg') }}">
+            <div class="card-content">
+              <p>견주만 휴가를 가나요, 반려견도 휴가!</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>써니</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
             <img src="{{ url_for('static', filename='image/골프.jpg') }}">
             <div class="card-content">
-                <p>골프란? 프로에게 배우는 꿀팁</p>
-                <div class="profile">
-                    <img src="https://placehold.co/24" alt="프로필">
-                    <span>이원비</span>
-                </div>
+              <p>골프란? 프로에게 배우는 꿀팁</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>이원비</span>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <div class="card">
+          <div class="card">
             <img src="{{ url_for('static', filename='image/이사청소.jpg') }}">
             <div class="card-content">
-                <p>⭐ 이사청소는 이렇게 진행돼요 ⭐</p>
-                <div class="profile">
-                    <img src="https://placehold.co/24" alt="프로필">
-                    <span>삐까번쩍홈케어</span>
-                </div>
+              <p>⭐ 이사청소는 이렇게 진행돼요 ⭐</p>
+              <div class="profile">
+                <img src="https://placehold.co/24" alt="프로필">
+                <span>삐까번쩍홈케어</span>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- 제목 -->
-<div class="section-title1">
-    <h2>　　　　　　　　　　　　　　　　　　　　　　　지금 인기 있는 고수</h2>
-    <a href="#">전체보기 ></a>
-</div>
-
-<!-- 카테고리 탭 -->
-<div class="category-tabs1">
-    <button>수영 레슨</button>
-    <button>원룸/소형 이사</button>
-    <button>용달/화물 운송</button>
-    <button>도배 시공</button>
-</div>
-
-<!-- 카드 리스트 -->
-<div class="card-list1">
-    <div class="card1">
-        <img src="{{url_for('static', filename='image/돋보기.png') }}">
-        <h3>1,558명의<br>고수 만나보기 ></h3>
-    </div>
-    <div class="card1">
-        <img src="{{url_for('static', filename='image/수영1.jpg') }}">
-        <div class="rating">⭐ 5.0</div>
-        <h3>최코치 수영아카데미</h3>
-        <span class="sugo-pay">숨고페이</span>
-        <p>경력 10년 · 평균 2시간 내 응답</p>
-    </div>
-    <div class="card1">
-        <img src="{{url_for('static', filename='image/축구.jpg') }}">
-        <div class="rating">⭐ 5.0</div>
-        <h3>김용임</h3>
-        <span class="sugo-pay">숨고페이</span>
-        <p>경력 15년 · 평균 1시간 내 응답</p>
-    </div>
-    <div class="card1">
-        <img src="{{url_for('static', filename='image/배트민턴.jpg') }}">
-        <div class="rating">⭐ 4.9</div>
-        <h3>박우희코치</h3>
-        <span class="sugo-pay">숨고페이</span>
-        <p>경력 20년 · 평균 1시간 내 응답</p>
-    </div>
-    <div class="card1">
-        <img src="{{url_for('static', filename='image/야구.jpg') }}">
-        <div class="rating">⭐ 5.0</div>
-        <h3>김민석</h3>
-        <span class="sugo-pay">숨고페이</span>
-        <p>경력 38년 · 평균 1시간 내 응답</p>
-    </div>
-</div>
-
-<!-- 배너 -->
-<div class="banner1">
-    <div class="card1">
-        숨고 앱으로 더 편하게 고수를 찾아보세요
-    </div>
-</div>
-
-
-<h2>　　　　　　　　　　　　　　　　　　　　　　　　　반셀프로 완성하는 우리 집</h2>
-
-<div class="card2-container">
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/도배장판.webp') }}" alt="도배장판 시공">
-        <p>도배장판 시공</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/인테리어필름.webp') }}">
-        <p>인테리어필름 시공</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/전기배선.webp') }}">
-        <p>전기배선 설치 및 수리</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/리모델링.webp') }}">
-        <p>욕실/화장실 리모델링</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/간접조명.jpg') }}">
-        <p>간접조명 설치</p>
-    </div>
-</div>
-
-<h2>　　　　　　　　　　　　　　　　　　　　　　　　　집 안이 달라지는 청소 비법</h2>
-
-<div class="card2-container">
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/거주청소.webp') }}">
-        <p>거주 청소업체</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/세탁기청소.webp') }}">
-        <p>세탁기 청소</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/폐기물처리.webp') }}">
-        <p>폐기물 처리</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/에어컨청소.webp') }}">
-        <p>에어컨 청소</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/유리청소.jpg') }}">
-        <p>유리 청소</p>
-    </div>
-</div>
-
-<h2>　　　　　　　　　　　　　　　　　　　　　　　　　　빠르고 편한 이사 준비</h2>
-
-<div class="card2-container">
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/이사트럭.webp') }}">
-        <p>용달/화물 운송</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/이사청소.webp') }}">
-        <p>이사/입주 청소업체</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/가정이사.webp') }}">
-        <p>가정이사(투룸 이상)</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/정리수납.webp') }}">
-        <p>정리수납 컨설팅</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/줄눈시공.webp') }}">
-        <p>줄눈 시공</p>
-    </div>
-</div>
-
-<h2>　　　　　　　　　　　　　　　　　　　　　　　　　　집안 곳곳 작은 해결</h2>
-
-<div class="card2-container">
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/수도설치.webp') }}">
-        <p>수도 관련 설치 및 수리</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/에어컨설치.webp') }}">
-        <p>에어컨 설치 및 수리</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/싱크대교체.webp') }}">
-        <p>싱크대 교체</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/보일러설치.webp') }}">
-        <p>보일러 설치 및 수리(지역난방 포함)</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/벽걸이TV설치.webp') }}">
-        <p>벽걸이TV 설치 및 철거</p>
-    </div>
-</div>
-
-<h2>　　　　　　　　　　　　　　　　　　　　　　　　　　올해 마지막 도전하기</h2>
-
-<div class="card2-container">
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/영어과외.webp') }}">
-        <p>영어 과외</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/보컬레슨.webp') }}">
-        <p>보컬 레슨</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/수학과외.webp') }}">
-        <p>수학 과외</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/퍼스널트레이닝(PT).webp') }}">
-        <p>퍼스널트레이닝(PT)</p>
-    </div>
-    <div class="card2">
-        <img src="{{url_for('static', filename='image/기타레슨.webp') }}">
-        <p>기타 레슨</p>
-    </div>
-</div>
-
-<section>
-    <div class="section-title">
-        <h2>　　　　　　　　　　　　　　　　　　　　　　　　　　　　숨고 이야기</h2>
-        <a href="#">전체보기 &gt;</a>
-    </div>
-
-    <div class="story-container">
-        <div class="story-card">
-            <img src="{{url_for('static', filename='image/숨고1.webp') }}">
-            <p>[10/1~10/12] 요청서를 보내면 100만 원 여행 상품권의 기회가!</p>
+          </div>
         </div>
 
-        <div class="story-card">
-            <img src="{{url_for('static', filename='image/숨고2.webp') }}">
-            <p>환갑도 늦지 않았어요, 나다운 삶으로 나아가는 원동력</p>
-        </div>
+    
 
-        <div class="story-card">
-            <img src="{{url_for('static', filename='image/숨고3.webp') }}">
-            <p>고생은 덜고 여유는 챙기는 추석 연휴</p>
-        </div>
-    </div>
-</section>
-
-<script>
+  <script>
     const slider = document.getElementById('slider');
     const sliderContainer = document.getElementById('slider-container');
     const prev = document.getElementById('prev');
@@ -610,86 +354,11 @@
     next.addEventListener('click', () => slide(-1));
     prev.addEventListener('click', () => slide(1));
 
-            const slider = document.getElementById('slider');
-        function scrollSlider(direction) {
-          const scrollAmount = 270;
-          slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-        }
-    </script>
-
-    <footer style="background:#fff; padding:40px 20px; font-family:Arial, sans-serif; color:#555; border-top:1px solid #eee;">
-        <div style="max-width:1200px; margin:0 auto;">
-            <!-- 고객센터 -->
-            <div style="text-align:center; margin-bottom:20px;">
-                <h2 style="color:#6c3cf0; margin:0; font-size:20px;">1599-5319</h2>
-                <p style="margin:5px 0;">평일 09:00 - 18:00<br>(점심시간 12:00 - 13:00 제외 · 주말/공휴일 제외)</p>
-                <div style="margin-top:15px;">
-                    <a href="#" style="display:inline-block; margin:5px; padding:12px 25px; background:#6c3cf0; color:#fff; border-radius:25px; text-decoration:none; font-size:14px;">▶ APP STORE</a>
-                    <a href="#" style="display:inline-block; margin:5px; padding:12px 25px; background:#6c3cf0; color:#fff; border-radius:25px; text-decoration:none; font-size:14px;">▶ PLAY STORE</a>
-                </div>
-            </div>
-
-            <!-- 링크 메뉴 -->
-            <div style="display:flex; justify-content:center; gap:150px; margin:40px 0; flex-wrap:wrap; text-align:left;">
-                <div>
-                    <h4 style="margin-bottom:10px;">숨고소개</h4>
-                    <ul style="list-style:none; padding:0; margin:0;">
-                        <li><a href="#" style="text-decoration:none; color:#555;">회사소개</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">채용안내</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">팀블로그</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="margin-bottom:10px;">고객안내</h4>
-                    <ul style="list-style:none; padding:0; margin:0;">
-                        <li><a href="#" style="text-decoration:none; color:#555;">이용안내</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">안전정책</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">예상금액</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">고수찾기</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">숨고보증</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">고수에게묻다</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="margin-bottom:10px;">고수안내</h4>
-                    <ul style="list-style:none; padding:0; margin:0;">
-                        <li><a href="#" style="text-decoration:none; color:#555;">이용안내</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">고수가이드</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">고수가입</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="margin-bottom:10px;">고객센터</h4>
-                    <ul style="list-style:none; padding:0; margin:0;">
-                        <li><a href="#" style="text-decoration:none; color:#555;">공지사항</a></li>
-                        <li><a href="#" style="text-decoration:none; color:#555;">자주묻는질문</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 회사 정보 -->
-            <div style="font-size:12px; color:#888; line-height:1.6; text-align:center; margin-top:60px;">
-                <p>
-                    이용약관 | 광고약관 | 개인정보 처리방침 | 사업자 정보확인
-                </p>
-                <p>
-                    (주)브레이브모바일은 통신판매중개자로서 통신판매의 당사자가 아니며 개별 판매자가 제공하는 서비스에 대한 이행, 계약사항 등과 관련한 의무와 책임은 거래당사자에게 있습니다.
-                </p>
-                <p>
-                    상호명:(주)브레이브모바일 · 대표이사:김태우 · 개인정보책임관리자:이은선 · 주소:서울특별시 강남구 테헤란로 133, 11-12층 (역삼동, 한국타이어빌딩)<br>
-                    사업자등록번호:120-88-22325 · 통신판매업신고:제 2021-서울강남-00551 호 · 직업정보제공사업 신고번호:J1200020190021<br>
-                    호스팅서비스 제공자:Amazon Web Services, Inc. · 고객센터:1599-5319 · 이메일:support@soomgo.com
-                </p>
-                <p>Copyright ⓒBrave Mobile Inc. All Rights Reserved.</p>
-            </div>
-
-            <!-- 소셜 아이콘 -->
-            <div style="text-align:center; margin-top:20px;">
-                <a href="#"><img src="{{url_for('static', filename='image/블로그.jpg') }}" alt="blog" style="width:55px; margin:0 5px;"></a>
-                <a href="#"><img src="{{url_for('static', filename='image/유튜브.jpg') }}" alt="youtube" style="width:55px; margin:0 5px;"></a>
-                <a href="#"><img src="{{url_for('static', filename='image/인스타.jpg') }}" alt="instagram" style="width:55px; margin:0 5px;"></a>
-                <a href="#"><img src="{{url_for('static', filename='image/카카오톡.jpg') }}" alt="chat" style="width:55px; margin:0 5px;"></a>
-            </div>
-        </div>
-    </footer>
-{% endblock %}
+        const slider = document.getElementById('slider');
+    function scrollSlider(direction) {
+      const scrollAmount = 270;
+      slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

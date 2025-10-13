@@ -1,0 +1,180 @@
+/* ====== Breadcrumb & Category ====== */
+.breadcrumb-row {
+    font-size: 0.95rem;
+    color: #6c757d; /* light grey text */
+    padding-bottom: 8px;
+}
+
+.category-row {
+    font-size: 1rem;
+    color: #495057; /* slightly darker grey */
+    padding-bottom: 12px;
+}
+
+/* ====== Post Title & City ====== */
+.post-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.post-city {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+/* ====== Post Box ====== */
+.post-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+/* ====== User Info ====== */
+.user-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.user-meta {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* ====== Post Image & Content ====== */
+.post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 20px; /* spacing below image */
+}
+
+.post-content {
+    font-size: 1.1rem;
+    margin-top: 20px;   /* spacing above content */
+    margin-bottom: 30px; /* spacing below content */
+}
+
+/* ====== Actions row (Post content) ====== */
+.action-btns {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px; /* spacing before comment input */
+}
+
+.action-btns .btn-action {
+    background-color: #ffffff; /* white background */
+    border: none; /* removed border for content buttons */
+    color: #333;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.action-btns .btn-action:hover {
+    background-color: #f8f9fa; /* subtle hover effect */
+}
+
+/* ====== Comment Input ====== */
+.comment-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0; /* remove extra gap */
+    margin-bottom: 30px;
+    position: relative; /* for absolute positioning inside */
+}
+
+.comment-input-wrapper textarea {
+    flex-grow: 1;
+    width: 100%;
+    padding: 8px 60px 8px 8px; /* right padding for button space */
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    font-size: 1.05rem;
+    color: #212529;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.comment-input-wrapper textarea:focus {
+    outline: none;
+}
+
+.comment-input-wrapper .btn-register {
+    position: absolute;
+    right: 8px;      /* inside padding from the right edge */
+    top: 50%;
+    transform: translateY(-50%); /* vertically center */
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #a504e6;
+    border: none;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ====== Comments ====== */
+.comment-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-content {
+    flex-grow: 1;
+}
+
+.comment-username {
+    font-weight: bold;
+}
+
+.comment-text {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.comment-meta {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.comment-actions {
+    margin-top: 4px;
+    display: flex;
+    gap: 5px;
+}
+
+.comment-actions .btn-action {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    background-color: #ffffff; /* white background */
+    border: 1px solid #dee2e6; /* keep border for comment buttons */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-actions .btn-action:hover {
+    background-color: #f8f9fa; /* subtle hover effect */
+}
