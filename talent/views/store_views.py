@@ -47,8 +47,6 @@ def create():
 
     form = StoreForm()
     if request.method == 'POST' and form.validate_on_submit():
-
-        # ✅ 이미지가 없으면 에러 처리
         if not form.image.data:
             flash("이미지는 필수입니다.", "danger")
             return render_template("store/store_form.html", form=form)
@@ -87,10 +85,10 @@ def create():
 
 
 
-@bp.route('/<userid>/<int:count>/edit', methods=['GET', 'POST'])
+@bp.route('/edit/<userid>/<int:count>/', methods=['GET', 'POST'])
 def edit(userid, count):
     user = User.query.filter_by(userid=userid).first_or_404()
-    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.asc()).all())
+    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
     store = stores[count - 1]
 
     if g.user is None or g.user.id != store.owner_id:
@@ -119,14 +117,18 @@ def edit(userid, count):
             store.image_path = f'store_uploads/{today}/{new_filename}'
 
         db.session.commit()
-        return redirect(url_for('store.detail', store_id=store.id))
+
+        all_stores = Store.query.filter_by(owner_id=g.user.id).order_by(Store.create_date.desc()).all()
+        count = all_stores.index(store) + 1
+
+        return redirect(url_for('store.detail', userid=userid, count=count))
     return render_template('store/store_form.html', form=form)
 
 
-@bp.route('/<userid>/<int:count>/delete')
+@bp.route('/delete/<userid>/<int:count>/')
 def delete(userid, count):
     user = User.query.filter_by(userid=userid).first_or_404()
-    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.asc()).all())
+    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
     store = stores[count - 1]
 
     if g.user is None or g.user.id != store.owner_id:

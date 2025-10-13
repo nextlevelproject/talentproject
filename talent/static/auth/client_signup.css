@@ -1,16 +1,10 @@
-.container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:calc(100vh - 56px);
-}
-
 .signup-container{
   background:#fff;
   border-radius:12px;
   padding:40px 30px;
   box-shadow:0 4px 12px rgba(0,0,0,.1);
   width:500px;
+  margin: 0 auto;
 }
 
 h2{
