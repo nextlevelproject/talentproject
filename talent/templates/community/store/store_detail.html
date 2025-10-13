@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 1000px;">
+    <div class="row align-items-end">
+        <div class="col-md-3">
+            {% if store.image_path %}
+            <img src="{{ url_for('static', filename=store.image_path.lstrip('/')) }}"
+                 alt="{{ store.title }}" class="img-fluid rounded shadow-sm"
+                 style="object-fit: cover; width: 100%; height: 250px;">
+            {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center rounded shadow-sm"
+                 style="width: 100%; height: 250px; color: #aaa;">
+                이미지 없음
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-9 d-flex flex-column justify-content-between" style="height: 250px;">
+            <div>
+                <h3 class="fw-bold">{{ store.title }}</h3>
+                <p class="text-muted mb-1">
+                    작성자: {{ store.user.name if store.user else "알 수 없음" }}
+                </p>
+                <p class="text-muted mb-1">
+                    등록일: {{ store.create_date.strftime("%Y-%m-%d") }}
+                </p>
+                <p class="text-muted mb-1">
+                    조회수: {{ store.views }}
+                </p>
+            </div>
+
+            <p class="h5 text-success fw-bold mb-0">
+                {{ "{:,}".format(store.price) }} 원
+            </p>
+        </div>
+    </div>
+
+
+
+    <div class="mt-4 p-3 border rounded bg-light">
+        <h5 class="fw-bold">상세 설명</h5>
+        <p style="white-space: pre-line;">{{ store.content }}</p>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-between">
+        <div>
+            {% if g.user and g.user.id == store.owner_id %}
+            <a href="{{ url_for('store.edit', userid=store.user.userid, count=count) }}" class="btn btn-light btn-sm">수정</a>
+            <a href="{{ url_for('store.delete', userid=store.user.userid, count=count) }}" class="btn btn-outline-danger btn-sm"
+               onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+            {% endif %}
+        </div>
+        <div>
+            <a href="{{ url_for('store._list') }}" class="btn btn-outline-dark btn-sm">목록으로</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

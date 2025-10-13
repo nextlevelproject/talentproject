@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 {% endblock %}
 {% block content %}
@@ -28,58 +30,58 @@
   <div class="slider-container" id="slider-container">
     <div class="slider" id="slider">
       <div class="menu-item"><div class="icon1">
-        <img src="{{ url_for('static', filename='image/이사.png') }}">
+        <img src="{{ url_for('static', filename='image/go.png') }}">
       </div><span>이사</span></div>
       <div class="menu-item"><div class="icon2">
-        <img src="{{ url_for('static', filename='image/청소.png') }}">
+        <img src="{{ url_for('static', filename='image/clean.png') }}">
       </div><span>청소</span></div>
       <div class="menu-item"><div class="icon3">
-        <img src="{{ url_for('static', filename='image/설치.png') }}">
+        <img src="{{ url_for('static', filename='image/fix.png') }}">
       </div><span>설치</span></div>
       <div class="menu-item"><div class="icon4">
-        <img src="{{ url_for('static', filename='image/인테리어.png') }}">
+        <img src="{{ url_for('static', filename='image/interier.png') }}">
       </div><span>인테리어</span></div>
       <div class="menu-item"><div class="icon5">
-        <img src="{{ url_for('static', filename='image/수리.jpg') }}">
+        <img src="{{ url_for('static', filename='image/fix.jpg') }}">
       </div><span>수리</span></div>
       <div class="menu-item"><div class="icon6">
-        <img src="{{ url_for('static', filename='image/이벤트.jpg') }}">
+        <img src="{{ url_for('static', filename='image/event1.jpg') }}">
       </div><span>이벤트</span></div>
       <div class="menu-item"><div class="icon7">
-        <img src="{{ url_for('static', filename='image/취업.jpg') }}">
+        <img src="{{ url_for('static', filename='image/job.jpg') }}">
       </div><span>취업</span></div>
       <div class="menu-item"><div class="icon8">
-        <img src="{{ url_for('static', filename='image/과외.jpg') }}">
+        <img src="{{ url_for('static', filename='image/study.jpg') }}">
       </div><span>과외</span></div>
       <div class="menu-item"><div class="icon9">
-        <img src="{{ url_for('static', filename='image/차량관리.jpg') }}">
+        <img src="{{ url_for('static', filename='image/car1.jpg') }}">
       </div><span>차량관리</span></div>
       <div class="menu-item"><div class="icon10">
-        <img src="{{ url_for('static', filename='image/법률.jpg') }}">
+        <img src="{{ url_for('static', filename='image/bub.jpg') }}">
       </div><span>법률</span></div>
       <div class="menu-item"><div class="icon11">
-        <img src="{{ url_for('static', filename='image/렌탈.jpg') }}">
+        <img src="{{ url_for('static', filename='image/rental.jpg') }}">
       </div><span>렌탈</span></div>
       <div class="menu-item"><div class="icon12">
-        <img src="{{ url_for('static', filename='image/심리상담.jpg') }}">
+        <img src="{{ url_for('static', filename='image/simly.jpg') }}">
       </div><span>심리상담</span></div>
       <div class="menu-item"><div class="icon13">
-        <img src="{{ url_for('static', filename='image/반려동물.jpg') }}">
+        <img src="{{ url_for('static', filename='image/pet.jpg') }}">
       </div><span>반려동물</span></div>
       <div class="menu-item"><div class="icon14">
-        <img src="{{ url_for('static', filename='image/번역.jpg) }}">
+        <img src="{{ url_for('static', filename='image/Eng.jpg) }}">
       </div><span>번역</span></div>
       <div class="menu-item"><div class="icon15">
-        <img src="{{ url_for('static', filename='image/의류.jpg') }}">
+        <img src="{{ url_for('static', filename='image/fashion.jpg') }}">
       </div><span>의류</span></div>
       <div class="menu-item"><div class="icon16">
-        <img src="{{ url_for('static', filename='image/여행.jpg') }}">
+        <img src="{{ url_for('static', filename='image/travel.jpg') }}">
       </div><span>여행</span></div>
       <div class="menu-item"><div class="icon17">
-        <img src="{{ url_for('static', filename='image/배달.jpg') }}">
+        <img src="{{ url_for('static', filename='image/delivery.jpg') }}">
       </div><span>배달</span></div>
       <div class="menu-item"><div class="icon18">
-        <img src="{{ url_for('static', filename='image/숙박시설.jpg') }}">
+        <img src="{{ url_for('static', filename='image/hotel.jpg') }}">
       </div><span>숙박시설</span></div>
     </div>
   </div>
@@ -91,7 +93,7 @@
             <h3>생활속의 모든 매칭</h3>
   </div>
 
-    <img class="banner-image" src="{{ url_for('static', filename='image/브랜드아이콘2.png') }}">
+    <img class="banner-image" src="{{ url_for('static', filename='image/brand1.png') }}">
       </div>
 
         <main class="wrap" role="main">
@@ -100,7 +102,7 @@
     <section class="services-grid" aria-label="인기 서비스 목록">
       <!-- 카드 1 -->
       <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/피아노레슨.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/piano.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">피아노 레슨</div>
@@ -124,7 +126,7 @@
 
       <!-- 카드 2 -->
       <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/골프레슨.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/golf1.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">골프 레슨</div>
@@ -147,7 +149,7 @@
 
       <!-- 카드 3 -->
       <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/퍼스널트레이닝.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/PT.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">퍼스널트레이닝(PT)</div>
@@ -170,7 +172,7 @@
 
       <!-- 카드 4 -->
       <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/보컬.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/vocal.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">보컬 레슨</div>
@@ -192,7 +194,7 @@
       </a>
 
             <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/청소.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/clean1.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">청소</div>
@@ -214,7 +216,7 @@
       </a>
 
             <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/렌탈1.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/rental1.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">렌탈</div>
@@ -236,7 +238,7 @@
       </a>
 
             <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/이벤트대행.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/event.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">이벤트 대행</div>
@@ -258,7 +260,7 @@
       </a>
 
             <a href="#" class="service-card" role="button">
-        <img class="svc-image" src="{{ url_for('static', filename='image/중고차 구매 대행.jpg') }}">
+        <img class="svc-image" src="{{ url_for('static', filename='image/car.jpg') }}">
         <div class="svc-body">
           <div class="svc-info">
             <div class="svc-title">중고차 구매대행</div>
@@ -289,7 +291,7 @@
 
         <div class="slider" id="slider">
           <div class="card">
-            <img src="{{ url_for('static', filename='image/모델.png') }}">
+            <img src="{{ url_for('static', filename='image/Chu.png') }}">
             <div class="card-content">
               <p>내가 작업한 모델 포토샵 메이크업</p>
               <div class="profile">
@@ -300,7 +302,7 @@
           </div>
 
           <div class="card">
-            <img src="{{ url_for('static', filename='image/강아지.jpg') }}">
+            <img src="{{ url_for('static', filename='image/Tan.jpg') }}">
             <div class="card-content">
               <p>견주만 휴가를 가나요, 반려견도 휴가!</p>
               <div class="profile">
@@ -311,7 +313,7 @@
           </div>
 
           <div class="card">
-            <img src="{{ url_for('static', filename='image/골프.jpg') }}">
+            <img src="{{ url_for('static', filename='image/golf.jpg') }}">
             <div class="card-content">
               <p>골프란? 프로에게 배우는 꿀팁</p>
               <div class="profile">
@@ -322,7 +324,7 @@
           </div>
 
           <div class="card">
-            <img src="{{ url_for('static', filename='image/이사청소.jpg') }}">
+            <img src="{{ url_for('static', filename='image/clean.jpg') }}">
             <div class="card-content">
               <p>⭐ 이사청소는 이렇게 진행돼요 ⭐</p>
               <div class="profile">
