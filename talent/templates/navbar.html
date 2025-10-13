@@ -11,31 +11,22 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" href="{{ url_for('main.index') }}">고수찾기</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint.startswith('store') %}active{% endif %}" href="{{ url_for('store._list') }}">마켓</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint.startswith('community') %}active{% endif %}" href="{{ url_for('community.home') }}">커뮤니티</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">고수찾기</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('store._list') }}">마켓</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('community.home') }}">커뮤니티</a></li>
       </ul>
 
       <ul class="navbar-nav">
-        {% if session.get('user_id') %}
+        {% if g.user %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.mypage') }}">
-              {{ g.user.username if g.user else '내 정보' }}
+            <a class="nav-link" href="{{ url_for('auth.mypage') }}"> 마이페이지
+              {{ g.user.name or g.user.userid }}
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.logout') }}">로그아웃</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">로그아웃</a></li>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">로그인 / 회원가입</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">로그인</a></li>
+          <li class="nav-item"><a class="nav-link sign" href="{{ url_for('auth.client_signup') }}">회원가입</a></li>
         {% endif %}
       </ul>
     </div>
