@@ -27,35 +27,42 @@
     </div>
 
     <div class="row">
-        {% for store in store_list.items %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
+    {% for store in store_list.items %}
+    <div class="col-12 col-sm-6 col-md-3 mb-4">
+        <div class="card h-100 shadow-sm border-0">
 
-                {% if store.image_path %}
-                <img src="{{ url_for('static', filename=store.image_path.lstrip('/')) }}"
-                     class="card-img-top" alt="{{ store.title }}"
-                     style="object-fit: cover; height: 200px;">
-                {% else %}
-                <div class="bg-light d-flex align-items-center justify-content-center"
-                     style="height: 200px; color: #aaa;">
-                    <span>이미지 없음</span>
-                </div>
-                {% endif %}
+            {% if store.image_path %}
+            <img src="{{ url_for('static', filename=store.image_path.lstrip('/')) }}"
+                 class="card-img-top"
+                 alt="{{ store.title }}"
+                 style="object-fit: cover; height: 180px; border-radius: 8px 8px 0 0;">
+            {% else %}
+            <div class="bg-light d-flex align-items-center justify-content-center"
+                 style="height: 180px; color: #aaa; border-radius: 8px 8px 0 0;">
+                <span>이미지 없음</span>
+            </div>
+            {% endif %}
 
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ store.title }}</h5>
-                    <p class="card-text text-muted mb-1">{{ store.price }} 원</p>
-                    <p class="card-text small text-muted">
-                        작성자: {{ store.user.name if store.user else "알 수 없음" }}<br>
-                        내용 : {{ store.content[:30] }}...
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h6 class="card-title fw-semibold text-truncate">{{ store.title }}</h6>
+                    <p class="card-text text-muted small mb-2">
+                        {{ store.content[:30] }}...
                     </p>
+                    <p class="text-secondary small mb-1">
+                        작성자: {{ store.user.name if store.user else "알 수 없음" }}
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="fw-bold text-success">{{ "{:,}".format(store.price) }} 원</span>
                     <a href="{{ url_for('store.detail', userid=store.user.userid, count=loop.index) }}"
-                       class="btn btn-sm btn-outline-primary mt-auto">상세보기</a>
+                       class="btn btn-sm btn-outline-secondary">상세보기</a>
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
