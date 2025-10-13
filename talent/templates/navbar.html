@@ -1,42 +1,43 @@
-<nav class="navbar navbar-expand-md bg-white">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('main.index') }}">
-            <img src="{{ url_for('static', filename='images/매칭허브.png') }}" alt="매칭허브">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">고수찾기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('store._list') }}">마켓</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('community.home') }}">커뮤니티</a>
-                </li>
-            </ul>
+<nav class="navbar navbar-expand-md bg-white border-bottom border-secondary-subtle fixed-top custom-navbar">
+  <div class="container" style="max-width: 1000px;">
+    <a class="navbar-brand" href="{{ url_for('main.index') }}">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="매칭허브" class="navbar-logo">
+    </a>
 
-            <!-- 로그인 여부 체크 -->
-            <ul class="navbar-nav">
-                {% if session.get('user_id') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.mypage') }}">
-                            {{ g.user.username if g.user else '내 정보' }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}">로그아웃</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.login') }}">로그인 / 회원가입</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" href="{{ url_for('main.index') }}">고수찾기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint.startswith('store') %}active{% endif %}" href="{{ url_for('store._list') }}">마켓</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint.startswith('community') %}active{% endif %}" href="{{ url_for('community.home') }}">커뮤니티</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        {% if session.get('user_id') %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.mypage') }}">
+              {{ g.user.username if g.user else '내 정보' }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.logout') }}">로그아웃</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">로그인 / 회원가입</a>
+          </li>
+        {% endif %}
+      </ul>
     </div>
+  </div>
 </nav>
