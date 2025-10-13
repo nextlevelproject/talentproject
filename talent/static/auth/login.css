@@ -1,0 +1,91 @@
+/* 페이지 스코프: 다른 CSS와 충돌 방지 + 우선순위 상승 */
+#login-page .auth-wrapper{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  padding:40px 16px !important;
+}
+
+#login-page .login-card{
+  background:#fff;
+  border-radius:12px;
+  padding:40px 30px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  width:500px;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+#login-page h2{
+  text-align:center;
+  margin:0 0 30px;
+  font-size:24px;
+}
+
+/* 폼 */
+#login-page .lg-form-group{ margin-bottom:18px; }
+#login-page label{
+  display:block !important;
+  margin-bottom:6px;
+  font-size:14px;
+}
+
+/* 인풋을 강제로 블록+전체폭 */
+#login-page input[type="text"],
+#login-page input[type="email"],
+#login-page input[type="password"],
+#login-page input[type="tel"],
+#login-page select{
+  display:block !important;
+  width:100% !important;
+  padding:12px !important;
+  border:1px solid #cfcfcf !important;
+  border-radius:6px !important;
+  font-size:14px !important;
+  box-sizing:border-box !important;
+  background:#fff !important;
+}
+
+#login-page input:focus,
+#login-page select:focus{
+  outline:none !important;
+  border:1px solid #7d4fff !important;
+}
+
+/* 버튼 */
+#login-page .lg-btn-group{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:stretch;
+  margin-top:16px;
+}
+
+#login-page .lg-login-btn,
+#login-page .lg-cancel-btn{
+  height:48px;
+  padding:0 16px;
+  border-radius:8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+  white-space:nowrap;
+  font-size:15px;
+  cursor:pointer;
+  text-decoration:none;
+  border:none;
+}
+
+#login-page .lg-login-btn{ background:#7d4fff; color:#fff; }
+#login-page .lg-login-btn:hover{ background:#693ae6; }
+#login-page .lg-cancel-btn{ background:orange; color:#fff; min-width:84px; }
+
+/* 에러 */
+#login-page .lg-text-error{ margin-top:6px; font-size:12px; color:#e54848; }
+
+/* 하단 링크 */
+#login-page .lg-aux-links{ margin-top:18px; text-align:center; font-size:14px; }
+#login-page .lg-aux-links a{ color:#7d4fff; text-decoration:none; }
+#login-page .lg-aux-links a:hover{ text-decoration:underline; }
+#login-page .lg-aux-links .sep{ color:#bbb; margin:0 6px; }
