@@ -1,9 +1,7 @@
 body {
-    font-family: 'Noto Sans KR','Pretendard', sans-serif;
-    padding: 20px;
+    font-family:'Pretendard';
     margin: 0 auto;
 }
-
 /*  SEARCH  */
 .search-form {
     max-width: 600px;
@@ -178,4 +176,9 @@ body {
 .post-info p {
     font-size: 14px;
     color: #666;
+}
+
+.vs{
+    display: flex;
+    justify-content: space-between;
 }

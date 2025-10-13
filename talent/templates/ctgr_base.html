@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 1000px;">
+
+    <h2 class="mb-3 pb-2">견적요청</h2>
+    <hr>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-truck category-icon" style="color: #e67837;"></i>
+        <p class="category-name">이사</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-soap category-icon" style="color: #74b5a1;"></i>
+        <p class="category-name">청소</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-screwdriver-wrench category-icon" style="color: #f4bb3a;"></i>
+        <p class="category-name">설치</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-screwdriver category-icon" style="color: #bed260;"></i>
+        <p class="category-name">수리</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-couch category-icon" style="color: #644f3d;"></i>
+        <p class="category-name">인테리어</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-gift category-icon" style="color: #3c4f7e;"></i>
+        <p class="category-name">이벤트</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-wand-magic-sparkles category-icon" style="color: #f4bb3a;"></i>
+        <p class="category-name">뷰티</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-shirt category-icon" style="color: #e67837;"></i>
+        <p class="category-name">의류</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-briefcase category-icon" style="color: #74b5a1;"></i>
+        <p class="category-name">취업</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-graduation-cap category-icon" style="color: #bed260;"></i>
+        <p class="category-name">과외</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-icons category-icon" style="color: #3c4f7e;"></i>
+        <p class="category-name">취미</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-puzzle-piece category-icon" style="color: #e67837;"></i>
+        <p class="category-name">자기계발</p>
+    </div>
+
+    <div class="swiper-slide">
+        <i class="fa-solid fa-paw category-icon" style="color: #644f3d;"></i>
+        <p class="category-name">반려동물</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-comments category-icon" style="color: #f4bb3a;"></i>
+        <p class="category-name">심리상담</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-wallet category-icon" style="color: #644f3d;"></i>
+        <p class="category-name">법률</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-car category-icon" style="color: #bed260;"></i>
+        <p class="category-name">차량관리</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-plane-departure category-icon" style="color: #74b5a1;"></i>
+        <p class="category-name">여행</p>
+    </div>
+    <div class="swiper-slide">
+        <i class="fa-solid fa-spinner category-icon" style="color: #3c4f7e;"></i>
+        <p class="category-name">기타</p>
+    </div>
+
+    {% block ctgr_content %}
+    {% endblock %}
+</div>
+{% endblock %}

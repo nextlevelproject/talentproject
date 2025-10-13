@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='expert_signup.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/expert_signup.css') }}">
 {% endblock %}
 {% block content %}
-<div class="container">
+<div class="ex-container">
   <h2>매칭허브 고수 가입하기</h2>
 
   <form id="expertForm" method="post" action="{{ url_for('auth.expert_signup') }}">
@@ -20,6 +20,9 @@
 
     {{ form.password.label }} {{ form.password(class="form-control") }}
     {% for e in form.password.errors %}<p class="err">{{ e }}</p>{% endfor %}
+
+    {{ form.password_confirm.label }} {{ form.password_confirm(class="form-control") }}
+    {% for e in form.password_confirm.errors %}<p class="err">{{ e }}</p>{% endfor %}
 
     {{ form.tel_number.label }} {{ form.tel_number(class="form-control") }}
     {% for e in form.tel_number.errors %}<p class="err">{{ e }}</p>{% endfor %}

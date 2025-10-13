@@ -139,6 +139,11 @@ class ExpertSignupForm(FlaskForm):
         validators=[DataRequired(), Regexp(_PASSWORD_RE)],
         render_kw={'id': 'password', 'placeholder': '영문·숫자·특수문자 포함 8~20자', 'autocomplete': 'new-password'}
     )
+    password_confirm = PasswordField(
+        '비밀번호 확인',
+        validators=[DataRequired(), EqualTo('password', message='비밀번호가 일치하지 않습니다.')],
+        render_kw={'id': 'password_confirm', 'placeholder': '비밀번호 재입력', 'autocomplete': 'new-password'}
+    )
     tel_number = StringField(
         '전화번호', validators=[DataRequired(), Regexp(_PHONE_RE)],
         render_kw={'id': 'tel_number', 'placeholder': '- 없이 숫자만'}
