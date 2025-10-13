@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_wtf import CSRFProtect
-# from . import models
 
 import config
 
@@ -33,7 +32,7 @@ def create_app():
     csrf.init_app(app)
 
     # 블루프린트 등록
-    from .views import main_views, auth_views, store_views, community_views
+    from .views import main_views, auth_views, store_views, community_views, category_views
     # 2) init 이후에만 내부 모듈 임포트 (순환 방지)
     from . import models
 
@@ -42,6 +41,7 @@ def create_app():
     app.register_blueprint(auth_views.bp)
     app.register_blueprint(store_views.bp)
     app.register_blueprint(community_views.bp)
+    app.register_blueprint(category_views.bp)
 
     from .filter import format_datetime
     app.jinja_env.filters['datetime'] = format_datetime
