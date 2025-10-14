@@ -57,7 +57,7 @@ def login():
 def logout():
     session.clear()
     flash('로그아웃되었습니다.', 'success')
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.index'))
 
 # ----------------- Client signup -----------------
 @bp.route('/client_signup', methods=['GET', 'POST'])

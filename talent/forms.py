@@ -268,3 +268,4 @@ class StoreForm(FlaskForm):
     content = TextAreaField('내용', validators=[DataRequired()])
     price = IntegerField('가격', validators=[DataRequired()])
     image = FileField('이미지', validators=[FileAllowed(['jpg', 'jpeg', 'png'], '이미지 파일만 업로드 가능합니다.')])
+
