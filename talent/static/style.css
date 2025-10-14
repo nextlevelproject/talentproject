@@ -76,4 +76,19 @@ ul,ol,li {
   flex-wrap: wrap;
 }
 
+/* style.css ― 기존 user-menu 규칙 교체 */
+.navbar .dropdown-menu.user-menu{
+  min-width: 150px;   /* 130 → 150 */
+  padding: 6px 0;     /* 4px → 6px */
+}
 
+.navbar .dropdown-menu.user-menu .dropdown-item{
+  padding-top: .45rem;   /* .2rem → .35rem */
+  padding-bottom: .35rem;
+  font-size: .90rem;     /* .85rem → .90rem */
+  line-height: 1.25;
+}
+
+.navbar .dropdown-menu.user-menu .dropdown-divider{
+  margin: .3rem 0;       /* .2rem → .3rem */
+}

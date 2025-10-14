@@ -1,45 +1,58 @@
 {% extends 'base.html' %}
+
+{% block head %}{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/login.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="container">
-  <h2 class="my-4">내 정보 수정</h2>
+<section id="login-page">
+  <div class="auth-wrapper">
+    <div class="login-card">
+      <h2>내 정보 수정</h2>
 
-  <form method="post" action="{{ url_for('auth.edit_profile') }}">
-    {{ form.hidden_tag() }}
+      <form method="post" action="{{ url_for('auth.edit_profile') }}">
+        {{ form.hidden_tag() }}
 
-    <div class="mb-3">
-      {{ form.name.label(class="form-label") }}
-      {{ form.name(class="form-control", value=user.name) }}
-      {% for e in form.name.errors %}<p class="err">{{ e }}</p>{% endfor %}
+        <div class="lg-form-group">
+          {{ form.name.label }}
+          {{ form.name() }}
+          {% for e in form.name.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="lg-form-group">
+          {{ form.email.label }}
+          {{ form.email() }}
+          {% for e in form.email.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="lg-form-group">
+          {{ form.tel_number.label }}
+          {{ form.tel_number() }}
+          {% for e in form.tel_number.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+
+        {% if user.is_expert and form.service is defined %}
+        <div class="lg-form-group">
+          {{ form.service.label }}
+          {{ form.service() }}
+          {% for e in form.service.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+        {% endif %}
+
+        {% if user.is_expert and form.location is defined %}
+        <div class="lg-form-group">
+          {{ form.location.label }}
+          {{ form.location() }}
+          {% for e in form.location.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="lg-btn-group">
+          <a href="{{ url_for('auth.mypage') }}" class="lg-cancel-btn">취소</a>
+          <button type="submit" class="lg-login-btn">정보 수정</button>
+        </div>
+      </form>
     </div>
-
-    <div class="mb-3">
-      {{ form.email.label(class="form-label") }}
-      {{ form.email(class="form-control", value=user.email) }}
-      {% for e in form.email.errors %}<p class="err">{{ e }}</p>{% endfor %}
-    </div>
-
-    <div class="mb-3">
-      {{ form.tel_number.label(class="form-label") }}
-      {{ form.tel_number(class="form-control", value=user.tel_number) }}
-      {% for e in form.tel_number.errors %}<p class="err">{{ e }}</p>{% endfor %}
-    </div>
-
-    {% if user.is_expert %}
-    <div class="mb-3">
-      {{ form.service.label(class="form-label") }}
-      {{ form.service(class="form-control", value=user.service) }}
-    </div>
-
-    <div class="mb-3">
-      {{ form.location.label(class="form-label") }}
-      {{ form.location(class="form-control", value=user.location) }}
-    </div>
-    {% endif %}
-
-    <div class="mt-4">
-      {{ form.submit(class="btn btn-primary") }}
-      <a href="{{ url_for('auth.mypage') }}" class="btn btn-outline-secondary">취소</a>
-    </div>
-  </form>
-</div>
+  </div>
+</section>
 {% endblock %}
