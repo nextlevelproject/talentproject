@@ -1,33 +1,53 @@
-<nav class="navbar navbar-expand-md bg-white sticky-top custom-navbar">
+{# templates/store/navber.html #}
+<nav class="navbar navbar-expand-md navbar-light bg-white sticky-top custom-navbar" role="navigation">
   <div class="container" style="max-width: 1000px;">
-    <a class="navbar-brand" href="{{ url_for('main.index') }}">
-      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="매칭허브" class="navbar-logo">
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="매칭허브" class="navbar-logo" height="32">
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mhNavbar"
+            aria-controls="mhNavbar" aria-expanded="false" aria-label="메뉴 열기">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="mhNavbar">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">고수찾기</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('store._list') }}">마켓</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('community.home') }}">커뮤니티</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.index') }}">고수찾기</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('store._list') }}">마켓</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('community.home') }}">커뮤니티</a>
+        </li>
       </ul>
 
       <ul class="navbar-nav">
         {% if g.user %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.mypage') }}"> 마이페이지
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
               {{ g.user.name or g.user.userid }}
             </a>
+            <ul class="dropdown-menu dropdown-menu-end user-menu" aria-labelledby="userMenu">
+              <li><a class="dropdown-item" href="{{ url_for('auth.mypage') }}">마이페이지</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ url_for('auth.edit_profile') }}">프로필 수정</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">로그아웃</a></li>
+            </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">로그아웃</a></li>
         {% else %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">로그인 / 회원가입</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">로그인 / 회원가입</a>
+          </li>
         {% endif %}
       </ul>
     </div>
   </div>
 </nav>
+

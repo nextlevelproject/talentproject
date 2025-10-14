@@ -9,14 +9,8 @@ import jwt, re
 from talent import db, mail
 from talent.models import User
 from talent.forms import (
-    LoginForm,
-    SignupForm,
-    ExpertSignupForm,
-    EditProfileForm,
-    FindIdForm,
-    FindPasswordForm,
-    ResetPasswordForm,
-    ChangePasswordForm,
+    LoginForm, SignupForm, ExpertSignupForm, EditProfileForm,
+    FindIdForm, FindPasswordForm, ResetPasswordForm, ChangePasswordForm
 )
 
 # 비밀번호 규칙: 영문+숫자+특수문자 8~20자
@@ -63,7 +57,7 @@ def login():
 def logout():
     session.clear()
     flash('로그아웃되었습니다.', 'success')
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('main.index'))
 
 # ----------------- Client signup -----------------
 @bp.route('/client_signup', methods=['GET', 'POST'])
@@ -73,14 +67,11 @@ def client_signup():
         userid = form.userid.data.strip()
         password = form.password.data
         email = form.email.data.strip().lower()
-
         tel_field = getattr(form, 'phone', None) or getattr(form, 'tel_number', None)
         tel_number = tel_field.data.strip().replace('-', '') if tel_field else ''
-
         name = (getattr(form, 'name', None).data.strip()
                 if getattr(form, 'name', None) else
                 (getattr(form, 'username', None).data.strip() if getattr(form, 'username', None) else userid))
-
         y, m, d = form.birth_year.data, form.birth_month.data, form.birth_day.data
         birthday = datetime(y, m, d)
 
@@ -101,8 +92,7 @@ def client_signup():
             is_expert=False
         )
         try:
-            db.session.add(user)
-            db.session.commit()
+            db.session.add(user); db.session.commit()
         except IntegrityError:
             db.session.rollback()
             flash('동일한 아이디/이메일/전화번호가 이미 존재합니다.', 'danger')
@@ -120,7 +110,6 @@ def expert_signup():
         if not PASSWORD_RE.fullmatch(form.password.data or ''):
             flash('비밀번호는 영문, 숫자, 특수문자 포함 8~20자여야 합니다.', 'danger')
             return render_template('auth/expert_signup.html', form=form)
-
         if hasattr(form, 'password_confirm') and (form.password.data != form.password_confirm.data):
             flash('비밀번호가 일치하지 않습니다.', 'danger')
             return render_template('auth/expert_signup.html', form=form)
@@ -154,8 +143,7 @@ def expert_signup():
             location=location if hasattr(User, 'location') else None,
         )
         try:
-            db.session.add(user)
-            db.session.commit()
+            db.session.add(user); db.session.commit()
         except IntegrityError:
             db.session.rollback()
             flash('동일한 아이디/이메일/전화번호가 이미 존재합니다.', 'danger')
@@ -166,12 +154,13 @@ def expert_signup():
     return render_template('auth/expert_signup.html', form=form)
 
 # ----------------- My page -----------------
-@bp.route('/mypage')
+@bp.get('/mypage')
 @login_required
 def mypage():
     user = User.query.get_or_404(session.get('user_id'))
     form = ChangePasswordForm()
-    return render_template('auth/mypage.html', user=user, form=form)
+    # 템플릿 호환을 위해 current_user 별칭 제공
+    return render_template('auth/mypage.html', user=user, current_user=user, form=form)
 
 # ----------------- Edit profile -----------------
 @bp.route('/edit_profile', methods=['GET', 'POST'])
@@ -180,21 +169,16 @@ def edit_profile():
     user = User.query.get_or_404(session.get('user_id'))
     form = EditProfileForm(obj=user)
     if request.method == 'POST' and form.validate_on_submit():
-        if hasattr(form, 'name'):
-            user.name = form.name.data.strip()
-        if hasattr(form, 'email'):
-            user.email = form.email.data.strip().lower()
-        if hasattr(form, 'tel_number'):
-            user.tel_number = form.tel_number.data.strip().replace('-', '')
+        if hasattr(form, 'name'):       user.name = form.name.data.strip()
+        if hasattr(form, 'email'):      user.email = form.email.data.strip().lower()
+        if hasattr(form, 'tel_number'): user.tel_number = form.tel_number.data.strip().replace('-', '')
         if getattr(user, 'is_expert', False):
-            if hasattr(form, 'service'):
-                user.service = form.service.data.strip()
-            if hasattr(form, 'location'):
-                user.location = form.location.data.strip()
+            if hasattr(form, 'service'):  user.service  = form.service.data.strip()
+            if hasattr(form, 'location'): user.location = form.location.data.strip()
         db.session.commit()
         flash('프로필이 성공적으로 수정되었습니다.', 'success')
         return redirect(url_for('auth.mypage'))
-    return render_template('auth/edit_profile.html', form=form, user=user)
+    return render_template('auth/edit_profile.html', form=form, user=user, current_user=user)
 
 # ----------------- Find ID -----------------
 @bp.route('/find_id', methods=['GET', 'POST'])
@@ -222,8 +206,7 @@ def find_password():
 
         token = jwt.encode(
             {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
-            current_app.config['SECRET_KEY'],
-            algorithm='HS256'
+            current_app.config['SECRET_KEY'], algorithm='HS256'
         )
         if isinstance(token, bytes):
             token = token.decode('utf-8')
@@ -262,11 +245,12 @@ def reset_password(token):
     return render_template('auth/reset_password.html', token=token)
 
 # ----------------- Change password (logged-in) -----------------
-@bp.route('/change_password', methods=['POST'])
+@bp.post('/change_password')
 @login_required
 def change_password():
     user = User.query.get_or_404(session.get('user_id'))
     form = ChangePasswordForm()
+
     if not form.validate_on_submit():
         for _, errs in form.errors.items():
             for e in errs:

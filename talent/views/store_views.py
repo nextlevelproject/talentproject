@@ -42,13 +42,13 @@ def detail(userid, count):
 @bp.route('/create', methods=['GET', 'POST'])
 def create():
     if g.user is None or not g.user.is_expert:
-        flash("전문가만 상품을 등록할 수 있습니다.")
+        flash("전문가만 상품을 등록할 수 있습니다.", "warning")
         return redirect(url_for("store._list"))
 
     form = StoreForm()
     if request.method == 'POST' and form.validate_on_submit():
         if not form.image.data:
-            flash("이미지는 필수입니다.")
+            flash("이미지는 필수입니다.", "danger")
             return render_template("store/store_form.html", form=form)
 
         image_file = form.image.data
@@ -137,4 +137,5 @@ def delete(userid, count):
 
     db.session.delete(store)
     db.session.commit()
+    flash('삭제되었습니다.')
     return redirect(url_for('store._list'))
