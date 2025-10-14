@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='category/ctgr.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="category-grid-wrapper">
+    <div class="container">
+        <div class="category-grid">
+            <div class="category-item">
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-truck category-icon" style="color: #e67837;"></i>
+                    <p class="category-name">이사</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.cleaning') }}">
+                    <i class="fa-solid fa-soap category-icon" style="color: #74b5a1;"></i>
+                    <p class="category-name">청소</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.installation') }}">
+                    <i class="fa-solid fa-screwdriver-wrench category-icon" style="color: #f4bb3a;"></i>
+                    <p class="category-name">설치</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.repair') }}">
+                    <i class="fa-solid fa-screwdriver category-icon" style="color: #bed260;"></i>
+                    <p class="category-name">수리</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.interior') }}">
+                    <i class="fa-solid fa-couch category-icon" style="color: #644f3d;"></i>
+                    <p class="category-name">인테리어</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.event') }}">
+                    <i class="fa-solid fa-gift category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">이벤트</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.beauty') }}">
+                    <i class="fa-solid fa-wand-magic-sparkles category-icon" style="color: #f4bb3a;"></i>
+                    <p class="category-name">뷰티</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.fashion') }}">
+                    <i class="fa-solid fa-shirt category-icon" style="color: #e67837;"></i>
+                    <p class="category-name">의류</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.employment') }}">
+                    <i class="fa-solid fa-briefcase category-icon" style="color: #74b5a1;"></i>
+                    <p class="category-name">취업</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.private_lesson') }}">
+                    <i class="fa-solid fa-graduation-cap category-icon" style="color: #bed260;"></i>
+                    <p class="category-name">과외</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.hobby') }}">
+                    <i class="fa-solid fa-icons category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">취미</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.pet') }}">
+                    <i class="fa-solid fa-paw category-icon" style="color: #e67837;"></i>
+                    <p class="category-name">반려동물</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.law') }}">
+                    <i class="fa-solid fa-wallet category-icon" style="color: #644f3d;"></i>
+                    <p class="category-name">법률</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.car') }}">
+                    <i class="fa-solid fa-car category-icon" style="color: #bed260;"></i>
+                    <p class="category-name">차량관리</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.travel') }}">
+                    <i class="fa-solid fa-plane-departure category-icon" style="color: #74b5a1;"></i>
+                    <p class="category-name">여행</p>
+                </a>
+            </div>
+            <div class="category-item">
+                <a href="{{ url_for('category.etc') }}">
+                    <i class="fa-solid fa-spinner category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">기타</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% block ctgr_content %}
+    {% endblock %}
+</section>
+{% endblock %}

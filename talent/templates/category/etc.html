@@ -1,0 +1,47 @@
+{% extends "ctgr_base.html" %}
+
+{% block ctgr_content %}
+<div class="container py-5" style="max-width: 1000px;">
+    <form method="post">
+        {% include 'form_errors.html' %}
+        <div class="mb-4 p-4 rounded bg-light shadow-sm">
+            <h5 class="fw-semibold text-secondary mb-3">심리상담</h5>
+            <div class="row">
+                {% for choice in form.psycology %}
+                <div class="col-md-6 mb-2">
+                    <div class="form-check">
+                        {{ choice(class="form-check-input") }}
+                        <label class="form-check-label ms-1">{{ choice.label.text }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <h5 class="fw-semibold text-secondary mt-4 mb-3">번역 / 통역</h5>
+            <div class="row">
+                {% for choice in form.translation %}
+                <div class="col-md-6 mb-2">
+                    <div class="form-check">
+                        {{ choice(class="form-check-input") }}
+                        <label class="form-check-label ms-1">{{ choice.label.text }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <h5 class="fw-semibold text-secondary mt-4 mb-3">심부름 / 알바</h5>
+            <div class="row">
+                {% for choice in form.errand %}
+                <div class="col-md-6 mb-2">
+                    <div class="form-check">
+                        {{ choice(class="form-check-input") }}
+                        <label class="form-check-label ms-1">{{ choice.label.text }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-success px-4">제출하기</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

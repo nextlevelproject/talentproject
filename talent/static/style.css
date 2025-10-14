@@ -1,0 +1,79 @@
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #121212;
+    height: 100%
+}
+
+.base{
+    min-height: calc(100vh - 100px);
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+/*  NAVBAR  */
+.custom-navbar {
+  height: 70px;
+  line-height: 70px;
+  box-shadow: none
+}
+
+.navbar-logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar .nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 70px;
+  height: 70px;
+  font-weight: 500;
+  color: #333;
+}
+
+.navbar {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* FOOTER */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.app-badge {
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.footer-icon {
+  color: #6c757d;
+  font-size: 1.5rem;
+  transition: color 0.2s;
+}
+
+.footer-icon:hover {
+  color: #212529;
+}
+
+ul,ol,li {
+    list-style-type: none;
+}
+
+.site-footer .footer-list li a {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
