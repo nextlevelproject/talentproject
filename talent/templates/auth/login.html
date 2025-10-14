@@ -1,36 +1,51 @@
 {% extends 'base.html' %}
-{% block content %}
-<div class="container">
-    <h5 class="my-3 border-bottom pb-2">로그인</h5>
 
-    <form method="post" action="{{ url_for('auth.login') }}">
+{% block head %}{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/login.css') }}?v=2">
+{% endblock %}
+
+{% block content %}
+<section id="login-page">  {# 페이지 스코프 고정 #}
+  <div class="auth-wrapper">
+    <div class="login-card">
+      <h2>로그인</h2>
+
+      <form method="post" action="{{ url_for('auth.login') }}">
         {{ form.hidden_tag() }}
         {% include 'form_errors.html' %}
 
-        <div class="mb-3">
-            {{ form.userid.label }}
-            {{ form.userid }}
-            {% for error in form.userid.errors %}
-            <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
+        <div class="lg-form-group">
+          {{ form.userid.label }}
+          {{ form.userid() }}
+          {% for error in form.userid.errors %}
+            <div class="lg-text-error">{{ error }}</div>
+          {% endfor %}
         </div>
 
-        <div class="mb-3">
-            {{ form.password.label }}
-            {{ form.password }}
-            {% for error in form.password.errors %}
-            <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
+        <div class="lg-form-group">
+          {{ form.password.label }}
+          {{ form.password() }}
+          {% for error in form.password.errors %}
+            <div class="lg-text-error">{{ error }}</div>
+          {% endfor %}
         </div>
 
-        {{ form.submit }}
-
-        <div class="mt-3 text-center">
-            <a href="{{ url_for('auth.client_signup') }}" class="btn btn-link">회원가입</a> |
-            <a href="{{ url_for('auth.expert_signup') }}" class="btn btn-link">전문가 회원가입</a> |
-            <a href="{{ url_for('auth.find_id') }}" class="btn btn-link">아이디 찾기</a> |
-            <a href="{{ url_for('auth.find_password') }}" class="btn btn-link">비밀번호 찾기</a>
+        <div class="lg-btn-group">
+          <button type="submit" class="lg-login-btn">로그인</button>
+          <a href="{{ url_for('main.index') }}" class="lg-cancel-btn">취소</a>
         </div>
-    </form>
-</div>
+
+        <div class="lg-aux-links">
+          <a href="{{ url_for('auth.client_signup') }}">일반 회원가입</a>
+          <span class="sep">|</span>
+          <a href="{{ url_for('auth.expert_signup') }}">전문가 회원가입</a>
+          <span class="sep">|</span>
+          <a href="{{ url_for('auth.find_id') }}">아이디 찾기</a>
+          <span class="sep">|</span>
+          <a href="{{ url_for('auth.find_password') }}">비밀번호 찾기</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 {% endblock %}

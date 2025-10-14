@@ -1,40 +1,48 @@
-<!-- 비밀번호 변경 모달 -->
-<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">비밀번호 변경</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+{# templates/auth/mypage.html #}
+{% extends 'base.html' %}
+
+{% block head %}{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<section id="login-page">
+  <div class="auth-wrapper">
+    <div class="login-card">
+      <h2>비밀번호 변경</h2>
+      <p class="lg-helper">
+        계정:
+        <strong>{{ (current_user.userid or current_user.username) if current_user else '' }}</strong>
+        · <a href="{{ url_for('auth.logout') }}">로그아웃</a>
+      </p>
 
       <form method="post" action="{{ url_for('auth.change_password') }}">
         {{ form.hidden_tag() }}
-        <div class="modal-body">
-          <div class="mb-3">
-            {{ form.current_password.label(class="form-label") }}
-            {{ form.current_password }}
-            {% for e in form.current_password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
-          </div>
 
-          <div class="mb-3">
-            {{ form.new_password.label(class="form-label") }}
-            {{ form.new_password }}
-            {% for e in form.new_password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
-          </div>
-
-          <div class="mb-3">
-            {{ form.confirm_password.label(class="form-label") }}
-            {{ form.confirm_password }}
-            {% for e in form.confirm_password.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
-          </div>
+        <div class="lg-form-group">
+          {{ form.current_password.label }}
+          {{ form.current_password() }}
+          {% for e in form.current_password.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
         </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-          {{ form.submit }}
+        <div class="lg-form-group">
+          {{ form.new_password.label }}
+          {{ form.new_password() }}
+          {% for e in form.new_password.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="lg-form-group">
+          {{ form.confirm_password.label }}
+          {{ form.confirm_password() }}
+          {% for e in form.confirm_password.errors %}<div class="lg-text-error">{{ e }}</div>{% endfor %}
+        </div>
+
+        <div class="lg-btn-group">
+          <a href="{{ url_for('main.index') }}" class="lg-cancel-btn">취소</a>
+          {{ form.submit(class_='lg-login-btn') }}
         </div>
       </form>
-
     </div>
   </div>
-</div>
+</section>
+{% endblock %}

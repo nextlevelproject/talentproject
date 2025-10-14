@@ -69,6 +69,7 @@ def employment():
     if form.validate_on_submit():
         return redirect(url_for('main.index'))
     return render_template('category/employment.html', form=form)
+    return render_template('category/employment.html')
 
 @bp.route('/private_lesson')
 def private_lesson():
@@ -111,6 +112,7 @@ def travel():
     if form.validate_on_submit():
         return redirect(url_for('main.index'))
     return render_template('category/travel.html', form=form)
+    return render_template('category/travel.html')
 
 @bp.route('/etc')
 def etc():

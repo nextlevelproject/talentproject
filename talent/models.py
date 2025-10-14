@@ -1,4 +1,4 @@
-from talent import db
+from . import db
 from datetime import datetime
 
 # USER
@@ -30,11 +30,7 @@ class Store(db.Model):
     user = db.relationship('User', backref=db.backref('store'))
     edit_date = db.Column(db.DateTime, nullable=False)
     image_path = db.Column(db.String(120), nullable=False)
-
-# class StorePost(db.Model):
-#     views = db.Column(db.Integer, default=0)
-#     thumbnail_url = db.Column(db.String(300))
-
+    views = db.Column(db.Integer, default=0)
 
 
 
@@ -49,8 +45,7 @@ class CommunityPost(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comments = db.relationship('Comment', backref='post', lazy=True, cascade="all, delete-orphan")
     likes = db.relationship('Like', backref='post', lazy=True, cascade="all, delete-orphan")
-    thumbnail_url = db.Column(db.String(300))
-    views = db.Column(db.Integer, default=0)
+
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
