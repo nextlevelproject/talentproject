@@ -35,7 +35,7 @@
             <img src="{{ url_for('static', filename=store.image_path.lstrip('/')) }}"
                  class="card-img-top"
                  alt="{{ store.title }}"
-                 style="object-fit: cover; height: 180px; border-radius: 8px 8px 0 0;">
+                 style="object-fit: contain; height: 180px; border-radius: 8px 8px 0 0;">
             {% else %}
             <div class="bg-light d-flex align-items-center justify-content-center"
                  style="height: 180px; color: #aaa; border-radius: 8px 8px 0 0;">
