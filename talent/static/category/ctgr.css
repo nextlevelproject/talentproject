@@ -1,7 +1,7 @@
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 16px;
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
@@ -18,6 +18,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.category-item a {
+    text-decoration: none;
 }
 
 .category-icon {
