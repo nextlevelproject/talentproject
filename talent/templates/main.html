@@ -25,92 +25,128 @@
 
 
 <!--  CATEGORY  -->
-<div class="category-wrapper">
+<section class="category-wrapper">
     <div class="swiper-button-prev categoryPrev"></div>
     <div class="swiper mySwiper categorySwiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <i class="fa-solid fa-bars category-icon" style="color: #3c4f7e;"></i>
-                <p class="category-name">전체보기</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-bars category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">전체보기</p>
+                </a>
             </div>
             <div class="swiper-slide">
                 <a href="{{ url_for('category.move') }}">
-                <i class="fa-solid fa-truck category-icon" style="color: #e67837;"></i>
-                <p class="category-name">이사</p></a>
+                    <i class="fa-solid fa-truck category-icon" style="color: #e67837;"></i>
+                    <p class="category-name">이사</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-soap category-icon" style="color: #74b5a1;"></i>
-                <p class="category-name">청소</p>
+                <a href="{{ url_for('category.cleaning') }}">
+                    <i class="fa-solid fa-soap category-icon" style="color: #74b5a1;"></i>
+                    <p class="category-name">청소</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-screwdriver-wrench category-icon" style="color: #f4bb3a;"></i>
-                <p class="category-name">설치</p>
+                <a href="{{ url_for('category.installation') }}">
+                    <i class="fa-solid fa-screwdriver-wrench category-icon" style="color: #f4bb3a;"></i>
+                    <p class="category-name">설치</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-screwdriver category-icon" style="color: #bed260;"></i>
-                <p class="category-name">수리</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-screwdriver category-icon" style="color: #bed260;"></i>
+                    <p class="category-name">수리</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-couch category-icon" style="color: #644f3d;"></i>
-                <p class="category-name">인테리어</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-couch category-icon" style="color: #644f3d;"></i>
+                    <p class="category-name">인테리어</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-gift category-icon" style="color: #3c4f7e;"></i>
-                <p class="category-name">이벤트</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-gift category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">이벤트</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-wand-magic-sparkles category-icon" style="color: #f4bb3a;"></i>
-                <p class="category-name">뷰티</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-wand-magic-sparkles category-icon" style="color: #f4bb3a;"></i>
+                    <p class="category-name">뷰티</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-shirt category-icon" style="color: #e67837;"></i>
-                <p class="category-name">의류</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-shirt category-icon" style="color: #e67837;"></i>
+                    <p class="category-name">의류</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-briefcase category-icon" style="color: #74b5a1;"></i>
-                <p class="category-name">취업</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-briefcase category-icon" style="color: #74b5a1;"></i>
+                    <p class="category-name">취업</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-graduation-cap category-icon" style="color: #bed260;"></i>
-                <p class="category-name">과외</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-graduation-cap category-icon" style="color: #bed260;"></i>
+                    <p class="category-name">과외</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-icons category-icon" style="color: #3c4f7e;"></i>
-                <p class="category-name">취미</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-icons category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">취미</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-puzzle-piece category-icon" style="color: #e67837;"></i>
-                <p class="category-name">자기계발</p>
-            </div>
-
-            <div class="swiper-slide">
-                <i class="fa-solid fa-paw category-icon" style="color: #644f3d;"></i>
-                <p class="category-name">반려동물</p>
+                <a href="{{ url_for('category.self_development') }}">
+                    <i class="fa-solid fa-puzzle-piece category-icon" style="color: #e67837;"></i>
+                    <p class="category-name">자기계발</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-comments category-icon" style="color: #f4bb3a;"></i>
-                <p class="category-name">심리상담</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-paw category-icon" style="color: #644f3d;"></i>
+                    <p class="category-name">반려동물</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-wallet category-icon" style="color: #644f3d;"></i>
-                <p class="category-name">법률</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-comments category-icon" style="color: #f4bb3a;"></i>
+                    <p class="category-name">심리상담</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-car category-icon" style="color: #bed260;"></i>
-                <p class="category-name">차량관리</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-wallet category-icon" style="color: #644f3d;"></i>
+                    <p class="category-name">법률</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-plane-departure category-icon" style="color: #74b5a1;"></i>
-                <p class="category-name">여행</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-car category-icon" style="color: #bed260;"></i>
+                    <p class="category-name">차량관리</p>
+                </a>
             </div>
             <div class="swiper-slide">
-                <i class="fa-solid fa-spinner category-icon" style="color: #3c4f7e;"></i>
-                <p class="category-name">기타</p>
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-plane-departure category-icon" style="color: #74b5a1;"></i>
+                    <p class="category-name">여행</p>
+                </a>
+            </div>
+            <div class="swiper-slide">
+                <a href="{{ url_for('category.move') }}">
+                    <i class="fa-solid fa-spinner category-icon" style="color: #3c4f7e;"></i>
+                    <p class="category-name">기타</p>
+                </a>
             </div>
         </div>
     </div>
     <div class="swiper-button-next categoryNext"></div>
-</div>
+</section>
 
 <div class="ad-wrapper">
     <div class="swiper-button-prev adPrev"></div>
@@ -126,7 +162,7 @@
 </div>
 
 <!--  STORE  -->
-<div class="container my-5" style="max-width: 1000px;">
+<section class="container my-5" style="max-width: 1000px;">
     <div class="vs">
         <h3 class="fw-bold mb-4">BEST STORE</h3>
         <div class="text-end mt-3">
@@ -156,11 +192,11 @@
     {% else %}
     <p class="text-muted">등록된 마켓이 없습니다.</p>
     {% endif %}
-</div>
+</section>
 
 
 <!--  COMMUNITY  -->
-<div class="container my-5" style="max-width: 1000px;">
+<section class="container my-5" style="max-width: 1000px;">
     <div class="vs">
         <h2 class="fw-bold mb-4">HURB COMMUNITY</h2>
         <div class="text-end mt-3">
@@ -197,10 +233,63 @@
     {% else %}
     <p class="text-muted">등록된 커뮤니티 글이 없습니다.</p>
     {% endif %}
-</div>
+</section>
 
-<p>고수 페이지</p>
-<p>고수 가입</p>
+<section class="pro-join-section bg-white">
+    <div class="container" style="max-width: 1000px;">
+        <div class="row align-items-center">
+
+            <div class="col-md-4 text-center text-md-start">
+                <h4 class="fw-bold mb-3">전문가로 활동하시나요?</h4>
+                <p class="text-muted mb-4">
+                    매칭허브에서 재능판매를 기다리는 고객들을 만나보세요.
+                </p>
+                <a href="{{ url_for('auth.expert_signup') }}" class="btn btn-success px-4 py-2 fw-semibold">
+                    고수가입
+                </a>
+            </div>
+
+            <div class="col-md-8 position-relative">
+                <div class="swiper proSwiper w-100">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide d-flex align-items-center justify-content-center">
+                            <div class="card border-0 shadow-sm w-100 h-100">
+                                <img src="{{ url_for('static', filename='images/signup_ad1.png') }}"
+                                     class="card-img-top" alt="레슨 고수" style="height: 200px; object-fit: contain;">
+                                <div class="card-body text-center ex">
+                                    <h6 class="fw-semibold mb-2">고객의 요청서를 무료로 받으세요</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide d-flex align-items-center justify-content-center">
+                            <div class="card border-0 shadow-sm w-100 h-100">
+                                <img src="{{ url_for('static', filename='images/signup_ad2.png') }}"
+                                     class="card-img-top" alt="생활서비스" style="height: 200px; object-fit: contain;">
+                                <div class="card-body text-center ex">
+                                    <h6 class="fw-semibold mb-2">조건에 맞는 고객에게 견적을 보내세요</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide d-flex align-items-center justify-content-center">
+                            <div class="card border-0 shadow-sm w-100 h-100">
+                                <img src="{{ url_for('static', filename='images/signup_ad3.png') }}"
+                                     class="card-img-top" alt="비즈니스 고수" style="height: 200px; object-fit: contain;">
+                                <div class="card-body text-center ex">
+                                    <h6 class="fw-semibold mb-2">채팅, 전화로 빠르게 상담하고 거래하세요</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination mt-3"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!--  SCRIPT  -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -227,6 +316,20 @@
             prevEl: ".adPrev",
         },
         loop: true
+    });
+
+    const swiper = new Swiper(".proSwiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {              // ✅ 화살표 활성화
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
     });
 </script>
 {% endblock %}
