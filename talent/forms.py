@@ -7,6 +7,7 @@ from wtforms import (
     TextAreaField, FileField, IntegerField
 )
 from wtforms.fields import EmailField
+from wtforms import ValidationError
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp
 
 # ---------------- Constants ----------------
@@ -139,6 +140,11 @@ class ExpertSignupForm(FlaskForm):
         validators=[DataRequired(), Regexp(_PASSWORD_RE)],
         render_kw={'id': 'password', 'placeholder': '영문·숫자·특수문자 포함 8~20자', 'autocomplete': 'new-password'}
     )
+    password_confirm = PasswordField(
+        '비밀번호 확인',
+        validators=[DataRequired(), EqualTo('password', message='비밀번호가 일치하지 않습니다.')],
+        render_kw={'id': 'password_confirm', 'placeholder': '비밀번호 재입력', 'autocomplete': 'new-password'}
+    )
     tel_number = StringField(
         '전화번호', validators=[DataRequired(), Regexp(_PHONE_RE)],
         render_kw={'id': 'tel_number', 'placeholder': '- 없이 숫자만'}
@@ -189,26 +195,46 @@ class LoginForm(FlaskForm):
     )
     submit = SubmitField('로그인', render_kw={'class': 'btn btn-primary'})
 
+
 # ---------------- My page: change password ----------------
 class ChangePasswordForm(FlaskForm):
     current_password = PasswordField(
         '현재 비밀번호',
         validators=[DataRequired('현재 비밀번호를 입력하세요')],
-        render_kw={'id': 'current_password', 'class': 'form-control'}
+        render_kw={'id': 'current_password', 'class': 'form-control', 'autocomplete': 'current-password'}
     )
     new_password = PasswordField(
         '새 비밀번호',
         validators=[DataRequired('새 비밀번호를 입력하세요'),
                     Regexp(_PASSWORD_RE, message='영문, 숫자, 특수문자 포함 8~20자')],
-        render_kw={'id': 'new_password', 'class': 'form-control'}
+        render_kw={'id': 'new_password', 'class': 'form-control', 'autocomplete': 'new-password'}
     )
     confirm_password = PasswordField(
         '비밀번호 확인',
         validators=[DataRequired('비밀번호 확인을 입력하세요'),
                     EqualTo('new_password', message='새 비밀번호가 일치하지 않습니다.')],
-        render_kw={'id': 'confirm_password', 'class': 'form-control'}
+        render_kw={'id': 'confirm_password', 'class': 'form-control', 'autocomplete': 'new-password'}
     )
     submit = SubmitField('변경하기', render_kw={'class': 'btn btn-primary'})
+
+    # 템플릿/기존 코드 호환: camelCase 별칭 제공
+    @property
+    def currentPassword(self):  # noqa: N802
+        return self.current_password
+    @property
+    def newPassword(self):      # noqa: N802
+        return self.new_password
+    @property
+    def confirmPassword(self):  # noqa: N802
+        return self.confirm_password
+
+    def validate(self, extra_validators=None):
+        ok = super().validate(extra_validators=extra_validators)
+        if not ok:
+            return False
+        if self.current_password.data == self.new_password.data:
+            raise ValidationError('새 비밀번호가 현재 비밀번호와 같습니다.')
+        return True
 
 # ---------------- Reset Password ----------------
 class ResetPasswordForm(FlaskForm):
@@ -242,3 +268,4 @@ class StoreForm(FlaskForm):
     content = TextAreaField('내용', validators=[DataRequired()])
     price = IntegerField('가격', validators=[DataRequired()])
     image = FileField('이미지', validators=[FileAllowed(['jpg', 'jpeg', 'png'], '이미지 파일만 업로드 가능합니다.')])
+

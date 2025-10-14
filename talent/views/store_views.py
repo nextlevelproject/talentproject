@@ -9,8 +9,6 @@ from talent.forms import StoreForm
 
 bp = Blueprint('store', __name__, url_prefix='/store')
 
-
-# 상품 목록
 @bp.route('/')
 def _list():
     page = request.args.get('page', default=1, type=int)
@@ -30,11 +28,15 @@ def _list():
     return render_template('store/store_list.html', store_list=store_list, page=page, kw=kw)
 
 
-@bp.route('/detail/<int:store_id>')
-def detail(store_id):
+@bp.route('/<userid>/<int:count>')
+def detail(userid, count):
     form = StoreForm()
-    store = Store.query.get_or_404(store_id)
-    return render_template('store/store_detail.html', store=store, form=form)
+    user = User.query.filter_by(userid=userid).first_or_404()
+    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
+    store = stores[count - 1]
+    store.views = (store.views or 0) + 1
+    db.session.commit()
+    return render_template('store/store_detail.html', store=store, form=form, count=count)
 
 
 @bp.route('/create', methods=['GET', 'POST'])
@@ -45,8 +47,6 @@ def create():
 
     form = StoreForm()
     if request.method == 'POST' and form.validate_on_submit():
-
-        # ✅ 이미지가 없으면 에러 처리
         if not form.image.data:
             flash("이미지는 필수입니다.", "danger")
             return render_template("store/store_form.html", form=form)
@@ -59,7 +59,6 @@ def create():
             upload_folder = os.path.join(current_app.root_path, 'static/store_uploads', today)
             os.makedirs(upload_folder, exist_ok=True)
 
-            # 파일명 중복 방지 (시간 붙이는 방식)
             filename = secure_filename(image_file.filename)
             timestamp = datetime.now().strftime("%H%M%S")
             new_filename = f"{timestamp}_{filename}"
@@ -86,11 +85,12 @@ def create():
 
 
 
-@bp.route('/edit/<int:store_id>', methods=['GET', 'POST'])
-def edit(store_id):
-    store = Store.query.get_or_404(store_id)
+@bp.route('/edit/<userid>/<int:count>/', methods=['GET', 'POST'])
+def edit(userid, count):
+    user = User.query.filter_by(userid=userid).first_or_404()
+    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
+    store = stores[count - 1]
 
-    # 작성자 체크
     if g.user is None or g.user.id != store.owner_id:
         flash('수정 권한이 없습니다.')
         return redirect(url_for('store._list'))
@@ -102,40 +102,38 @@ def edit(store_id):
         store.price = form.price.data
         store.edit_date = datetime.now()
 
-        # ✅ 이미지 수정 로직 (선택적)
-        if form.image.data:   # 새 이미지를 업로드한 경우에만 실행
+        if form.image.data:
             image_file = form.image.data
             today = datetime.now().strftime('%Y%m%d')
             upload_folder = os.path.join(current_app.root_path, 'static/store_uploads', today)
             os.makedirs(upload_folder, exist_ok=True)
 
-            # 파일명 중복 방지: 시간 붙이기 방식
             filename = secure_filename(image_file.filename)
             timestamp = datetime.now().strftime("%H%M%S")
             new_filename = f"{timestamp}_{filename}"
 
             file_path = os.path.join(upload_folder, new_filename)
             image_file.save(file_path)
-
-            # DB에 새로운 경로 반영
             store.image_path = f'store_uploads/{today}/{new_filename}'
 
-        # 이미지 안 올리면 → store.image_path는 그대로 유지
         db.session.commit()
-        return redirect(url_for('store.detail', store_id=store.id))
 
+        all_stores = Store.query.filter_by(owner_id=g.user.id).order_by(Store.create_date.desc()).all()
+        count = all_stores.index(store) + 1
+
+        return redirect(url_for('store.detail', userid=userid, count=count))
     return render_template('store/store_form.html', form=form)
 
 
-
-
-@bp.route('/delete/<int:store_id>')
-def delete(store_id):
-    store = Store.query.get_or_404(store_id)
+@bp.route('/delete/<userid>/<int:count>/')
+def delete(userid, count):
+    user = User.query.filter_by(userid=userid).first_or_404()
+    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
+    store = stores[count - 1]
 
     if g.user is None or g.user.id != store.owner_id:
         flash('삭제 권한이 없습니다.')
-        return redirect(url_for('store.detail', store_id=store.id))
+        return redirect(url_for('store.detail', userid=userid, count=count))
 
     db.session.delete(store)
     db.session.commit()
