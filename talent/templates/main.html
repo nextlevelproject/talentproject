@@ -69,7 +69,7 @@
         <img src="{{ url_for('static', filename='image/pet.jpg') }}">
       </div><span>반려동물</span></div>
       <div class="menu-item"><div class="icon14">
-        <img src="{{ url_for('static', filename='image/Eng.jpg) }}">
+        <img src="{{ url_for('static', filename='image/Eng.jpg') }}">
       </div><span>번역</span></div>
       <div class="menu-item"><div class="icon15">
         <img src="{{ url_for('static', filename='image/fashion.jpg') }}">
@@ -97,7 +97,7 @@
       </div>
 
         <main class="wrap" role="main">
-    <h1 class="section-title">숨고 인기 서비스</h1>
+    <h1 class="section-title">매칭허브 인기 서비스</h1>
 
     <section class="services-grid" aria-label="인기 서비스 목록">
       <!-- 카드 1 -->
@@ -313,7 +313,7 @@
           </div>
 
           <div class="card">
-            <img src="{{ url_for('static', filename='image/골프.jpg') }}">
+            <img src="{{ url_for('static', filename='image/golf1.jpg') }}">
             <div class="card-content">
               <p>골프란? 프로에게 배우는 꿀팁</p>
               <div class="profile">
@@ -324,7 +324,7 @@
           </div>
 
           <div class="card">
-            <img src="{{ url_for('static', filename='image/이사청소.jpg') }}">
+            <img src="{{ url_for('static', filename='image/clean1.jpg') }}">
             <div class="card-content">
               <p>⭐ 이사청소는 이렇게 진행돼요 ⭐</p>
               <div class="profile">
@@ -334,8 +334,214 @@
             </div>
           </div>
         </div>
+      </div>
 
-    
+        <!-- 제목 -->
+        <div class="section-title1">
+        <h2>　　　　　　　　　　　　　　　　　　　　　　　지금 인기 있는 고수</h2>
+        <a href="#">전체보기 ></a>
+        </div>
+
+        <!-- 카테고리 탭 -->
+        <div class="category-tabs1">
+        <button>수영 레슨</button>
+        <button>원룸/소형 이사</button>
+        <button>용달/화물 운송</button>
+        <button>도배 시공</button>
+        </div>
+
+        <!-- 카드 리스트 -->
+        <div class="card-list1">
+        <div class="card1">
+            <img src="{{url_for('static', filename='image/bogi.png') }}">
+            <h3>1,558명의<br>고수 만나보기 ></h3>
+        </div>
+        <div class="card1">
+            <img src="{{url_for('static', filename='image/swim.jpg') }}">
+            <div class="rating">⭐ 5.0</div>
+            <h3>최코치 수영아카데미</h3>
+            <span class="sugo-pay">숨고페이</span>
+            <p>경력 10년 · 평균 2시간 내 응답</p>
+        </div>
+        <div class="card1">
+            <img src="{{url_for('static', filename='image/soccer.jpg') }}">
+            <div class="rating">⭐ 5.0</div>
+            <h3>김용임</h3>
+            <span class="sugo-pay">숨고페이</span>
+            <p>경력 15년 · 평균 1시간 내 응답</p>
+        </div>
+        <div class="card1">
+            <img src="{{url_for('static', filename='image/bad.jpg') }}">
+            <div class="rating">⭐ 4.9</div>
+            <h3>박우희코치</h3>
+            <span class="sugo-pay">숨고페이</span>
+            <p>경력 20년 · 평균 1시간 내 응답</p>
+        </div>
+        <div class="card1">
+            <img src="{{url_for('static', filename='image/baseball.jpg') }}">
+            <div class="rating">⭐ 5.0</div>
+            <h3>김민석</h3>
+            <span class="sugo-pay">숨고페이</span>
+            <p>경력 38년 · 평균 1시간 내 응답</p>
+        </div>
+        </div>
+
+        <!-- 배너 -->
+        <div class="banner1">
+        <div class="card1">
+            숨고 앱으로 더 편하게 고수를 찾아보세요
+        </div>
+        </div>
+
+
+        <h2>　　　　　　　　　　　　　　　　　　　　　　　　　반셀프로 완성하는 우리 집</h2>
+
+        <div class="card2-container">
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/dobae.webp') }}" alt="도배장판 시공">
+            <p>도배장판 시공</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/film.webp') }}">
+            <p>인테리어필름 시공</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/EEE.webp') }}">
+            <p>전기배선 설치 및 수리</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/remodel.webp') }}">
+            <p>욕실/화장실 리모델링</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/right.jpg') }}">
+            <p>간접조명 설치</p>
+        </div>
+        </div>
+
+        <h2>　　　　　　　　　　　　　　　　　　　　　　　　　집 안이 달라지는 청소 비법</h2>
+
+        <div class="card2-container">
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/eoeo.webp') }}">
+            <p>거주 청소업체</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/se.webp') }}">
+            <p>세탁기 청소</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/trash.webp') }}">
+            <p>폐기물 처리</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/air.webp') }}">
+            <p>에어컨 청소</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/mirror.jpg') }}">
+            <p>유리 청소</p>
+        </div>
+        </div>
+
+        <h2>　　　　　　　　　　　　　　　　　　　　　　　　　　빠르고 편한 이사 준비</h2>
+
+        <div class="card2-container">
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/esa.webp') }}">
+            <p>용달/화물 운송</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/es.webp') }}">
+            <p>이사/입주 청소업체</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/fa.webp') }}">
+            <p>가정이사(투룸 이상)</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/fg.webp') }}">
+            <p>정리수납 컨설팅</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/jn.webp') }}">
+            <p>줄눈 시공</p>
+        </div>
+        </div>
+
+        <h2>　　　　　　　　　　　　　　　　　　　　　　　　　　집안 곳곳 작은 해결</h2>
+
+        <div class="card2-container">
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/sd.webp') }}">
+            <p>수도 관련 설치 및 수리</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/as.webp') }}">
+            <p>에어컨 설치 및 수리</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/sk.webp') }}">
+            <p>싱크대 교체</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/boil.webp') }}">
+            <p>보일러 설치 및 수리(지역난방 포함)</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/tv.webp') }}">
+            <p>벽걸이TV 설치 및 철거</p>
+        </div>
+        </div>
+
+        <h2>　　　　　　　　　　　　　　　　　　　　　　　　　　올해 마지막 도전하기</h2>
+
+        <div class="card2-container">
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/eng.webp') }}">
+            <p>영어 과외</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/voc.webp') }}">
+            <p>보컬 레슨</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/sh.webp') }}">
+            <p>수학 과외</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/pt.webp') }}">
+            <p>퍼스널트레이닝(PT)</p>
+        </div>
+        <div class="card2">
+            <img src="{{url_for('static', filename='image/gt.webp') }}">
+            <p>기타 레슨</p>
+        </div>
+        </div>
+
+        <section>
+        <div class="section-title">
+            <h2>　　　　　　　　　　　　　　　　　　　　　　　　　　　　숨고 이야기</h2>
+            <a href="#">전체보기 &gt;</a>
+        </div>
+
+        <div class="story-container">
+            <div class="story-card">
+                <img src="{{url_for('static', filename='image/1.webp') }}">
+                <p>[10/1~10/12] 요청서를 보내면 100만 원 여행 상품권의 기회가!</p>
+            </div>
+
+            <div class="story-card">
+                <img src="{{url_for('static', filename='image/2.webp') }}">
+                <p>환갑도 늦지 않았어요, 나다운 삶으로 나아가는 원동력</p>
+            </div>
+
+            <div class="story-card">
+                <img src="{{url_for('static', filename='image/3.webp') }}">
+                <p>고생은 덜고 여유는 챙기는 추석 연휴</p>
+            </div>
+        </div>
+        </section>
 
   <script>
     const slider = document.getElementById('slider');
@@ -360,5 +566,4 @@
       slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
   </script>
-</body>
-</html>
+{% endblock %}
