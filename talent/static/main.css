@@ -2,6 +2,10 @@ body {
     font-family:'Pretendard';
     margin: 0 auto;
 }
+
+
+
+
 /*  SEARCH  */
 .search-form {
     max-width: 600px;
@@ -61,8 +65,8 @@ body {
     margin: 0 auto;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.categoryPrev, .categoryNext,
+.adPrev, .adNext {
     width: 32px;
     height: 32px;
     top: 65%;
@@ -80,10 +84,10 @@ body {
     font-weight: bold;
 }
 
-.swiper-button-prev {
+.categoryPrev, .adPrev {
     left: -16px;
 }
-.swiper-button-next {
+.categoryNext, .adNext{
     right: -16px;
 }
 
@@ -99,16 +103,17 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
     border-radius: 12px;
     text-align: center;
     font-weight: 600;
     padding: 16px 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    cursor: pointer;
     transition: all .2s ease;
 }
 
+.swiper-slide a {
+    text-decoration: none;
+}
 .ad-wrapper{
     position: relative;
     width: 100%;
@@ -140,6 +145,9 @@ body {
         font-size: 13px;
     }
 }
+
+
+
 
 /*  COMMUNITY  */
 .community-preview {
@@ -181,4 +189,18 @@ body {
 .vs{
     display: flex;
     justify-content: space-between;
+}
+
+.ex {
+    margin-bottom: 12px;
+}
+.swiper-pagination {
+    padding-bottom: 12px;
+}
+.swiper-pagination-bullet-active{
+        background: #198754;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    color: #666;
 }

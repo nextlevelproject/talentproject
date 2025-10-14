@@ -1,5 +1,4 @@
-# talent/views/auth_views.py
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, jsonify, g
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
@@ -25,6 +24,12 @@ PASSWORD_RE = re.compile(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+# ----------------- g.user 로드 -----------------
+@bp.before_app_request
+def load_logged_in_user():
+    uid = session.get('user_id')
+    g.user = User.query.get(uid) if uid else None
+
 # ----------------- Auth guard -----------------
 def login_required(f):
     @wraps(f)
@@ -34,7 +39,6 @@ def login_required(f):
             return redirect(url_for('auth.login'))
         return f(*args, **kwargs)
     return decorated
-
 
 # ----------------- Login -----------------
 @bp.route('/login', methods=['GET', 'POST'])
@@ -70,7 +74,6 @@ def client_signup():
         password = form.password.data
         email = form.email.data.strip().lower()
 
-        # 폼에 따라 phone 또는 tel_number 사용
         tel_field = getattr(form, 'phone', None) or getattr(form, 'tel_number', None)
         tel_number = tel_field.data.strip().replace('-', '') if tel_field else ''
 
@@ -95,7 +98,6 @@ def client_signup():
             birthday=birthday,
             tel_number=tel_number,
             name=name if hasattr(User, 'name') else None,
-            username=name if hasattr(User, 'username') else None,
             is_expert=False
         )
         try:
@@ -115,12 +117,10 @@ def client_signup():
 def expert_signup():
     form = ExpertSignupForm()
     if request.method == 'POST' and form.validate_on_submit():
-        # 1) 비밀번호 형식
         if not PASSWORD_RE.fullmatch(form.password.data or ''):
             flash('비밀번호는 영문, 숫자, 특수문자 포함 8~20자여야 합니다.', 'danger')
             return render_template('auth/expert_signup.html', form=form)
 
-        # 2) 비밀번호 확인 일치
         if hasattr(form, 'password_confirm') and (form.password.data != form.password_confirm.data):
             flash('비밀번호가 일치하지 않습니다.', 'danger')
             return render_template('auth/expert_signup.html', form=form)
@@ -149,7 +149,6 @@ def expert_signup():
             birthday=birthday,
             tel_number=tel_number,
             name=name if hasattr(User, 'name') else None,
-            username=name if hasattr(User, 'username') else None,
             is_expert=True,
             service=service if hasattr(User, 'service') else None,
             location=location if hasattr(User, 'location') else None,
@@ -181,14 +180,12 @@ def edit_profile():
     user = User.query.get_or_404(session.get('user_id'))
     form = EditProfileForm(obj=user)
     if request.method == 'POST' and form.validate_on_submit():
-        # 공통 필드
         if hasattr(form, 'name'):
             user.name = form.name.data.strip()
         if hasattr(form, 'email'):
             user.email = form.email.data.strip().lower()
         if hasattr(form, 'tel_number'):
             user.tel_number = form.tel_number.data.strip().replace('-', '')
-        # 전문가 전용
         if getattr(user, 'is_expert', False):
             if hasattr(form, 'service'):
                 user.service = form.service.data.strip()
