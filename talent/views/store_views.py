@@ -28,15 +28,14 @@ def _list():
     return render_template('store/store_list.html', store_list=store_list, page=page, kw=kw)
 
 
-@bp.route('/<userid>/<int:count>')
-def detail(userid, count):
+@bp.route('/<userid>/<int:store_id>/')
+def detail(userid, store_id):
     form = StoreForm()
     user = User.query.filter_by(userid=userid).first_or_404()
-    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
-    store = stores[count - 1]
+    store = Store.query.filter_by(id=store_id, owner_id=user.id).first_or_404()
     store.views = (store.views or 0) + 1
     db.session.commit()
-    return render_template('store/store_detail.html', store=store, form=form, count=count)
+    return render_template('store/store_detail.html', store=store, form=form)
 
 
 @bp.route('/create', methods=['GET', 'POST'])
@@ -85,11 +84,10 @@ def create():
 
 
 
-@bp.route('/edit/<userid>/<int:count>/', methods=['GET', 'POST'])
-def edit(userid, count):
+@bp.route('/edit/<userid>/<int:store_id>/', methods=['GET', 'POST'])
+def edit(userid, store_id):
     user = User.query.filter_by(userid=userid).first_or_404()
-    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
-    store = stores[count - 1]
+    store = Store.query.filter_by(id=store_id, owner_id=user.id).first_or_404()
 
     if g.user is None or g.user.id != store.owner_id:
         flash('수정 권한이 없습니다.')
@@ -118,24 +116,19 @@ def edit(userid, count):
 
         db.session.commit()
 
-        all_stores = Store.query.filter_by(owner_id=g.user.id).order_by(Store.create_date.desc()).all()
-        count = all_stores.index(store) + 1
-
-        return redirect(url_for('store.detail', userid=userid, count=count))
+        return redirect(url_for('store.detail', userid=userid, store_id=store.id))
     return render_template('store/store_form.html', form=form)
 
 
-@bp.route('/delete/<userid>/<int:count>/')
-def delete(userid, count):
+@bp.route('/delete/<userid>/<int:store_id>')
+def delete(userid, store_id):
     user = User.query.filter_by(userid=userid).first_or_404()
-    stores = (Store.query.filter_by(owner_id=user.id).order_by(Store.create_date.desc()).all())
-    store = stores[count - 1]
+    store = Store.query.filter_by(id=store_id, owner_id=user.id).first_or_404()
 
     if g.user is None or g.user.id != store.owner_id:
         flash('삭제 권한이 없습니다.')
-        return redirect(url_for('store.detail', userid=userid, count=count))
+        return redirect(url_for('store.detail', userid=userid, store_id=store_id))
 
     db.session.delete(store)
     db.session.commit()
-    flash('삭제되었습니다.')
     return redirect(url_for('store._list'))
