@@ -20,9 +20,7 @@
         {% if session.get('user_id') and session.get('is_expert') == True %}
         <a href="{{ url_for('store.create') }}"
            class="btn btn-success btn-sm ms-3 d-flex align-items-center justify-content-center"
-           style="height: 32px; min-width: 90px;">
-            상품 등록
-        </a>
+           style="height: 32px; min-width: 90px;">상품 등록</a>
         {% endif %}
     </div>
 
@@ -55,7 +53,7 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center mt-auto">
                     <span class="fw-bold text-success">{{ "{:,}".format(store.price) }} 원</span>
-                    <a href="{{ url_for('store.detail', userid=store.user.userid, count=loop.index) }}"
+                    <a href="{{ url_for('store.detail', userid=store.user.userid, store_id=store.id) }}"
                        class="btn btn-sm btn-outline-secondary">상세보기</a>
                 </div>
             </div>

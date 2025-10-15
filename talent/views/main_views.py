@@ -12,3 +12,7 @@ def index():
     c_posts = (CommunityPost.query.outerjoin(CommunityPost.likes).group_by(CommunityPost.id)
                .order_by(like_count.desc(), CommunityPost.create_date.desc()).limit(3).all())
     return render_template('main.html', s_posts=s_posts, c_posts=c_posts)
+
+@bp.route('/find')
+def find():
+    return render_template('find.html')

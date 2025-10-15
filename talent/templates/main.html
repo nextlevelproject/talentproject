@@ -161,7 +161,7 @@
     <div class="row">
         {% for store in s_posts %}
         <div class="col-md-4 mb-4">
-            <a href="{{ url_for('store.detail', userid=store.user.userid, count=loop.index) }}" class="text-decoration-none text-dark">
+            <a href="{{ url_for('store.detail', userid=store.user.userid, store_id=store.id) }}" class="text-decoration-none text-dark">
                 <div class="card h-100 shadow-sm border-0">
                     <img src="{{ url_for('static', filename=store.image_path or 'images/no_image.png') }}"
                          class="card-img-top"
