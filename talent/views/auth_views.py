@@ -30,7 +30,7 @@ def login_required(f):
     def decorated(*args, **kwargs):
         if 'user_id' not in session:
             flash('로그인이 필요한 기능입니다.', 'danger')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.login', next=request.url))
         return f(*args, **kwargs)
     return decorated
 
