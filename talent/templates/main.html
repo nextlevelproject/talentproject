@@ -186,7 +186,7 @@
 <!--  COMMUNITY  -->
 <section class="container my-5" style="max-width: 1000px;">
     <div class="vs">
-        <h2 class="fw-bold mb-4">HURB COMMUNITY</h2>
+        <h2 class="fw-bold mb-4">COMMUNITY HUB</h2>
         <div class="text-end mt-3">
             <a href="{{ url_for('community.home') }}" class="btn btn-outline-dark btn-sm">전체보기 ></a>
         </div>
@@ -198,19 +198,26 @@
             <a href="{{ url_for('community.post_detail', post_id=post.id) }}" class="text-decoration-none text-dark">
                 <div class="card h-100 shadow-sm border-0">
 
+                    {% if post.image_filename %}
+                        <img src="{{ url_for('static', filename='community_uploads/' + post.image_filename) }}"
+                             class="card-img-top"
+                             alt="{{ post.title }}"
+                             style="height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                    {% endif %}
+
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-2">{{ post.title }}</h5>
                         <p class="card-text text-muted small mb-3">{{ (post.content or '')[:80] }}...</p>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-secondary">{{ post.user.userid }}</small>
+                            <small class="text-secondary">{{ post.user.userid if post.user else 'Guest' }}</small>
                             <small class="text-secondary">{{ post.create_date.strftime('%Y-%m-%d') }}</small>
                         </div>
 
                         <div class="mt-2 text-end">
-              <span class="badge bg-light text-dark border">
-                ❤️ {{ post.likes|length }}
-              </span>
+                            <span class="badge bg-light text-dark border">
+                                ❤️ {{ post.likes|length }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -222,6 +229,7 @@
     <p class="text-muted">등록된 커뮤니티 글이 없습니다.</p>
     {% endif %}
 </section>
+
 
 <section class="pro-join-section bg-white">
     <div class="container" style="max-width: 1000px;">
