@@ -27,7 +27,7 @@
 }
 
 .input-field:focus {
-    border-color: #a504e6;
+    border-color: #198754;
     outline: none;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .btn-submit {
-    background-color: #a504e6;
+    background-color: #198754;
     color: #fff;
     border: none;
     padding: 10px 18px;
@@ -67,7 +67,7 @@
 }
 
 .btn-submit:hover {
-    background-color: #8a03c2;
+    background-color: #198754;
 }
 
 /* ====== Custom Dropdown ====== */
@@ -101,14 +101,14 @@
 
 /* Focus effect */
 .custom-select:focus {
-    border-color: #a504e6;
+    border-color: #198754;
     box-shadow: 0 0 0 2px rgba(165, 4, 230, 0.2);
     outline: none;
 }
 
 /* Hover effect */
 .custom-select:hover {
-    border-color: #a504e6;
+    border-color: #198754;
 }
 
 /* Option hover (modern browsers) */
